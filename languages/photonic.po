@@ -1,0 +1,735 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Sayontan Sinha <sayontan@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "140 &times; 140 px"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "280 &times; 280 px"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "500px"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "75 &times; 75 px"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Abstract"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Album"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Albums"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "All Categories"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "All albums"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "All tags"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Animals"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Any tag"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Applies to slideshows only"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Black and White"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Blind X"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Blind Y"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Blind Z"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Cancel"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Category"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Celebrities"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Collection ID"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Collections"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Comma-separated list of tags"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Commercial"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Concert"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Cover"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Created at"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Curtain-X"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Curtain-Y"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Date posted, ascending"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Date posted, descending"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Date taken, ascending"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Date taken, descending"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Display"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Display Style"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Editor's choices"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Either User ID or User Name is required if Feature is user-specific"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Fade"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Fade Zoom"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Family"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Fashion"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Feature"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Film"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Fine Art"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Flickr"
+msgstr ""
+
+#. Text in function
+#: photonic/extensions/Photonic_Flickr_Processor.php:1
+msgid "Flickr API Key not defined"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Food"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Fresh today"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Full size"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Galleries"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Gallery ID"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Group ID"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Grow X"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Grow Y"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "If your SmugMug URL is http://joe-sixpack.smugmug.com, this is \"joe-sixpack\". Required if the \"Display\" is \"Tree\" or \"All albums\"."
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "In pixels"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "In pixels. This is applicable only if you are displaying the slideshow directly on the page."
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Insert into post"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Interestingness, ascending"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Interestingness, descending"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Journalism"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Landscapes"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Macro"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Main image size"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Nature"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Nickname"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "No thumbnails - only slideshow"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Nude"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Number of columns"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Number of photos to show"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Only thumbnails - click for slideshow"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic.php:577
+msgid "Original height"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic.php:577
+msgid "Original width"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "People"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Performing Arts"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Photo ID"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Photos"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Photos of specified user's friends"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Photoset ID"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Photosets"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Picasa"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Popular photos"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Rating"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Relevance"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Required if you are showing \"Single Album\" above. If your gallery URL is http://nick-name.smugmug.com/gallery/<b>abcdefgh_123456</b>, this is <b>abcdefgh_123456</b>"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Scroll Down"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Scroll Horizontal"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Scroll Left"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Scroll Right"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Scroll Up"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Scroll Vertical"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Shortcode preview"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Single Album"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Single Photo"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Sizes defined by your theme. Applies to slideshows only. Avoid loading large sizes to reduce page loads."
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Sizes defined by your theme. Image picked here will be resized to the dimensions above."
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Slide X"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Slide Y"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Slides image size"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Slideshow Effects"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Slideshow Height"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "SmugMug"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Sort by"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Specified user's favourite photos"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Specified user's photos"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Sport"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Still Life"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Street"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Tag mode"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Tags"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Taken at"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Thumbnail height"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Thumbnail size"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Thumbnail width"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Thumbnails above slideshow"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Thumbnails below slideshow"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Time between slides in ms"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Time for each transition in ms"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Times viewed"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Travel"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Tree"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Turn Down"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Turn Left"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Turn Right"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Turn Up"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Uncover"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Underwater"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Upcoming photos"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "User ID"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "User Name"
+msgstr ""
+
+#. Text in function
+#: photonic/extensions/Photonic_Flickr_Processor.php:1
+msgid "User id is required for displaying a single gallery"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic.php:1
+msgid "View in Flickr"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "WP Galleries"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Will show a single gallery if \"Display\" is set to \"Galleries\""
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Will show a single photo if \"Display\" is set to \"Single Photo\""
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Will show a single photoset if \"Display\" is set to \"Photosets\""
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Will show contents of a single collection if \"Display\" is set to \"Collections\""
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Wipe"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "With text"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "You have to define your Consumer API Key under Settings &rarr; Photonic &rarr; 500px &rarr; 500px Settings"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "You have to define your Flickr API Key under Settings &rarr; Photonic &rarr; Flickr &rarr; Flickr Settings"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "You have to define your SmugMug API Key under Settings &rarr; Photonic &rarr; SmugMug &rarr; SmugMug Settings"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic-form.php:55
+msgid "Zoom"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic.php:1
+msgid "{#} photos"
+msgstr ""
+
+#. Text in function
+#: photonic/photonic.php:1
+msgid "{#} sets"
+msgstr ""

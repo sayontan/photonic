@@ -1,0 +1,103 @@
+Version 1.22 - 12th Apr 2012
+============================
+1.  Made minor corrections to authentication behaviour. If not connected to the internet, Photonic was returning a fatal error.
+2.  Changed the wording for PrettyPhoto licensing. PrettyPhoto is licensed under GPL, and that is now explicitly stated in the options page.
+3.  Added the capability to include shortcodes inside the parameters of the gallery shortcode (nested shortcodes)
+
+Version 1.21 - 27th Mar 2012
+============================
+1.	Added support for SmugMug password-protected albums where the user has access to the albums. Other albums show up, but
+	clicking on them takes the users nowhere.
+2.	Fixed a bug that was killing the last thumbnail in a popup for SmugMug.
+
+Version 1.20 - 22nd Mar 2012
+============================
+1.	Added authentication support for Flickr, 500px.com and SmugMug.
+2.  Disabled the showing of password-protected SmugMug galleries.
+
+Version 1.12 - 14th Mar 2012
+============================
+1.	Fixed a problem with handling double quotes in the title of Flickr photos.
+
+Version 1.11 - 05th Mar 2012
+============================
+1.	Combined SimpleModal script with Photonic to save an HTTP request.
+2.  Deleted some redundant JS files.
+3.  Added support for a different default type.
+4.  Added support for single photos in Flickr.
+
+Version 1.10 - 23rd Jan 2012
+============================
+1.	Fixed a bug with the SmugMug processor, which was preventing the display of an album popup.
+
+Version 1.09 - 16th Jan 2012
+============================
+1.	Fixed a bug with the Flickr processor, which was preventing the execution of the shortcode with a group_id parameter
+2.	Fixed a minor problem with the popup panels, where hovering over the panel titles was resulting in a Tooltip error.
+3.	The Picasa inserter was not showing the "album" field. This has been rectified.
+
+Version 1.08 - 01st Jan 2012
+============================
+1.	Made a change to the Picasa processor to handle the recent change by Google. Google's change was forcing images to 512px.
+2.	Updated the plugin to support WP 3.3.
+3.  Fixed an issue with FancyBox that was showing server log errors for IE.
+
+Version 1.07 - 09th Nov 2011
+============================
+1.	Added support for SmugMug
+2.	Modified the Picasa plugin to not display the file name if no title is found.
+
+Version 1.06 - 25th Oct 2011
+============================
+1.	Fixed an issue with the 500px.com extension, which had to be changed to invoke HTTPS instead of HTTP.
+2.	Added support for the "sort" parameter for 500px.
+3.	Fixed an issue with the PrettyPhoto library where you couldn't see the "View in Flickr" link.
+
+Version 1.05 - 24th Oct 2011
+============================
+1.	Added support for the PrettyPhoto JS library.
+2.	Added check for _wp_additional_image_sizes; causing errors for some people.
+3.	Fixed a bug with the thumbnail_width and thumbnail_height attribute of the plugin. The attributes should have been called thumb_width and thumb_height.
+4.	Added option to launch images in a slideshow mode.
+5.	Fixed a bug that was not accepting border settings for the thumbnails.
+
+Version 1.04 - 21st Sep 2011
+============================
+1. Added support for 500px.
+2. Modified the Colorbox invocation parameters so that large images are displayed within the window.
+
+Version 1.03 - 19th Sep 2011
+============================
+1. Added support for Gallery objects in Flickr.
+2. Fixed an issue with the Picasa galleries where under certain circumstances users were getting a "Division by zero" error.
+3. Fixed an issue where Chrome and Safari were showing an overlap of the slides over the rest of the content in native galleries.
+
+Version 1.02 - 06th Sep 2011
+============================
+1. Added capability to insert the shortcode through the "Upload/Insert Media" screen.
+2. Reorganized the backend PHP code to make it more extensible.
+
+Version 1.01 - 03rd Sep 2011
+============================
+1. Added translation file, photonic.po
+2. Fixed a bug to prevent Photonic stylesheets being loaded on all admin pages.
+
+Version 1.00 - 02nd Sep 2011
+============================
+1. Native gallery extension
+	a. Slideshow - consider Gallerific instead of JQuery Cycle
+	b. Library plugin - i.e. whichever library is used for the rest of the stuff, like Fancybox etc.
+2. Flickr support
+	a. Display all photos in a Photoset using photoset_id='x'
+	b. Display all Photosets for a user using user_id='x' and view='photosets'
+	c. Display all Photosets in a collection using user_id='x' and collection_id='y'
+	d. Display all Photosets grouped by Collection for a user using user_id='x' and view='collections'
+	e. Display photos using search criteria
+3. Picasa support
+	a. Display all albums for a user using user_id='x'
+	b. Display all photos in an album using user_id='x' and album='y'
+	c. Display photos filtered by tags and restrict their counts.
+4. JS library support
+	a. Fancybox
+	b. Colorbox
+5. Skinning options / Custom CSS

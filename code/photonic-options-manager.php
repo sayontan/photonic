@@ -1,26 +1,36 @@
 <?php
 class Photonic_Options_Manager {
 	var $options, $tab, $tab_options, $reverse_options, $shown_options, $option_defaults, $allowed_values, $hidden_options, $nested_options, $displayed_sections;
-	var $option_structure, $previous_displayed_section, $file, $tab_name;
+	var $option_structure, $previous_displayed_section, $file, $tab_name, $core;
 
-	function Photonic_Options_Manager($file) {
-		global $photonic_setup_options, $photonic_generic_options, $photonic_flickr_options, $photonic_picasa_options, $photonic_500px_options, $photonic_smugmug_options;
+	function __construct($file, $core) {
+		global $photonic_setup_options, $photonic_generic_options, $photonic_flickr_options, $photonic_picasa_options, $photonic_google_options,
+			   $photonic_500px_options, $photonic_smugmug_options, $photonic_instagram_options, $photonic_zenfolio_options, $photonic_lightbox_options;
 		$options_page_array = array(
 			'generic-options.php' => $photonic_generic_options,
 			'flickr-options.php' => $photonic_flickr_options,
 			'picasa-options.php' => $photonic_picasa_options,
-			'500px-options.php' => $photonic_500px_options,
+			'google-options.php' => $photonic_google_options,
 			'smugmug-options.php' => $photonic_smugmug_options,
+			'zenfolio-options.php' => $photonic_zenfolio_options,
+			'instagram-options.php' => $photonic_instagram_options,
+			'500px-options.php' => $photonic_500px_options,
+			'lightbox-options.php' => $photonic_lightbox_options,
 		);
 
 		$tab_name_array = array(
 			'generic-options.php' => 'Generic Options',
 			'flickr-options.php' => 'Flickr Options',
 			'picasa-options.php' => 'Picasa Options',
-			'500px-options.php' => '500px Options',
+			'google-options.php' => 'Picasa Options',
 			'smugmug-options.php' => 'SmugMug Options',
+			'zenfolio-options.php' => 'Zenfolio Options',
+			'instagram-options.php' => 'Instagram Options',
+			'500px-options.php' => '500px Options',
+			'lightbox-options.php' => 'Lightbox Options',
 		);
 
+		$this->core = $core;
 		$this->file = $file;
 		$this->tab = 'generic-options.php';
 		if (isset($_REQUEST['tab']) && array_key_exists($_REQUEST['tab'], $options_page_array)) {
@@ -71,72 +81,480 @@ class Photonic_Options_Manager {
 				}
 			}
 		}
-
-		add_action('wp_ajax_photonic_admin_upload_file', array(&$this, 'admin_upload_file'));
-		add_action('wp_ajax_photonic_authenticate_oauth', array(&$this, 'authenticate_oauth'));
 	}
 
-	function render_options_page() {
-?>
-	<div class="photonic-wrap">
-		<div class="photonic-tabbed-options">
-			<div class="photonic-header-nav">
-				<div class="photonic-header-nav-top fix">
-					<h2 class='photonic-header-1'>Photonic</h2>
-					<div class='donate fix'>
-						<form action="https://www.paypal.com/cgi-bin/webscr" method="post" id="paypal-submit" >
-							<input type="hidden" name="cmd" value="_s-xclick"/>
-							<input type="hidden" name="hosted_button_id" value="9018267"/>
-							<ul>
-								<li class='announcements'><a href='http://www.aquoid.com/news'>Announcements</a></li>
-								<li class='support'><a href='http://www.aquoid.com/forum'>Support Forum</a></li>
-								<li class='coffee'><input type='submit' name='submit' value='Like Photonic? Buy me a coffee!' /></li>
-							</ul>
-							<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
-						</form>
-					</div><!-- donate -->
-				</div>
-				<div class="photonic-options-header-bar fix">
-					<ul class='photonic-options-header-bar'>
-						<li><a class='photonic-load-page <?php if ($this->tab == 'generic-options.php') echo 'current-tab'; ?>' id='photonic-options-generic' href='?page=photonic-options-manager&amp;tab=generic-options.php'><span class="icon">&nbsp;</span> Generic Options</a></li>
-						<li><a class='photonic-load-page <?php if ($this->tab == 'flickr-options.php') echo 'current-tab'; ?>' id='photonic-options-flickr' href='?page=photonic-options-manager&amp;tab=flickr-options.php'><span class="icon">&nbsp;</span> Flickr</a></li>
-						<li><a class='photonic-load-page <?php if ($this->tab == 'picasa-options.php') echo 'current-tab'; ?>' id='photonic-options-picasa' href='?page=photonic-options-manager&amp;tab=picasa-options.php'><span class="icon">&nbsp;</span> Picasa</a></li>
-						<li><a class='photonic-load-page <?php if ($this->tab == '500px-options.php') echo 'current-tab'; ?>' id='photonic-options-500px' href='?page=photonic-options-manager&amp;tab=500px-options.php'><span class="icon">&nbsp;</span> 500px</a></li>
-						<li><a class='photonic-load-page <?php if ($this->tab == 'smugmug-options.php') echo 'current-tab'; ?>' id='photonic-options-smugmug' href='?page=photonic-options-manager&amp;tab=smugmug-options.php'><span class="icon">&nbsp;</span> SmugMug</a></li>
-					</ul>
-				</div>
-			</div>
-<?php
-		$option_structure = $this->get_option_structure();
-		$group = substr($this->tab, 0, stripos($this->tab, '.'));
-
-		echo "<div class='photonic-options photonic-options-$group' id='photonic-options'>";
-		echo "<div class='photonic-options-page-header fix'>\n";
-		echo "<h1>{$this->tab_name}</h1>\n";
-		echo "</div><!-- photonic-options-page-header -->\n";
-
-		echo "<ul class='photonic-section-tabs'>";
-		foreach ($option_structure as $l1_slug => $l1) {
-			echo "<li><a href='#$l1_slug'>" . $l1['name'] . "</a></li>\n";
+	function render_settings_page() {
+		$saved_options = get_option('photonic_options');
+		if (isset($saved_options) && !empty($saved_options) && !empty($saved_options['css_in_file'])) {
+			$generated_css = $this->core->generate_css(false);
+			$this->save_css_to_file($generated_css);
 		}
-		echo "</ul>";
 
-		do_settings_sections($this->file);
-		echo "</form>\n";
-		echo "</div><!-- main-content -->\n";
+		?>
+		<div class="photonic-wrap">
+			<div class="photonic-tabbed-options">
+				<div class="photonic-header-nav">
+					<div class="photonic-header-nav-top fix">
+						<h1 class='photonic-header-1'>Photonic</h1>
+						<div class='donate fix'>
+							<form action="https://www.paypal.com/cgi-bin/webscr" method="post" id="paypal-submit" >
+								<input type="hidden" name="cmd" value="_s-xclick"/>
+								<input type="hidden" name="hosted_button_id" value="9018267"/>
+								<ul>
+									<li class='announcements'><a href='https://aquoid.com/news/'><span class="icon">&nbsp;</span>Announcements</a></li>
+									<li class='support'><a href='https://wordpress.org/support/plugin/photonic/'><span class="icon">&nbsp;</span>Support</a></li>
+									<li class='coffee'><span class="icon">&nbsp;</span><input type='submit' name='submit' value='Like Photonic? Buy me a coffee &hellip;' /></li>
+									<li class='rate'><a href='https://wordpress.org/support/plugin/photonic/reviews/'><span class="icon">&nbsp;</span>&hellip; Or Rate it Well!</a></li>
+								</ul>
+								<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
+							</form>
+						</div><!-- donate -->
+					</div>
+					<div class="photonic-options-header-bar fix">
+						<h2 class='nav-tab-wrapper'>
+							<a class='nav-tab <?php if ($this->tab == 'generic-options.php') echo 'nav-tab-active'; ?>' id='photonic-options-generic' href='?page=photonic-options-manager&amp;tab=generic-options.php'><span class="icon">&nbsp;</span> Generic Options</a>
+							<a class='nav-tab <?php if ($this->tab == 'flickr-options.php') echo 'nav-tab-active'; ?>' id='photonic-options-flickr' href='?page=photonic-options-manager&amp;tab=flickr-options.php'><span class="icon">&nbsp;</span> Flickr</a>
+							<a class='nav-tab <?php if ($this->tab == 'smugmug-options.php') echo 'nav-tab-active'; ?>' id='photonic-options-smugmug' href='?page=photonic-options-manager&amp;tab=smugmug-options.php'><span class="icon">&nbsp;</span> SmugMug</a>
+							<a class='nav-tab <?php if ($this->tab == 'picasa-options.php') echo 'nav-tab-active'; ?>' id='photonic-options-picasa' href='?page=photonic-options-manager&amp;tab=picasa-options.php'><span class="icon">&nbsp;</span> Picasa</a>
+							<a class='nav-tab <?php if ($this->tab == 'google-options.php') echo 'nav-tab-active'; ?>' id='photonic-options-google' href='?page=photonic-options-manager&amp;tab=google-options.php'><span class="icon">&nbsp;</span> Google Photos</a>
+							<a class='nav-tab <?php if ($this->tab == 'zenfolio-options.php') echo 'nav-tab-active'; ?>' id='photonic-options-zenfolio' href='?page=photonic-options-manager&amp;tab=zenfolio-options.php'><span class="icon">&nbsp;</span> Zenfolio</a>
+							<a class='nav-tab <?php if ($this->tab == 'instagram-options.php') echo 'nav-tab-active'; ?>' id='photonic-options-instagram' href='?page=photonic-options-manager&amp;tab=instagram-options.php'><span class="icon">&nbsp;</span> Instagram</a>
+<!--							<a class='nav-tab --><?php //if ($this->tab == '500px-options.php') echo 'nav-tab-active'; ?><!--' id='photonic-options-500px' href='?page=photonic-options-manager&amp;tab=500px-options.php'><span class="icon">&nbsp;</span> 500px</a>-->
+							<a class='nav-tab <?php if ($this->tab == 'lightbox-options.php') echo 'nav-tab-active'; ?>' id='photonic-options-lightbox' href='?page=photonic-options-manager&amp;tab=lightbox-options.php'><span class="icon">&nbsp;</span> Lightboxes</a>
+						</h2>
+					</div>
+				</div>
+				<?php
+				$option_structure = $this->get_option_structure();
+				$group = substr($this->tab, 0, stripos($this->tab, '.'));
 
-		echo "</div><!-- /#photonic-options -->\n";
-?>
-		</div><!-- /#photonic-tabbed-options -->
+				echo "<div class='photonic-options photonic-options-$group' id='photonic-options'>";
+				echo "<ul class='photonic-section-tabs'>";
+				foreach ($option_structure as $l1_slug => $l1) {
+					echo "<li><a href='#$l1_slug'>" . $l1['name'] . "</a></li>\n";
+				}
+				echo "</ul>";
+
+				do_settings_sections($this->file);
+
+				$last_option = end($option_structure);
+				$last_slug = key($option_structure);
+				$this->show_buttons($last_slug, $last_option);
+
+				echo "</form>\n";
+				echo "</div><!-- /photonic-options-panel -->\n";
+
+				echo "</div><!-- /#photonic-options -->\n";
+				?>
+			</div><!-- /#photonic-tabbed-options -->
+		</div>
+		<?php
+	}
+
+	function show_buttons($slug, $option) {
+		if (!isset($option['buttons']) || ($option['buttons'] != 'no-buttons' && $option['buttons'] != 'special-buttons')) {
+			echo "<div class=\"photonic-button-bar photonic-button-bar-{$slug}\">\n";
+			echo "<input name=\"photonic_options[submit-{$slug}]\" type='submit' value=\"Save page &ldquo;".esc_attr($option['name'])."&rdquo;\" class=\"button button-primary\" />\n";
+			echo "<input name=\"photonic_options[submit-{$slug}]\" type='submit' value=\"Reset page &ldquo;".esc_attr($option['name'])."&rdquo;\" class=\"button\" />\n";
+			echo "<input name=\"photonic_options[submit-{$slug}]\" type='submit' value=\"Delete all options\" class=\"button\" />\n";
+			echo "</div><!-- photonic-button-bar -->\n";
+		}
+	}
+
+	function render_helpers() { ?>
+	<div class="photonic-wrap">
+		<div class="photonic-tabbed-options" style='position: relative; display: inline-block; '>
+			<div class="photonic-waiting"><img src="<?php echo plugins_url('/include/images/downloading-dots.gif', __FILE__); ?>" alt='waiting'/></div>
+			<form method="post" id="photonic-helper-form">
+				<div class="photonic-header-nav">
+					<div class="photonic-header-nav-top fix">
+						<h2 class='photonic-header-1'>Photonic</h2>
+					</div>
+				</div>
+				<h3 class="photonic-helper-header">Flickr</h3>
+				<div class="photonic-helper-box">
+					<?php $this->display_flickr_id_helper(); ?>
+				</div>
+				<div class="photonic-helper-box">
+					<?php $this->display_flickr_group_helper(); ?>
+				</div>
+				<h3 class="photonic-helper-header">Picasa</h3>
+				<div class="photonic-helper-box">
+					<?php $this->display_picasa_album_helper(); ?>
+				</div>
+				<h3 class="photonic-helper-header">Google Photos</h3>
+				<div class="photonic-helper-box">
+					<?php $this->display_google_photos_album_helper(); ?>
+				</div>
+				<h3 class="photonic-helper-header">SmugMug</h3>
+				<div class="photonic-helper-box">
+					<?php $this->display_smugmug_album_id_helper(); ?>
+				</div>
+				<h3 class="photonic-helper-header">Zenfolio</h3>
+				<div class="photonic-helper-box">
+					<?php $this->display_zenfolio_category_helper(); ?>
+				</div>
+				<h3 class="photonic-helper-header">Instagram</h3>
+				<div class="photonic-helper-box">
+					<?php $this->display_instagram_id_helper(); ?>
+				</div>
+			</form>
+		</div>
 	</div>
-<?php
+	<?php
+	}
+
+	function render_authentication() { ?>
+		<div class="photonic-waiting"><img src="<?php echo plugins_url('/include/images/downloading-dots.gif', __FILE__); ?>" alt='waiting'/></div>
+		<h1>Photonic - Authentication</h1>
+		<form method="post" id="photonic-auth-form">
+			<h3 id="#photonic-flickr-auth-section">Flickr</h3>
+			<?php $this->display_flickr_token_getter(); ?>
+
+			<h3 id="#photonic-smugmug-auth-section">SmugMug</h3>
+			<?php $this->display_smugmug_token_getter(); ?>
+
+			<h3 id="#photonic-picasa-auth-section">Picasa</h3>
+			<?php $this->display_picasa_token_getter(); ?>
+
+			<h3 id="#photonic-picasa-auth-section">Google Photos</h3>
+			<?php $this->display_google_token_getter(); ?>
+
+			<h3 id="#photonic-instagram-auth-section">Instagram</h3>
+			<?php $this->display_instagram_access_token_helper(); ?>
+
+			<h3 id="#photonic-picasa-auth-section">Zenfolio</h3>
+			<?php $this->display_zenfolio_token_getter(); ?>
+
+<!--			<h3 id="#photonic-500px-auth-section">500px</h3>-->
+			<?php // $this->display_500px_token_getter(); ?>
+		</form>
+		<?php
+	}
+
+	function render_gutenberg() { ?>
+		<div class="photonic-wrap">
+			<div class="photonic-waiting"><img src="<?php echo plugins_url('/include/images/downloading-dots.gif', __FILE__); ?>" alt='waiting'/></div>
+			<form method="post" id="photonic-helper-form" name="photonic-helper-form">
+				<div class="photonic-header-nav">
+					<h1 class='photonic-header-1'>Prepare Photonic on Your Site for Gutenberg</h1>
+				</div>
+				<div class="photonic-form-body fix">
+					<h2>What is Gutenberg?</h2>
+					<p>
+						WordPress 5.0 includes a new editor codenamed Gutenberg. Gutenberg features a different style of
+						creating content, which introduces a concept called a <code>block</code>. While Gutenberg is slated to
+						be bundled in WP 5.0, you can test out your site's readiness beforehand using the Gutenberg plugin.
+					</p>
+
+					<h2>How does it impact Photonic on your site?</h2>
+					<p>
+						If you have configured Photonic not to use the standard <code>gallery</code> shortcode, and instead have
+						a custom shortcode via <em>Photonic &rarr; Settings &rarr; Generic Options &rarr; Generic Settings &rarr; Custom Shortcode</em>,
+						you are fine!
+					</p>
+					<p>
+						<strong>But if you are using the <code>gallery</code> shortcode for Photonic and you click on
+							"Convert to Blocks" using Gutenberg, your post will be in trouble!</strong> <span class="warning">All your instances of the
+								<code>gallery</code> shortcode will be replaced by the native WordPress Gallery Block.</span>
+					</p>
+					<p>
+						To avoid this you can find and replace all instances of the <code>gallery</code> shortcode
+						used for Photonic and replace them with a custom shortcode of your choosing.
+					</p>
+					<div style="text-align: center">
+						<img src="<?php echo plugins_url('/include/images/Gutenberg.jpg', __FILE__); ?>" alt="Gutenberg Flow" title="Gutenberg Flow"/>
+					</div>
+
+					<h2>Am I using the Gallery Shortcode with Photonic?</h2>
+					<div id="photonic-shortcode-results">
+						<?php
+						require_once(PHOTONIC_PATH."/admin/Photonic_Shortcode_Usage.php");
+						$usage = new Photonic_Shortcode_Usage();
+						echo sprintf(__('<p>The following instances were found on your site for Photonic with the <code>%s</code> shortcode. <strong>Please verify the instances below before replacing the shortcodes. It is strongly recommended to back up the posts listed below before the shortcode replacement.</strong></p>', 'photonic'), $usage->tag);
+						$usage->prepare_items();
+						$usage->display();
+						?>
+					</div>
+				</div>
+			</form>
+		</div>
+		<?php
+	}
+
+	function display_flickr_id_helper() {
+		global $photonic_flickr_api_key;
+		if (empty($photonic_flickr_api_key)) {
+			_e('Please set up your Flickr API Key under <em>Photonic &rarr; Settings &rarr; Flickr &rarr; Flickr Settings</em>', 'photonic');
+		}
+		else {
+			_e('<h4>Flickr User ID Finder</h4>', 'photonic');
+			_e('<label>Enter your Flickr photostream URL and click "Find"', 'photonic');
+			echo '<input type="text" value="https://www.flickr.com/photos/username/" id="photonic-flickr-user" name="photonic-flickr-user"/>';
+			echo '</label>';
+			echo '<input type="button" value="'.__('Find', 'photonic').'" id="photonic-flickr-user-find" class="button button-primary"/>';
+			echo '<div class="result">&nbsp;</div>';
+		}
+	}
+
+	function display_flickr_group_helper() {
+		global $photonic_flickr_api_key;
+		if (empty($photonic_flickr_api_key)) {
+			_e('Please set up your Flickr API Key under <em>Photonic &rarr; Settings &rarr; Flickr &rarr; Flickr Settings</em>', 'photonic');
+		}
+		else {
+			_e('<h4>Flickr Group ID Finder</h4>', 'photonic');
+			_e('<label>Enter your Flickr group URL and click "Find"', 'photonic');
+			echo '<input type="text" value="https://www.flickr.com/groups/groupname/" id="photonic-flickr-group" name="photonic-flickr-group"/>';
+			echo '</label>';
+			echo '<input type="button" value="'.__('Find', 'photonic').'" id="photonic-flickr-group-find" class="button button-primary"/>';
+			echo '<div class="result">&nbsp;</div>';
+		}
+	}
+
+	function display_smugmug_album_id_helper() {
+		global $photonic_smug_api_key;
+		if (empty($photonic_smug_api_key)) {
+			_e('Please set up your SmugMug API Key under <em>Photonic &rarr; Settings &rarr; SmugMug &rarr; SmugMug Settings</em>', 'photonic');
+		}
+		else {
+			_e('<h4>SmugMug User Albums and Folders</h4>', 'photonic');
+			_e('<label>Enter your SmugMug username and click "Find"', 'photonic');
+			echo '<input type="text" value="username" id="photonic-smugmug-user" name="photonic-smugmug-user"/>';
+			echo '</label>';
+			echo '<input type="button" value="'.__('Find', 'photonic').'" id="photonic-smugmug-user-tree" class="button button-primary"/>';
+			echo '<div class="result">&nbsp;</div>';
+		}
+	}
+
+	function display_flickr_token_getter() {
+		global $photonic_flickr_gallery;
+		if (!isset($photonic_flickr_gallery)) {
+			$photonic_flickr_gallery = new Photonic_Flickr_Processor();
+		}
+
+		$this->show_token_section($photonic_flickr_gallery, 'flickr', 'Flickr');
+	}
+
+	function display_smugmug_token_getter() {
+		global $photonic_smugmug_gallery;
+		if (!isset($photonic_smugmug_gallery)) {
+			$photonic_smugmug_gallery = new Photonic_SmugMug_Processor();
+		}
+
+		$this->show_token_section($photonic_smugmug_gallery, 'smug', 'SmugMug');
+	}
+
+	function display_500px_token_getter() {
+		global $photonic_500px_gallery;
+		if (!isset($photonic_500px_gallery)) {
+			$photonic_500px_gallery = new Photonic_500px_Processor();
+		}
+
+		$this->show_token_section($photonic_500px_gallery, '500px', '500px');
+	}
+
+	function display_picasa_token_getter() {
+		global $photonic_picasa_client_id, $photonic_picasa_client_secret, $photonic_picasa_gallery, $photonic_picasa_refresh_token;
+		echo "<div class=\"photonic-token-header\">\n";
+		if (empty($photonic_picasa_client_id) || empty($photonic_picasa_client_secret)) {
+			_e('Please set up your Google Client ID and Client Secret under <em>Photonic &rarr; Settings &rarr; Picasa &rarr; Picasa Settings</em>', 'photonic');
+		}
+		else {
+			if (!isset($photonic_picasa_gallery)) {
+				$photonic_picasa_gallery = new Photonic_Picasa_Processor();
+			}
+			$parameters = Photonic_Processor::parse_parameters($_SERVER['QUERY_STRING']);
+
+			if (!empty($photonic_picasa_refresh_token)) {
+				_e('You have already set up your authentication. <span class="photonic-all-ok">Unless you wish to regenerate the token this step is not required.</span><br/>', 'photonic');
+			}
+
+			echo "</div>\n";
+			echo "<div class=\"photonic-token-header\">\n";
+			_e("You first have to authorize Photonic to connect to your Google account.", 'photonic');
+			echo "<br/>\n";
+			if (!isset($parameters['code']) || !isset($parameters['source']) || $parameters['source'] != 'picasa') {
+				echo "<a href='".$photonic_picasa_gallery->get_authorization_url(array('redirect_uri' => admin_url('admin.php?page=photonic-auth&source=picasa'), 'prompt' => 'consent'))."' class='button button-primary'>".
+					__('Step 1: Authenticate', 'photonic')."</a>";
+				echo "</div>\n";
+				echo "<div class=\"photonic-token-header\">\n";
+				echo __("Next, you have to obtain the token.", 'photonic').'<br/>';
+				echo "<span class='button photonic-helper-button-disabled'>".
+					__('Step 2: Obtain Token', 'photonic')."</span>";
+			}
+			else {
+				echo "<span class='button photonic-helper-button-disabled'>".
+					__('Step 1: Authenticate', 'photonic')."</span>";
+				echo "</div>\n";
+				echo "<div class=\"photonic-token-header\">\n";
+				echo __("Next, you have to obtain the token.", 'photonic').'<br/>';
+				echo "<a href='#' class='button button-primary photonic-picasa-refresh'>".
+					__('Step 2: Obtain Token', 'photonic')."</a>";
+				echo '<input type="hidden" value="'.$parameters['code'].'" id="photonic-picasa-oauth-code"/>';
+				echo '<input type="hidden" value="'.$parameters['state'].'" id="photonic-picasa-oauth-state"/>';
+			}
+		}
+		echo "</div>\n";
+		echo '<div class="result" id="picasa-result">&nbsp;</div>';
+
+	}
+
+	function display_google_token_getter() {
+		global $photonic_google_client_id, $photonic_google_client_secret, $photonic_google_gallery, $photonic_google_refresh_token;
+		echo "<div class=\"photonic-token-header\">\n";
+		if (empty($photonic_google_client_id) || empty($photonic_google_client_secret)) {
+			_e('Please set up your Google Client ID and Client Secret under <em>Photonic &rarr; Settings &rarr; Picasa &rarr; Picasa Settings</em>', 'photonic');
+		}
+		else {
+			if (!isset($photonic_google_gallery)) {
+				$photonic_google_gallery = new Photonic_Google_Photos_Processor();
+			}
+			$parameters = Photonic_Processor::parse_parameters($_SERVER['QUERY_STRING']);
+
+			if (!empty($photonic_google_refresh_token)) {
+				_e('You have already set up your authentication. <span class="photonic-all-ok">Unless you wish to regenerate the token this step is not required.</span><br/>', 'photonic');
+			}
+
+			echo "</div>\n";
+			echo "<div class=\"photonic-token-header\">\n";
+			_e("You first have to authorize Photonic to connect to your Google account.", 'photonic');
+			echo "<br/>\n";
+			if (!isset($parameters['code']) || !isset($parameters['source']) || $parameters['source'] != 'google') {
+				echo "<a href='".$photonic_google_gallery->get_authorization_url(array('redirect_uri' => admin_url('admin.php?page=photonic-auth&source=google'), 'prompt' => 'consent'))."' class='button button-primary'>".
+					__('Step 1: Authenticate', 'photonic')."</a>";
+				echo "</div>\n";
+				echo "<div class=\"photonic-token-header\">\n";
+				echo __("Next, you have to obtain the token.", 'photonic').'<br/>';
+				echo "<span class='button photonic-helper-button-disabled'>".
+					__('Step 2: Obtain Token', 'photonic')."</span>";
+			}
+			else {
+				echo "<span class='button photonic-helper-button-disabled'>".
+					__('Step 1: Authenticate', 'photonic')."</span>";
+				echo "</div>\n";
+				echo "<div class=\"photonic-token-header\">\n";
+				echo __("Next, you have to obtain the token.", 'photonic').'<br/>';
+				echo "<a href='#' class='button button-primary photonic-google-refresh'>".
+					__('Step 2: Obtain Token', 'photonic')."</a>";
+				echo '<input type="hidden" value="'.$parameters['code'].'" id="photonic-google-oauth-code"/>';
+				echo '<input type="hidden" value="'.$parameters['state'].'" id="photonic-google-oauth-state"/>';
+			}
+		}
+		echo "</div>\n";
+		echo '<div class="result" id="google-result">&nbsp;</div>';
+
+	}
+
+	function display_zenfolio_token_getter() {
+		global $photonic_zenfolio_gallery, $photonic_zenfolio_default_user;
+		if (!isset($photonic_zenfolio_gallery)) {
+			$photonic_zenfolio_gallery = new Photonic_Zenfolio_Processor();
+		}
+		$gallery = $photonic_zenfolio_gallery;
+
+		echo "<div class=\"photonic-token-header\">\n";
+		if (empty($photonic_zenfolio_default_user)) {
+			_e('Please set up the default user for Zenfolio under <em>Photonic &rarr; Settings &rarr; Zenfolio &rarr; Zenfolio Photo Settings &rarr; Default User</em>', 'photonic');
+		}
+		else if (!empty($gallery->token)) {
+			_e('You have already set up your authentication. <span class="photonic-all-ok">Unless you wish to re-authenticate or your password has changed this step is not required.</span>', 'photonic');
+		}
+		echo "</div>\n";
+
+		$response = Photonic_Processor::parse_parameters($_SERVER['QUERY_STRING']);
+		if (!empty($photonic_zenfolio_default_user) && empty($response['provider']) || 'zenfolio' !== $response['provider']) {
+			echo "<label>".__('Password:', 'photonic')."<input type='password' name='zenfolio-password' id='zenfolio-password'></label>";
+			echo "<a href='#' class='button button-primary' data-photonic-provider='zenfolio'>" . __('Login and Authenticate', 'photonic') . "</a>";
+		}
+		if (!empty($gallery->token)) {
+			echo "<div style='display: block; width: 100%;'>\n";
+			echo "<a href='#' class='button button-primary photonic-zenfolio-delete'>".__('Delete current authentication data', 'photonic')."</a>";
+			echo "</div>\n";
+		}
+		echo '<div class="result" id="zenfolio-result">&nbsp;</div>';
+	}
+
+	function display_picasa_album_helper() {
+		_e('<h4>Picasa Album ID Finder</h4>', 'photonic');
+		global $photonic_picasa_client_id, $photonic_picasa_client_secret, $photonic_picasa_refresh_token;
+		if (empty($photonic_picasa_client_id) || empty($photonic_picasa_client_secret)) {
+			_e('Please set up your Google Client ID and Client Secret under <em>Photonic &rarr; Settings &rarr; Picasa &rarr; Picasa Settings</em>', 'photonic');
+		}
+		else if (empty($photonic_picasa_refresh_token)) {
+			_e('Please obtain your Refresh Token and save it under <em>Photonic &rarr; Settings &rarr; Picasa &rarr; Picasa Settings</em>', 'photonic');
+		}
+		else {
+			_e('<label>Enter your Picasa / Google Photos user name click "Find"', 'photonic');
+			echo '<br/><input type="text" value="username" id="photonic-picasa-user" name="photonic-picasa-user"/>';
+			echo '</label>';
+			echo '<input type="button" value="'.__('Find', 'photonic').'" id="photonic-picasa-album-find" class="button button-primary"/>';
+			echo '<div class="result">&nbsp;</div>';
+		}
+	}
+
+	function display_google_photos_album_helper() {
+		_e('<h4>Google Photos Album ID Finder</h4>', 'photonic');
+		global $photonic_google_client_id, $photonic_google_client_secret, $photonic_google_refresh_token;
+		if (empty($photonic_google_client_id) || empty($photonic_google_client_secret)) {
+			_e('Please set up your Google Client ID and Client Secret under <em>Photonic &rarr; Settings &rarr; Google Photos &rarr; Google Photos Settings</em>', 'photonic');
+		}
+		else if (empty($photonic_google_refresh_token)) {
+			_e('Please obtain your Refresh Token and save it under <em>Photonic &rarr; Settings &rarr; Google Photos &rarr; Google Photos Settings</em>', 'photonic');
+		}
+		else {
+			echo '<input type="button" value="'.__('Find my albums', 'photonic').'" id="photonic-google-album-find" class="button button-primary"/>';
+			echo '<div class="result">&nbsp;</div>';
+		}
+	}
+
+	function display_instagram_access_token_helper() {
+		global $photonic_instagram_gallery;
+		if (!isset($photonic_instagram_gallery)) {
+			$photonic_instagram_gallery = new Photonic_Instagram_Processor();
+		}
+		$this->show_token_section_header($photonic_instagram_gallery, 'Instagram');
+		$response = Photonic_Processor::parse_parameters($_SERVER['QUERY_STRING']);
+		if (empty($response['access_token'])) {
+			echo "<a href='https://instagram.com/oauth/authorize/?client_id=f95ba49c90034990b8f5c7270c264fd3&scope=basic+public_content&redirect_uri=https://aquoid.com/photonic-router/?internal_uri=" .
+				admin_url('admin.php?page=photonic-auth') . "&response_type=token' class='button button-primary'>" .
+				__('Login and get Access Token', 'photonic') . "</a>";
+		}
+		else if (!empty($response['access_token'])) {
+			echo "<span class='button photonic-helper-button-disabled'>" . __('Login and get Access Token', 'photonic') . "</span>";
+			echo '<div class="result">'.(!empty($response['access_token']) ? 'Access token: <code id="instagram-token">'.$response['access_token'].'</code>' : '&nbsp;').'</div>';
+			echo "<a href='#' class='button button-primary photonic-save-token' data-photonic-provider='instagram'>" . __('Save Token', 'photonic') . "</a>";
+		}
+	}
+
+	function display_instagram_id_helper() {
+		global $photonic_instagram_access_token;
+		if (!isset($photonic_instagram_access_token)) {
+			_e('Please set up your Instagram Access Token under <em>Photonic &rarr; Settings &rarr; Instagram &rarr; Instagram Settings</em>', 'photonic');
+		}
+		else {
+			_e('<h4>Instagram ID Finder</h4>', 'photonic');
+			_e('Instagram has made it almost impossible to determine user ids using the API. <strong>That being said, if you are authenticated your user id is not required: the authenticated user is used to show photos.</strong> However, if you are feeling adventurous, you can try the following steps:<br/>', 'photonic');
+			echo "<ol>\n";
+			echo "<li>Log into Instagram with your account on a browser like Chrome, Firefox or Edge</li>\n";
+			echo "<li>Open the Developer tools and go to the Console tab</li>\n";
+			echo "<li>Type <code>window._sharedData.config.viewer.id</code> and hit 'Enter'</li>\n";
+			echo "<li>Your id will show up</li>\n";
+			echo "</ol>\n";
+		}
+	}
+
+	function display_zenfolio_category_helper() {
+		_e('<h4>Zenfolio Categories</h4>', 'photonic');
+		echo '<input type="button" value="'.__('List', 'photonic').'" id="photonic-zenfolio-categories-find" class="button button-primary"/>';
+		echo '<div class="result">&nbsp;</div>';
 	}
 
 	function init() {
 		foreach ($this->option_structure as $slug => $option) {
 			register_setting('photonic_options-'.$slug, 'photonic_options', array(&$this, 'validate_options'));
 			add_settings_section($slug, "", array(&$this, "create_settings_section"), $this->file);
-			$this->add_settings_fields($slug, $this->file);
+			$this->add_settings_fields($this->file);
 		}
 	}
 
@@ -148,12 +566,9 @@ class Photonic_Options_Manager {
 					// For all text type of options make sure that the eventual text is properly escaped.
 					case "text":
 					case "textarea":
-					case "slider":
 					case "color-picker":
 					case "background":
 					case "border":
-					case "font":
-					case "upload":
 						$options[$option] = esc_attr($option_value);
 						break;
 
@@ -243,8 +658,8 @@ class Photonic_Options_Manager {
 				else if (substr($options['submit-'.$section], 0, 13) == 'Reset changes') {
 					unset($options['submit-'.$section]);
 					// This is a reset for all options in the sub-menu. So we will unset all child fields.
-					foreach ($this->nested_options as $section => $children) {
-						foreach ($children as $child) {
+					foreach ($this->nested_options as $inner_section => $inner_children) {
+						foreach ($inner_children as $child) {
 							unset($options[$child]);
 						}
 					}
@@ -292,133 +707,49 @@ class Photonic_Options_Manager {
 		return $option_structure;
 	}
 
-	function evaluate_conditions($conditions) {
-		// Operators: NOT, OR, AND, NOR, NAND. XOR is too complex
-		if (isset($conditions['operator'])) {
-			$operator = $conditions['operator'];
-		}
-		else {
-			$operator = 'OR';
-		}
-		$nested_conditions = $conditions['conditions'];
-		if (isset($nested_conditions['operator'])) {
-			return $this->evaluate_conditions($nested_conditions);
-		}
-		else {
-			$evals = array();
-			foreach ($nested_conditions as $variable => $check_value) {
-				$photonic_variable = 'photonic_'.$variable;
-				global $$photonic_variable;
-				$actual_value = $$photonic_variable;
-
-				if ($operator == 'NOT') {
-					return $actual_value != $check_value;
-				}
-				else {
-					$evals[] = $actual_value == $check_value ? 1 : 0;
-				}
-			}
-			return $this->array_join_boolean($evals, $operator);
-		}
-	}
-
-	function array_join_boolean($conditions, $operator) {
-		if (count($conditions) == 1) {
-			return $conditions[0];
-		}
-		else {
-			$first = $conditions[0];
-			$rest = array_slice($conditions, 1);
-			if ($operator == 'AND') {
-				$result =  $first * $this->array_join_boolean($rest, $operator);
-				return $result != 0;
-			}
-			else if ($operator == 'NOR') {
-				$result = $first + $this->array_join_boolean($rest, $operator);
-				return $result == 0;
-			}
-			else if ($operator == 'NAND') {
-				$result = $first * $this->array_join_boolean($rest, $operator);
-				return $result == 0;
-			}
-			else { // Everything else is treated as OR
-				$result = $first + $this->array_join_boolean($rest, $operator);
-				return $result != 0;
-			}
-		}
-	}
-
-	function add_settings_fields($section, $page) {
+	function add_settings_fields($page) {
 		$ctr = 0;
 		foreach ($this->tab_options as $value) {
-			if (isset($value['conditional']) && true === $value['conditional']) {
-				$show = true;
-				if (isset($value['conditions'])) {
-					$conditions = $value['conditions'];
-					$show = $this->evaluate_conditions($conditions);
-				}
-				if (!$show) {
-					continue;
-				}
-			}
 			$ctr++;
 			switch ($value['type']) {
-				case "section":
-					add_settings_field('', '', array(&$this, "create_title"), $page, $section, $value);
-					break;
-
 				case "blurb";
-					add_settings_field($value['grouping'].'-'.$ctr, '', array(&$this, "create_section_for_blurb"), $page, $value['grouping'], $value);
+					add_settings_field($value['grouping'].'-'.$ctr, $value['name'], array(&$this, "create_section_for_blurb"), $page, $value['grouping'], $value);
 					break;
 
 				case "text";
-					add_settings_field($value['id'], '', array(&$this, "create_section_for_text"), $page, $value['grouping'], $value);
+					add_settings_field($value['id'], $value['name'], array(&$this, "create_section_for_text"), $page, $value['grouping'], $value);
 					break;
 
 				case "textarea";
-					add_settings_field($value['id'], '', array(&$this, "create_section_for_textarea"), $page, $value['grouping'], $value);
+					add_settings_field($value['id'], $value['name'], array(&$this, "create_section_for_textarea"), $page, $value['grouping'], $value);
 					break;
 
 				case "select":
-					add_settings_field($value['id'], '', array(&$this, "create_section_for_select"), $page, $value['grouping'], $value);
+					add_settings_field($value['id'], $value['name'], array(&$this, "create_section_for_select"), $page, $value['grouping'], $value);
+					break;
+
+				case "multi-select":
+					add_settings_field($value['id'], $value['name'], array(&$this, "create_section_for_multi_select"), $page, $value['grouping'], $value);
 					break;
 
 				case "radio":
-					add_settings_field($value['id'], '', array(&$this, "create_section_for_radio"), $page, $value['grouping'], $value);
-//					add_settings_field($value['id'], '', array(&$this, "create_section_for_radio"), $parent, 'default', $value);
-					break;
-
-				case "slider":
-					add_settings_field($value['id'], '', array(&$this, "create_section_for_slider"), $page, $value['grouping'], $value);
-//					add_settings_field($value['id'], '', array(&$this, "create_section_for_slider"), $parent, $section, $value);
-					break;
-
-				case "color-picker":
-					add_settings_field($value['id'], '', array(&$this, "create_section_for_color_picker"), $page, $value['grouping'], $value);
+					add_settings_field($value['id'], $value['name'], array(&$this, "create_section_for_radio"), $page, $value['grouping'], $value);
 					break;
 
 				case "checkbox":
-					add_settings_field($value['id'], '', array(&$this, "create_section_for_checkbox"), $page, $value['grouping'], $value);
+					add_settings_field($value['id'], $value['name'], array(&$this, "create_section_for_checkbox"), $page, $value['grouping'], $value);
 					break;
 
 				case "border":
-					add_settings_field($value['id'], '', array(&$this, "create_section_for_border"), $page, $value['grouping'], $value);
+					add_settings_field($value['id'], $value['name'], array(&$this, "create_section_for_border"), $page, $value['grouping'], $value);
 					break;
 
 				case "background":
-					add_settings_field($value['id'], '', array(&$this, "create_section_for_background"), $page, $value['grouping'], $value);
+					add_settings_field($value['id'], $value['name'], array(&$this, "create_section_for_background"), $page, $value['grouping'], $value);
 					break;
 
 				case "padding":
-					add_settings_field($value['id'], '', array(&$this, "create_section_for_padding"), $page, $value['grouping'], $value);
-					break;
-
-				case "ajax-button":
-					add_settings_field($value['id'], '', array(&$this, "create_section_for_ajax_button"), $page, $value['grouping'], $value);
-					break;
-
-				case 'oauth-authorize':
-					add_settings_field($value['id'], '', array(&$this, "create_section_for_oauth_authorization"), $page, $value['grouping'], $value);
+					add_settings_field($value['id'], $value['name'], array(&$this, "create_section_for_padding"), $page, $value['grouping'], $value);
 					break;
 			}
 		}
@@ -458,7 +789,7 @@ class Photonic_Options_Manager {
 
 		echo '<input type="text" name="photonic_options['.$value['id'].']" value="'.$text.'" />'."\n";
 		if (isset($value['hint'])) {
-			echo " &laquo; ".$value['hint']."<br />\n";
+			echo "<em> &laquo; ".$value['hint']."<br /></em>\n";
 		}
 		$this->create_closing_tag($value);
 	}
@@ -500,46 +831,57 @@ class Photonic_Options_Manager {
 		$this->create_closing_tag($value);
 	}
 
-	/**
-	 * Renders an option whose type is "slider". Invoked by add_settings_field.
-	 *
-	 * @param  $value
-	 * @return void
-	 */
-	function create_section_for_slider($value) {
+	function create_section_for_multi_select($value) {
 		global $photonic_options;
 		$this->create_opening_tag($value);
-		$options = $value['options'];
-		if (!isset($photonic_options[$value['id']])) {
-			$default = $value['std'];
+		echo '<div class="photonic-checklist">'."\n";
+		echo '<ul class="photonic-checklist" id="'.$value['id'].'-chk" >'."\n";
+		if (isset($value['std'])) {
+			$consolidated_value = $value['std'];
+		}
+		if (isset($photonic_options[$value['id']])) {
+			$consolidated_value = $photonic_options[$value['id']];
+		}
+		if (!isset($consolidated_value)) {
+			$consolidated_value = "";
+		}
+		$consolidated_value = trim($consolidated_value);
+		$exploded = array();
+		if ($consolidated_value != '') {
+			$exploded = explode(',', $consolidated_value);
+		}
+
+		foreach ($value['options'] as $option_value => $option_list) {
+			$checked = " ";
+			if ($consolidated_value) {
+				foreach ($exploded as $checked_value) {
+					$checked = checked($checked_value, $option_value, false);
+					if (trim($checked) != '') {
+						break;
+					}
+				}
+			}
+			echo "<li>\n";
+			$depth = 0;
+			if (isset($option_list['depth'])) {
+				$depth = $option_list['depth'];
+			}
+			echo '<label><input type="checkbox" name="'.$value['id']."_".$option_value.'" value="true" '.$checked.' class="depth-'.($depth+1).' photonic-options-checkbox-'.$value['id'].'" data-photonic-selection-for="'.$value['id'].'" data-photonic-value="'.$option_value.'" />'.$option_list['title']."</label>\n";
+			echo "</li>\n";
+		}
+		echo "</ul>\n";
+
+		if (isset($photonic_options[$value['id']])) {
+			$set_value = $photonic_options[$value['id']];
+		}
+		else if (isset($value['std'])) {
+			$set_value = $value['std'];
 		}
 		else {
-			$default = $photonic_options[$value['id']];
+			$set_value = "";
 		}
-	?>
-		<script type="text/javascript">
-		$j = jQuery.noConflict();
-		$j(document).ready(function() {
-			$j("#<?php echo $value['id']; ?>-slider").slider({
-				range: "<?php echo $options['range']; ?>",
-				value: <?php echo (int)$default; ?>,
-				min: <?php echo $options['min']; ?>,
-				max: <?php echo $options['max']; ?>,
-				step: <?php echo $options['step']; ?>,
-				slide: function(event, ui) {
-					$j("input#<?php echo $value['id']; ?>").val(ui.value);
-				}
-			});
-		});
-		</script>
-
-		<div class='slider'>
-			<p>
-				<input type="text" id="<?php echo $value['id']; ?>" name="photonic_options[<?php echo $value['id']; ?>]" value="<?php echo $default; ?>" class='slidertext' /> <?php echo $options['unit'];?>
-			</p>
-			<div id="<?php echo $value['id']; ?>-slider"  style="width:<?php echo $options['size'];?>;"></div>
-		</div>
-	<?php
+		echo '<input type="hidden" name="photonic_options['.$value['id'].']" id="'.$value['id'].'" value="'.$set_value.'"/>'."\n";
+		echo "</div>\n";
 		$this->create_closing_tag($value);
 	}
 
@@ -566,11 +908,12 @@ class Photonic_Options_Manager {
 	function create_settings_section($section) {
 		$option_structure = $this->option_structure;
 		if ($this->displayed_sections != 0) {
+			$this->show_buttons($this->previous_displayed_section, $option_structure[$this->previous_displayed_section]);
 			echo "</form>\n";
-			echo "</div><!-- main-content -->\n";
+			echo "</div><!-- /photonic-options-panel -->\n";
 		}
 
-		echo "<div id='{$section['id']}' class='photonic-options-panel'> <!-- main-content -->\n";
+		echo "<div id='{$section['id']}' class='photonic-options-panel'> \n";
 		echo "<form method=\"post\" action=\"options.php\" id=\"photonic-options-form-{$section['id']}\" class='photonic-options-form'>\n";
 		echo '<h3>' . $option_structure[$section['id']]['name'] . "</h3>\n";
 
@@ -589,16 +932,6 @@ class Photonic_Options_Manager {
 		echo "<input type='hidden' name='tab' value='" . $tab . "' />\n";
 
 		settings_fields("photonic_options-{$section['id']}");
-		if (!isset($option_structure[$section['id']]['buttons']) ||
-				($option_structure[$section['id']]['buttons'] != 'no-buttons' && $option_structure[$section['id']]['buttons'] != 'special-buttons')) {
-			echo "<div class=\"photonic-button-toggler fix\"><a href='#' class='photonic-button-toggler-{$section['id']}'><span class='photonic-button-toggler-{$section['id']}'>Save / Reset</span></a></div>\n";
-			echo "<div class=\"photonic-button-bar photonic-button-bar-{$section['id']}\" title='Save / Reset'>\n";
-			echo "<h2 class='fix'><a href='#'><img src='".plugins_url('/include/images/remove.png', __FILE__)."' alt='Close' /></a>Save / Reset</h2>\n";
-			echo "<input name=\"photonic_options[submit-{$section['id']}]\" type='submit' value=\"Save page '".esc_attr($option_structure[$section['id']]['name'])."'\" class=\"button photonic-button-section\" />\n";
-			echo "<input name=\"photonic_options[submit-{$section['id']}]\" type='submit' value=\"Reset page '".esc_attr($option_structure[$section['id']]['name'])."'\" class=\"button photonic-button-section\" />\n";
-			echo "<input name=\"photonic_options[submit-{$section['id']}]\" type='submit' value=\"Delete all options\" class=\"button photonic-button-all\" />\n";
-			echo "</div><!-- photonic-button-bar -->\n";
-		}
 		$this->displayed_sections++;
 		$this->previous_displayed_section = $section['id'];
 	}
@@ -717,7 +1050,7 @@ class Photonic_Options_Manager {
 			foreach ($edges as $edge => $edge_text) {
 		?>
 			<tr>
-				<th scope="row"><?php echo $edge_text." border"; ?></th>
+				<th scope="row"><?php echo $edge_text; ?></th>
 				<td valign='top'>
 					<select name="<?php echo $value['id'].'-'.$edge; ?>-style" id="<?php echo $value['id'].'-'.$edge; ?>-style" >
 				<?php
@@ -736,7 +1069,7 @@ class Photonic_Options_Manager {
 					<div class="color-picker-group">
 						<input type="radio" name="<?php echo $value['id'].'-'.$edge; ?>-colortype" value="transparent" <?php checked($default[$edge]['colortype'], 'transparent'); ?> /> Transparent / No color<br/>
 						<input type="radio" name="<?php echo $value['id'].'-'.$edge; ?>-colortype" value="custom" <?php checked($default[$edge]['colortype'], 'custom'); ?>/> Custom
-						<input type="text" id="<?php echo $value['id'].'-'.$edge; ?>-color" name="<?php echo $value['id']; ?>-color" value="<?php echo $default[$edge]['color']; ?>" class="color" /><br />
+						<input type="text" id="<?php echo $value['id'].'-'.$edge; ?>-color" name="<?php echo $value['id']; ?>-color" value="<?php echo $default[$edge]['color']; ?>" data-photonic-default-color="<?php echo $original[$edge]['color']; ?>" class="color" /><br />
 						Default: <span> <?php echo $original[$edge]['color']; ?> </span>
 					</div>
 				</td>
@@ -834,7 +1167,7 @@ class Photonic_Options_Manager {
 						<strong>Background Color:</strong><br />
 						<input type="radio" name="<?php echo $value['id']; ?>-colortype" value="transparent" <?php checked($default['colortype'], 'transparent'); ?> /> Transparent / No color<br/>
 						<input type="radio" name="<?php echo $value['id']; ?>-colortype" value="custom" <?php checked($default['colortype'], 'custom'); ?>/> Custom
-						<input type="text" id="<?php echo $value['id']; ?>-bgcolor" name="<?php echo $value['id']; ?>-bgcolor" value="<?php echo $default['color']; ?>" class="color" /><br />
+						<input type="text" id="<?php echo $value['id']; ?>-bgcolor" name="<?php echo $value['id']; ?>-bgcolor" value="<?php echo $default['color']; ?>" data-photonic-default-color="<?php echo $original['color']; ?>" class="color" /><br />
 						Default: <span> <?php echo $original['color']; ?> </span>
 					</div>
 				</td>
@@ -873,35 +1206,19 @@ class Photonic_Options_Manager {
 			</tr>
 			<tr>
 				<td valign='top' colspan='2'>
-					<script type="text/javascript">
-					$j = jQuery.noConflict();
-					$j(document).ready(function() {
-						$j("#<?php echo $value['id']; ?>-transslider").slider({
-							range: "min",
-							value: <?php echo (int)$default['trans']; ?>,
-							min: 0,
-							max: 100,
-							step: 1,
-							slide: function(event, ui) {
-								$j("input#<?php echo $value['id']; ?>-trans").val(ui.value);
-								$j("#<?php echo $value['id']; ?>").val('color=' + $j("#<?php echo $value['id']; ?>-bgcolor").val() + ';' +
-																	   'colortype=' + $j("input[name=<?php echo $value['id']; ?>-colortype]:checked").val() + ';' +
-																	   'image=' + $j("#<?php echo $value['id']; ?>-bgimg").val() + ';' +
-																	   'position=' + $j("#<?php echo $value['id']; ?>-position").val() + ';' +
-																	   'repeat=' + $j("#<?php echo $value['id']; ?>-repeat").val() + ';' +
-																	   'trans=' + $j("#<?php echo $value['id']; ?>-trans").val() + ';'
-										);
-							}
-						});
-					});
-					</script>
-
 					<div class='slider'>
 						<p>
 							<strong>Layer Transparency (not for IE):</strong>
-							<input type="text" id="<?php echo $value['id']; ?>-trans" name="<?php echo $value['id']; ?>-trans" value="<?php echo $default['trans']; ?>" class='slidertext' />
+							<select id="<?php echo $value['id']; ?>-trans" name="<?php echo $value['id']; ?>-trans">
+								<?php
+								for ($i = 0; $i <= 100; $i++) {
+									echo "<option ";
+									selected($default['trans'], $i);
+									echo " value='$i' >".$i."</option>\n";
+								}
+								?>
+							</select>
 						</p>
-						<div id="<?php echo $value['id']; ?>-transslider" class='transslider'></div>
 					</div>
 				</td>
 			</tr>
@@ -987,7 +1304,7 @@ class Photonic_Options_Manager {
 			foreach ($edges as $edge => $edge_text) {
 		?>
 			<tr>
-				<th scope="row"><?php echo $edge_text." padding"; ?></th>
+				<th scope="row"><?php echo $edge_text; ?></th>
 				<td valign='top'>
 					<input type="text" id="<?php echo $value['id'].'-'.$edge; ?>-padding" name="<?php echo $value['id'].'-'.$edge; ?>-padding" value="<?php echo $default[$edge]['padding']; ?>" /><br />
 				</td>
@@ -1014,18 +1331,6 @@ class Photonic_Options_Manager {
 		$this->create_closing_tag($value);
 	}
 
-	function create_section_for_ajax_button($value) {
-		$this->create_opening_tag($value);
-		//echo "<a href='' "
-		$this->create_closing_tag($value);
-	}
-
-	function create_section_for_oauth_authorization($value) {
-		$this->create_opening_tag($value);
-		echo "<a class='button oauth-authorize smugmug' href='".$value['link']."'>".$value['std']."</a>";
-		$this->create_closing_tag($value);
-	}
-
 	/**
 	 * Creates the opening markup for each option.
 	 *
@@ -1034,9 +1339,9 @@ class Photonic_Options_Manager {
 	 */
 	function create_opening_tag($value) {
 		echo "<div class='photonic-section fix'>\n";
-		if (isset($value['name'])) {
+/*		if (isset($value['name'])) {
 			echo "<h3>" . $value['name'] . "</h3>\n";
-		}
+		}*/
 		if (isset($value['desc']) && $value['type'] != 'checkbox') {
 			echo $value['desc']."<br />";
 		}
@@ -1068,61 +1373,662 @@ class Photonic_Options_Manager {
 	function display_upload_field($upload, $id, $name, $hint = null) {
 		echo '<input type="text" name="'.$name.'" id="'.$id.'" value="'.$upload.'" />'."\n";
 		if ($hint != null) {
-			echo " &laquo; ".$hint."<br />\n";
-		}
-
-		echo '<div class="upload-buttons">';
-		$hide = empty($upload) ? '' : 'hidden';
-		echo '<span class="button image_upload_button '.$hide.'" id="upload_'.$id.'">Upload Image</span>';
-
-		$hide = !empty($upload) ? '' : 'hidden';
-		echo '<span class="button image_reset_button '. $hide.'" id="reset_'.$id.'">Reset</span>';
-		echo '</div>' . "\n";
-
-		if(!empty($upload)){
-			echo "<div id='photonic-preview-$id'>\n";
-			echo "<p><strong>Preview:</strong></p>\n";
-		    echo '<img class="photonic-option-image" id="image_'.$id.'" src="'.$upload.'" alt="" />';
-			echo "</div>";
+			echo "<em> &laquo; ".$hint."<br /></em>\n";
 		}
 	}
 
-	/**
-	 * Called when you upload a file for option type "upload". This is an AJAX call.
-	 *
-	 * @return void
-	 */
-	function admin_upload_file() {
-		$save_type = $_POST['type'];
-		if ($save_type == 'upload') {
-			$data = $_POST['data']; // Acts as the name
-			$filename = $_FILES[$data];
-			$filename['name'] = preg_replace('/[^a-zA-Z0-9._\-]/', '', $filename['name']);
+	function invoke_helper() {
+		if (isset($_POST['helper']) && !empty($_POST['helper'])) {
+			$helper = sanitize_text_field($_POST['helper']);
+			$photonic_options = get_option('photonic_options');
+			switch ($helper) {
+				case 'photonic-flickr-user-find':
+					$flickr_api_key = $photonic_options['flickr_api_key'];
+					$user = isset($_POST['photonic-flickr-user']) ? sanitize_text_field($_POST['photonic-flickr-user']) : '';
+					$url = 'https://api.flickr.com/services/rest/?format=json&nojsoncallback=1&api_key='.$flickr_api_key.'&method=flickr.urls.lookupUser&url='.$user;
+					$this->execute_query('flickr', $url, 'flickr.urls.lookupUser');
+					break;
 
-			$override['test_form'] = false;
-			$override['action'] = 'wp_handle_upload';
-			$uploaded_file = wp_handle_upload($filename, $override);
+				case 'photonic-flickr-group-find':
+					$flickr_api_key = $photonic_options['flickr_api_key'];
+					$group = isset($_POST['photonic-flickr-group']) ? sanitize_text_field($_POST['photonic-flickr-group']) : '';
+					$url = 'https://api.flickr.com/services/rest/?format=json&nojsoncallback=1&api_key='.$flickr_api_key.'&method=flickr.urls.lookupGroup&url='.$group;
+					$this->execute_query('flickr', $url, 'flickr.urls.lookupGroup');
+					break;
 
-			$image_id = substr($data, 7);
+				case 'photonic-smugmug-user-tree':
+					$smugmug_api_key = $photonic_options['smug_api_key'];
+					$user = isset($_POST['photonic-smugmug-user']) ? sanitize_text_field($_POST['photonic-smugmug-user']) : '';
+					if (!empty($user)) {
+						global $photonic_smugmug_gallery;
+						if (!isset($photonic_smugmug_gallery)) {
+							$photonic_smugmug_gallery = new Photonic_SmugMug_Processor();
+						}
 
-			if (!empty($uploaded_file['error'])) {
-				echo 'Upload Error: ' . $uploaded_file['error'];
+						$cookie = Photonic::parse_cookie();
+						global $photonic_smug_allow_oauth, $photonic_smug_oauth_done;
+						if ($photonic_smug_allow_oauth && isset($cookie['smug']) && isset($cookie['smug']['oauth_token']) && isset($cookie['smug']['oauth_token_secret'])) {
+							$current_token = array(
+								'oauth_token' => $cookie['smug']['oauth_token'],
+								'oauth_token_secret' => $cookie['smug']['oauth_token_secret']
+							);
+
+							if (!$photonic_smug_oauth_done && ((isset($cookie['smug']['oauth_token_type']) && $cookie['smug']['oauth_token_type'] == 'request') || !isset($cookie['smug']['oauth_token_type']))) {
+								$current_token['oauth_verifier'] = $_REQUEST['oauth_verifier'];
+								$new_token = $photonic_smugmug_gallery->get_access_token($current_token);
+								if (isset($new_token['oauth_token']) && isset($new_token['oauth_token_secret'])) {
+									$access_token_response = $photonic_smugmug_gallery->check_access_token($new_token);
+									if (is_wp_error($access_token_response)) {
+										$photonic_smugmug_gallery->is_server_down = true;
+									}
+									$photonic_smug_oauth_done = $photonic_smugmug_gallery->is_access_token_valid($access_token_response);
+								}
+							}
+							else if (isset($cookie['smug']['oauth_token_type']) && $cookie['smug']['oauth_token_type'] == 'access') {
+								$access_token_response = $photonic_smugmug_gallery->check_access_token($current_token);
+								if (is_wp_error($access_token_response)) {
+									$photonic_smugmug_gallery->is_server_down = true;
+								}
+								$photonic_smug_oauth_done = $photonic_smugmug_gallery->is_access_token_valid($access_token_response);
+							}
+						}
+
+						$count = 500;
+						$config = array(
+							'expand' => array(
+								'Node' => array(),
+								'HighlightImage' => array(
+									'expand' => array(
+										'ImageSizes' => array()
+									),
+								),
+								'NodeCoverImage' => array(
+									'expand' => array(
+										'ImageSizes' => array()
+									),
+								),
+								'ChildNodes' => array(
+									'args' => array(
+										'count' => $count
+									),
+									'expand' => array(
+										'HighlightImage' => array(
+											'expand' => array(
+												'ImageSizes' => array()
+											),
+										),
+										'NodeCoverImage' => array(
+											'expand' => array(
+												'ImageSizes' => array()
+											),
+										),
+										'ChildNodes' => array(
+											'args' => array(
+												'count' => $count
+											),
+											'expand' => array(
+												'HighlightImage' => array(
+													'expand' => array(
+														'ImageSizes' => array()
+													),
+												),
+												'NodeCoverImage' => array(
+													'expand' => array(
+														'ImageSizes' => array()
+													),
+												),
+												'ChildNodes' => array(
+													'args' => array(
+														'count' => $count
+													),
+													'expand' => array(
+														'HighlightImage' => array(
+															'expand' => array(
+																'ImageSizes' => array()
+															),
+														),
+														'NodeCoverImage' => array(
+															'expand' => array(
+																'ImageSizes' => array()
+															),
+														),
+														'ChildNodes' => array(
+															'args' => array(
+																'count' => $count
+															),
+															'expand' => array(
+																'HighlightImage' => array(
+																	'expand' => array(
+																		'ImageSizes' => array()
+																	),
+																),
+																'NodeCoverImage' => array(
+																	'expand' => array(
+																		'ImageSizes' => array()
+																	),
+																),
+																'ChildNodes' => array(
+																	'args' => array(
+																		'count' => $count
+																	),
+																),
+															),
+														),
+													),
+												),
+											),
+										),
+									),
+								),
+							),
+						);
+
+						//$api_call = 'https://api.smugmug.com/api/v2/user/' . $user . '?_expand=Node.ChildNodes.ChildNodes.ChildNodes.ChildNodes.ChildNodes';
+						$api_call = 'https://api.smugmug.com/api/v2/user/' . $user;
+						$args = array(
+							'APIKey' => $smugmug_api_key,
+							'_accept' => 'application/json',
+							'_verbosity' => 1,
+							'_expandmethod' => 'inline',
+							'count' => 500
+						);
+
+						$response = Photonic::http($api_call, 'GET', $args);
+						if (!is_wp_error($response)) {
+							$body = $response['body'];
+							$body = json_decode($body);
+							if ($body->Code === 200) {
+								$body = $body->Response;
+								if (isset($body->User) && isset($body->User->Uris) && isset($body->User->Uris->Node)) {
+									$node = $body->User->Uris->Node->Uri;
+									$node = explode('/', $node);
+									$node = array_pop($node);
+									$api_call = 'https://api.smugmug.com/api/v2/node/' . $node . '?_config='.json_encode($config);
+
+									if ($photonic_smug_oauth_done || $photonic_smugmug_gallery->oauth_done) {
+										$args = $photonic_smugmug_gallery->sign_call($api_call, 'GET', $args);
+									}
+									else {
+										$request_token = $photonic_smugmug_gallery->get_request_token();
+										$authorize_url = $photonic_smugmug_gallery->get_authorize_URL($request_token).'&Access=Full&Permissions=Read';
+										echo sprintf(__("If you have protected albums, you will have to %1sauthenticate%2s to see the protected albums.", 'photonic'), "<a href='$authorize_url' target='_blank'>", "</a>");
+									}
+									$response = Photonic::http($api_call, 'GET', $args);
+									$this->process_smugmug_response($response);
+								}
+							}
+						}
+
+					}
+					break;
+
+				case 'photonic-picasa-album-find':
+					$user = isset($_POST['photonic-picasa-user']) ? sanitize_text_field($_POST['photonic-picasa-user']) : '';
+					if (!empty($user)) {
+						$url = 'https://picasaweb.google.com/data/feed/api/user/'.$user.'?kind=album';
+
+						global $photonic_picasa_gallery, $photonic_picasa_refresh_token;
+						if (!isset($photonic_picasa_gallery)) {
+							$photonic_picasa_gallery = new Photonic_Picasa_Processor();
+						}
+						$photonic_picasa_gallery->perform_back_end_authentication($photonic_picasa_refresh_token);
+						if (!empty($photonic_picasa_gallery->access_token)) {
+							$url .= '&access_token='.$photonic_picasa_gallery->access_token;
+						}
+
+						$response = wp_remote_request($url);
+						if (!is_wp_error($response) && $response['response']['code'] == 200) {
+							$response = $response['body'];
+						}
+
+						if (strlen($response) == 0 || substr($response, 0, 1) != '<') {
+							if (stripos($response, 'No album found') !== false) {
+								$response = '';
+							}
+						}
+						else if (!is_string($response)) {
+							$response = '';
+						}
+
+						$this->process_picasa_response($response);
+					}
+					break;
+
+				case 'photonic-google-album-find':
+				case 'photonic-google-album-more':
+					$url = 'https://photoslibrary.googleapis.com/v1/albums';
+
+					global $photonic_google_gallery, $photonic_google_refresh_token;
+					if (!isset($photonic_google_gallery)) {
+						$photonic_google_gallery = new Photonic_Google_Photos_Processor();
+					}
+					$photonic_google_gallery->perform_back_end_authentication($photonic_google_refresh_token);
+					if (!empty($photonic_google_gallery->access_token)) {
+						$query_args = array(
+							'access_token' => $photonic_google_gallery->access_token,
+							'pageSize' => 50,
+						);
+						if (!empty($_POST['nextPageToken'])) {
+							$query_args['pageToken'] = $_POST['nextPageToken'];
+						}
+
+						$url = add_query_arg(
+							$query_args,
+							$url);
+					}
+
+					$response = wp_remote_request($url);
+					if (!is_wp_error($response) && $response['response']['code'] == 200) {
+						$response = $response['body'];
+					}
+
+					$this->process_google_response($response, !empty($_POST['nextPageToken']));
+					break;
+
+				case 'photonic-instagram-user-find':
+					$user = isset($_POST['photonic-instagram-user']) ? sanitize_text_field($_POST['photonic-instagram-user']) : '';
+					if (!empty($user)) {
+						global $photonic_instagram_gallery, $photonic_instagram_access_token;
+						if (!isset($photonic_instagram_gallery)) {
+							$photonic_instagram_gallery = new Photonic_Instagram_Processor();
+						}
+
+						if (isset($photonic_instagram_access_token) && !$photonic_instagram_gallery->is_token_expired($photonic_instagram_access_token)) {
+							$url = 'https://api.instagram.com/v1/users/search?access_token='.$photonic_instagram_access_token.'&q='.$user;
+							$this->execute_query('instagram', $url, 'users/search');
+						}
+						else {
+							_e("You have to authenticate to see the details.");
+						}
+					}
+					break;
+
+				case 'photonic-instagram-location-find':
+					global $photonic_instagram_gallery, $photonic_instagram_access_token;
+					if (!isset($photonic_instagram_gallery)) {
+						$photonic_instagram_gallery = new Photonic_Instagram_Processor();
+					}
+					$lat = isset($_POST['photonic-instagram-lat']) ? sanitize_text_field($_POST['photonic-instagram-lat']) : '';
+					$lng = isset($_POST['photonic-instagram-lng']) ? sanitize_text_field($_POST['photonic-instagram-lng']) : '';
+					$fs_id = isset($_POST['photonic-instagram-fsid']) ? sanitize_text_field($_POST['photonic-instagram-fsid']) : '';
+					if (isset($photonic_instagram_access_token) && !$photonic_instagram_gallery->is_token_expired($photonic_instagram_access_token)) {
+						$url = 'https://api.instagram.com/v1/locations/search?access_token=' . $photonic_instagram_access_token . '&lat=' . $lat . '&lng=' . $lng . '&foursquare_v2_id=' . $fs_id;
+						$this->execute_query('instagram', $url, 'locations/search');
+					}
+					else {
+						_e("You have to authenticate to see the details.");
+					}
+					break;
+
+				case 'photonic-zenfolio-categories-find':
+					$url = 'https://api.zenfolio.com/api/1.8/zfapi.asmx/GetCategories';
+					$this->execute_query('zenfolio', $url, 'GetCategories');
+					break;
 			}
-			else {
-				$this->options[$image_id] = $uploaded_file['url'];
-				echo $uploaded_file['url'];
-			}
-		}
-		elseif ($save_type == 'image_reset') {
-			$data = $_POST['data'];
-			$image_id = substr($data, 6);
-			if (isset($this->options[$image_id])) unset($this->options[$image_id]);
 		}
 		die();
 	}
 
-	function authenticate_oauth() {
-		//
+	function execute_query($where, $url, $method) {
+		$response = wp_remote_request($url, array('sslverify' => PHOTONIC_SSL_VERIFY));
+		if (!is_wp_error($response)) {
+			if (isset($response['response']) && isset($response['response']['code'])) {
+				if ($response['response']['code'] == 200) {
+					if (isset($response['body'])) {
+						if ($where == 'flickr') {
+							$this->execute_flickr_query($response['body'], $method);
+						}
+						else if ($where == 'instagram') {
+							$this->execute_instagram_query($response['body'], $method);
+						}
+						else if ($where == 'zenfolio') {
+							$this->execute_zenfolio_query($response['body'], $method);
+						}
+					}
+					else {
+						_e('<span class="found-id-text">No response from server!</span>', 'photonic');
+					}
+				}
+				else {
+					echo '<span class="found-id-text">'.$response['response']['message'].'</span>';
+				}
+			}
+			else {
+				_e('<span class="found-id-text">No response from server!</span>', 'photonic');
+			}
+		}
+		else {
+			_e('<span class="found-id-text">Cannot connect to the server. Please try later.</span>', 'photonic');
+		}
+	}
+
+	function execute_flickr_query($body, $method) {
+		$body = json_decode($body);
+		if (isset($body->stat) && $body->stat == 'fail') {
+			echo '<span class="found-id-text">'.$body->message.'</span>';
+		}
+		else {
+			if ($method == 'flickr.urls.lookupUser') {
+				if (isset($body->user)) {
+					echo '<span class="found-id-text">'.__('User ID:', 'photonic').'</span> <span class="found-id"><code>'.$body->user->id.'</code></span>';
+				}
+			}
+			else if ($method == 'flickr.urls.lookupGroup') {
+				if (isset($body->group)) {
+					echo '<span class="found-id-text">'.__('Group ID:', 'photonic').'</span> <span class="found-id"><code>'.$body->group->id.'</code></span>';
+				}
+			}
+		}
+	}
+
+	function process_smugmug_response($response) {
+		$body = $response['body'];
+		$body = json_decode($body);
+
+		if ($body->Code === 200) {
+			$body = $body->Response;
+			if (isset($body->Node)) {
+				$node = $body->Node;
+				if ($node->Type == 'Folder') {
+					$ret = $this->process_smugmug_node($node);
+					if (!empty($ret)) {
+						$ret = "<table class='photonic-helper-table'>\n".
+									"\t<tr>\n".
+										"\t<th>Name</th>\n".
+										"\t<th>Type</th>\n".
+										"\t<th>Thumbnail</th>\n".
+										"\t<th>Album Key</th>\n".
+										"\t<th>Security Level</th>\n".
+									"\t</tr>\n".
+									$ret.
+								"</table>\n";
+						echo $ret;
+					}
+				}
+			}
+		}
+	}
+
+	function process_smugmug_node($node) {
+		$ret = '';
+		if ($node->Type == 'Folder') {
+			$albums = array();
+			$folders = array();
+			if (isset($node->Uris->ChildNodes->Node)) {
+				$child_nodes = $node->Uris->ChildNodes->Node;
+				foreach ($child_nodes as $child) {
+					if ($child->Type == 'Album') {
+						$albums[] = $child;
+					}
+					else if ($child->Type == 'Folder') {
+						$folders[] = $child;
+					}
+				}
+
+				foreach ($albums as $album) {
+					$ret .= "\t<tr>\n";
+					$ret .= "\t\t<td>{$album->Name}</td>\n";
+					$ret .= "\t\t<td>Album</td>\n";
+					$thumb = isset($album->Uris->NodeCoverImage->Image->ThumbnailUrl) ? $album->Uris->NodeCoverImage->Image->ThumbnailUrl : '';
+					$ret .= "\t\t<td>".(empty($thumb) ? '' : "<img src='$thumb'/>")."</td>\n";
+					$album_key = isset($album->Uris->Album) ? $album->Uris->Album->Uri : '';
+					$album_key = explode('/', $album_key);
+					$album_key = $album_key[count($album_key) - 1];
+					$ret .= "\t\t<td>$album_key</td>\n";
+					$ret .= "\t\t<td>{$album->SecurityType}</td>\n";
+					$ret .= "\t</tr>\n";
+				}
+
+				foreach ($folders as $folder) {
+					$ret .= "\t<tr>\n";
+					$ret .= "\t\t<td>{$folder->Name}</td>\n";
+					$ret .= "\t\t<td>Folder</td>\n";
+					$thumb = isset($folder->Uris->NodeCoverImage->Image->ThumbnailUrl) ? $folder->Uris->NodeCoverImage->Image->ThumbnailUrl : '';
+					$ret .= "\t\t<td>".(empty($thumb) ? '' : "<img src='$thumb'/>")."</td>\n";
+					$ret .= "\t\t<td>{$folder->NodeID}</td>\n";
+					$ret .= "\t\t<td>{$folder->SecurityType}</td>\n";
+					$ret .= "\t</tr>\n";
+
+					$ret .= $this->process_smugmug_node($folder);
+				}
+			}
+		}
+		return $ret;
+	}
+
+	function process_picasa_response($response) {
+		$picasa_result = simplexml_load_string($response);
+		if (isset($picasa_result->entry) && count($picasa_result->entry) > 0) {
+			$albums = $picasa_result->entry;
+			echo "<table class='photonic-helper-table'>\n";
+			echo "\t<tr>\n";
+			echo "\t\t<th>Album Title</th>\n";
+			echo "\t\t<th>Thumbnail</th>\n";
+			echo "\t\t<th>Album Name</th>\n";
+			echo "\t\t<th>Album ID</th>\n";
+			echo "\t\t<th>Auth Key</th>\n";
+			echo "\t\t<th>Access Level</th>\n";
+			echo "\t</tr>\n";
+			foreach ($albums as $album) {
+				$auth_key = '';
+				if (isset($album->link)) {
+					foreach ($album->link as $link) {
+						$attributes = $link->attributes();
+						if (isset($attributes['rel']) && $attributes['rel'] == 'self' && isset($attributes['href'])) {
+							if (stripos($attributes['href'], '?authkey=') !== FALSE) {
+								$auth_key = substr($attributes['href'], stripos($attributes['href'], '?authkey=') + 9);
+								break;
+							}
+						}
+					}
+				}
+				$media = $album->children('media', 1);
+				$media = $media->group;
+				$thumbnail = $media->thumbnail->attributes()->url;
+
+				echo "\t<tr>\n";
+				echo "\t\t<td>{$album->title}</td>\n";
+				echo "\t\t<td><img src='{$thumbnail}'/></td>\n";
+				$gphoto_photo = $album->children('gphoto', 1);
+				echo "\t\t<td>{$gphoto_photo->name}</td>\n";
+				echo "\t\t<td>{$gphoto_photo->id}</td>\n";
+				echo "\t\t<td>$auth_key</td>\n";
+				echo "\t\t<td>{$gphoto_photo->access}</td>\n";
+				echo "\t</tr>\n";
+			}
+			echo "</table>\n";
+		}
+	}
+
+	function process_google_response($response, $more = false) {
+		$response = json_decode($response);
+		if (!empty($response->albums) && is_array($response->albums)) {
+			$albums = $response->albums;
+			if (!$more) {
+				echo "<table class='photonic-helper-table'>\n";
+				echo "\t<tr>\n";
+				echo "\t\t<th>Album Title</th>\n";
+				echo "\t\t<th>Thumbnail</th>\n";
+				echo "\t\t<th>Album ID</th>\n";
+				echo "\t\t<th>Media Count</th>\n";
+				echo "\t</tr>\n";
+			}
+
+			foreach ($albums as $album) {
+				echo "\t<tr>\n";
+				echo "\t\t<td>".(empty($album->title)? '' : esc_attr($album->title))."</td>\n";
+				echo "\t\t<td><img src='{$album->coverPhotoBaseUrl}=w75-h75-c' /></td>\n";
+				echo "\t\t<td>{$album->id}</td>\n";
+				echo "\t\t<td>{$album->totalMediaItems}</td>\n";
+				echo "\t</tr>\n";
+			}
+
+			if (!empty($response->nextPageToken)) {
+				echo "\t<tr>\n";
+				echo "\t\t<td colspan='4'>\n";
+				echo '<input type="button" value="'.__('Load More', 'photonic').'" id="photonic-google-album-more" class="button button-primary" data-photonic-token="'.$response->nextPageToken.'"/>';
+				echo "\t\t</td>\n";
+				echo "\t</tr>\n";
+			}
+
+			if (!$more) {
+				echo "</table>\n";
+			}
+		}
+		else {
+			_e("No albums found", 'photonic');
+		}
+	}
+
+	function execute_instagram_query($body, $method) {
+		$body = json_decode($body);
+		if (isset($body->meta) && isset($body->meta->code) && $body->meta->code == 200 && isset($body->data)) {
+			$data = $body->data;
+			if (count($data) == 0) {
+				if ($method == 'users/search') {
+					_e('<span class="found-id-text">User not found</span>', 'photonic');
+				}
+				else if ($method = 'locations/search') {
+					_e('<span class="found-id-text">Location not found</span>', 'photonic');
+				}
+			}
+			else if (count($data) == 1) {
+				if ($method == 'users/search') {
+					$user = $data[0];
+					$text = '<code>'.$user->id.'</code> ('.(!empty($user->full_name) ? $user->full_name : $user->username).')';
+					echo '<span class="found-id-text">'.__('User ID:', 'photonic').'</span> <span class="found-id">'.$text.'</span>';
+				}
+				else if ($method == 'locations/search') {
+					$location = $data[0];
+					$text = '<code>'.$location->id.'</code> ('.(!empty($location->name) ? $location->name : __('Name not available', 'photonic')).')';
+					echo '<span class="found-id-text">'.__('Location ID:', 'photonic').'</span> <span class="found-id">'.$text.'</span>';
+				}
+			}
+			else if (count($data) > 1) {
+				if ($method == 'users/search') {
+					$text = array();
+					foreach ($data as $user) {
+						$text[] = '<code>'.$user->id.'</code> ('.(!empty($user->full_name) ? $user->full_name : $user->username).')';
+					}
+					echo '<span class="found-id-text">'.__('Matching users:', 'photonic').'</span> <span class="found-id">'.implode(', ', $text).'</span>';
+				}
+				else if ($method == 'locations/search') {
+					$text = array();
+					foreach ($data as $location) {
+						$text[] = '<code>'.$location->id.'</code> ('.(!empty($location->name) ? $location->name : __('Name not available', 'photonic')).')';
+					}
+					echo '<span class="found-id-text">'.__('Matching locations:', 'photonic').'</span> <span class="found-id">'.implode(', ', $text).'</span>';
+				}
+			}
+		}
+	}
+
+	function execute_zenfolio_query($body, $method) {
+		if ($method == 'GetCategories') {
+			$response = simplexml_load_string($body);
+			if (!empty($response->Category)) {
+				$categories = $response->Category;
+				echo "<ul class='photonic-scroll-panel'>\n";
+				foreach ($categories as $category) {
+					echo "<li>{$category->DisplayName} &ndash; {$category->Code}</li>\n";
+				}
+				echo "</ul>\n";
+			}
+		}
+	}
+
+	/**
+	 * Save generated options to a file. This uses the WP_Filesystem to validate the credentials of the user attempting to save options.
+	 *
+	 * @param array $custom_css
+	 * @return bool
+	 */
+	function save_css_to_file($custom_css) {
+		if(!isset($_GET['settings-updated'])) {
+			return false;
+		}
+
+		$url = wp_nonce_url('themes.php?page=photonic-options-manager');
+		if (false === ($creds = request_filesystem_credentials($url, '', false, false))) {
+			return true;
+		}
+
+		if (!WP_Filesystem($creds)) {
+			request_filesystem_credentials($url, '', true, false);
+			return true;
+		}
+
+		global $wp_filesystem;
+		if (!is_dir(PHOTONIC_UPLOAD_DIR)) {
+			if (!$wp_filesystem->mkdir(PHOTONIC_UPLOAD_DIR)) {
+				echo "<div class='error'><p>Failed to create directory ".PHOTONIC_UPLOAD_DIR.". Please check your folder permissions.</p></div>";
+				return false;
+			}
+		}
+
+		$filename = trailingslashit(PHOTONIC_UPLOAD_DIR).'custom-styles.css';
+
+		if (empty($custom_css)) {
+			return false;
+		}
+
+		if (!$wp_filesystem->put_contents($filename, $custom_css, FS_CHMOD_FILE)) {
+			echo "<div class='error'><p>Failed to save file $filename. Please check your folder permissions.</p></div>";
+			return false;
+		}
+		return true;
+	}
+
+	function render_getting_started() {
+		require_once(plugin_dir_path(__FILE__)."/photonic-getting-started.php");
+	}
+
+	private function show_token_section($gallery, $provider_slug, $provider_text) {
+		$this->show_token_section_header($gallery, $provider_text);
+		if (!empty($gallery->api_key)) {
+			$this->show_token_section_body($gallery, $provider_slug);
+		}
+		else {
+			echo '<div class="result" id="'.$provider_slug.'-result">&nbsp;</div>';
+		}
+	}
+
+	private function show_token_section_header($gallery, $provider) {
+		echo "<div class=\"photonic-token-header\">\n";
+		if ($provider == '500px') {
+			_e('<div class="notice-warning notice-alt">With effect from 15th June <a href="https://support.500px.com/hc/en-us/articles/360002435653-API-">500px.com has shutdown its API</a>, so authentication is no longer possible.</div>', 'photonic');
+		}
+		else if (empty($gallery->api_key)) {
+			echo sprintf(__('Please set up your %1$s API key under <em>Photonic &rarr; Settings &rarr; %1$s &rarr; %1$s Settings</em>.', 'photonic'), $provider);
+		}
+		else if (!empty($gallery->token)) {
+			_e('You have already set up your authentication. <span class="photonic-all-ok">Unless you wish to regenerate your token this step is not required.</span>', 'photonic');
+		}
+		echo "</div>\n";
+	}
+
+	/**
+	 * @param $gallery
+	 * @param $provider
+	 */
+	public function show_token_section_body($gallery, $provider) {
+		$photonic_authentication = get_option('photonic_authentication');
+		$response = Photonic_Processor::parse_parameters($_SERVER['QUERY_STRING']);
+
+		if (empty($response['provider']) || $provider !== $response['provider']) {
+			echo "<a href='#' class='button button-primary photonic-token-request' data-photonic-provider='$provider'>" . __('Login and get Access Token', 'photonic') . "</a>";
+		}
+		else if (!empty($response['oauth_token']) && !empty($response['oauth_verifier'])) {
+			echo "<span class='button photonic-helper-button-disabled'>" . __('Login and get Access Token', 'photonic') . "</span>";
+			$authorization = array('oauth_token' => $response['oauth_token'], 'oauth_verifier' => $response['oauth_verifier']);
+			if (isset($photonic_authentication) && isset($photonic_authentication[$provider]) && isset($photonic_authentication[$provider]['oauth_token_secret'])) {
+				$authorization['oauth_token_secret'] = $photonic_authentication[$provider]['oauth_token_secret'];
+			}
+			$access_token = $gallery->get_access_token($authorization, false);
+			if (isset($access_token['oauth_token'])) {
+				echo '<div class="result">Access Token: <code id="'.$provider.'-token">' . $access_token['oauth_token'] . '</code><br/>Access Token Secret: <code id="'.$provider.'-token-secret">' . $access_token['oauth_token_secret'] . '</code></div>'."\n";
+				echo "<a href='#' class='button button-primary photonic-save-token' data-photonic-provider='$provider'>" . __('Save Token', 'photonic') . "</a>";
+			}
+		}
 	}
 }
-?>

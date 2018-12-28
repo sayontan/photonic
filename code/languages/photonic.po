@@ -1,735 +1,3202 @@
+# Copyright (C) 2018 Photonic Gallery & Lightbox for Flickr, SmugMug, Google Photos, Picasa, Zenfolio and Instagram
+# This file is distributed under the same license as the Photonic Gallery & Lightbox for Flickr, SmugMug, Google Photos, Picasa, Zenfolio and Instagram package.
 msgid ""
 msgstr ""
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: Sayontan Sinha <sayontan@gmail.com>\n"
-"Language-Team: \n"
+"Project-Id-Version: Photonic Gallery & Lightbox for Flickr, SmugMug, Google Photos, Picasa, Zenfolio and Instagram 2.13\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/photonic\n"
+"POT-Creation-Date: 2018-12-11 23:33:12+00:00\n"
 "MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "140 &times; 140 px"
+#: admin/Photonic_Shortcode_Usage.php:39
+msgid "Post Title"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "280 &times; 280 px"
+#: admin/Photonic_Shortcode_Usage.php:40
+msgid "Post Type"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "500px"
+#: admin/Photonic_Shortcode_Usage.php:41
+msgid "Post Status"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "75 &times; 75 px"
+#: admin/Photonic_Shortcode_Usage.php:42
+msgid "Gallery Shortcodes used by Photonic"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Abstract"
+#: admin/Photonic_Shortcode_Usage.php:143
+msgid "Edit"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Album"
+#: admin/Photonic_Shortcode_Usage.php:144 layouts/Layout_Default.php:193
+msgid "View"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Albums"
+#: admin/Photonic_Shortcode_Usage.php:145
+msgid "Replace Shortcodes"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "All Categories"
+#: admin/Photonic_Shortcode_Usage.php:155
+msgid "No instances of Photonic found with the <code>%s</code> shortcode"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "All albums"
+#: admin/Photonic_Shortcode_Usage.php:160
+msgid "Replace Shortcode"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "All tags"
+#: admin/Photonic_Shortcode_Usage.php:185
+msgid "Cannot update the posts because a custom shortcode has not been set up under <strong><em>Photonic &rarr; Settings &rarr; Generic Options &rarr; Generic Settings &rarr; Custom Shortcode</em></strong>."
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Animals"
+#: admin/Photonic_Shortcode_Usage.php:242
+msgid "Failed to replace shortcodes due to an error. Please open a support ticket."
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Any tag"
+#: admin/Photonic_Shortcode_Usage.php:246
+msgid "0 replacements made. If this is not what you were expecting please open a support ticket."
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Applies to slideshows only"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Black and White"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Blind X"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Blind Y"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Blind Z"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Cancel"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Category"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Celebrities"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Collection ID"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Collections"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Comma-separated list of tags"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Commercial"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Concert"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Cover"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Created at"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Curtain-X"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Curtain-Y"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Date posted, ascending"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Date posted, descending"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Date taken, ascending"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Date taken, descending"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Display"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Display Style"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Editor's choices"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Either User ID or User Name is required if Feature is user-specific"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Fade"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Fade Zoom"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Family"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Fashion"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Feature"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Film"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Fine Art"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Flickr"
-msgstr ""
-
-#. Text in function
-#: photonic/extensions/Photonic_Flickr_Processor.php:1
-msgid "Flickr API Key not defined"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Food"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Fresh today"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Full size"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Galleries"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Gallery ID"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Group ID"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Grow X"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Grow Y"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "If your SmugMug URL is http://joe-sixpack.smugmug.com, this is \"joe-sixpack\". Required if the \"Display\" is \"Tree\" or \"All albums\"."
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "In pixels"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "In pixels. This is applicable only if you are displaying the slideshow directly on the page."
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Insert into post"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Interestingness, ascending"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Interestingness, descending"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Journalism"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Landscapes"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Macro"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Main image size"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Nature"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Nickname"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "No thumbnails - only slideshow"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Nude"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Number of columns"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Number of photos to show"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Only thumbnails - click for slideshow"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic.php:577
-msgid "Original height"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic.php:577
-msgid "Original width"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "People"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Performing Arts"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Photo ID"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Photos"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Photos of specified user's friends"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Photoset ID"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Photosets"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Picasa"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Popular photos"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Rating"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Relevance"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Required if you are showing \"Single Album\" above. If your gallery URL is http://nick-name.smugmug.com/gallery/<b>abcdefgh_123456</b>, this is <b>abcdefgh_123456</b>"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Scroll Down"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Scroll Horizontal"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Scroll Left"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Scroll Right"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Scroll Up"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Scroll Vertical"
-msgstr ""
+#: admin/Photonic_Shortcode_Usage.php:250
+msgid "%d post updated with the shortcode replacement."
+msgid_plural "%d posts updated with the shortcode replacement."
+msgstr[0] ""
+msgstr[1] ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
+#: admin/add-gallery.php:122
 msgid "Shortcode preview"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Single Album"
+#: admin/add-gallery.php:128
+msgid "Insert into post"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
+#: admin/add-gallery.php:129
+msgid "Cancel"
+msgstr ""
+
+#: admin/flow/Flow.php:14
+msgid "You are not authorized to use this capability."
+msgstr ""
+
+#: admin/flow/Flow.php:48
+msgid "Choose Gallery Source"
+msgstr ""
+
+#: admin/flow/Flow.php:75
+msgid "<p><strong>Hint:</strong> To edit an existing shortcode select the shortcode before clicking on the \"Add / Edit Photonic Gallery\" button.</p>"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:19
+msgid "Square Grid"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:20
+msgid "Circular Icon Grid"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:21
+msgid "Justified Grid"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:22
+msgid "Masonry"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:23
+msgid "Mosaic"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:24
+msgid "Slideshow"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:28
+msgid "Number of columns in output"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:32
+msgid "Automatic (Photonic calculates the columns)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:73
+#: admin/flow/Photonic_Flow_Fields.php:88
+#: admin/flow/Photonic_Flow_Fields.php:144
+#: admin/flow/Photonic_Flow_Fields.php:185
+#: admin/flow/Photonic_Flow_Fields.php:222
+#: admin/flow/Photonic_Flow_Fields.php:238
+#: admin/flow/Photonic_Flow_Fields.php:288
+msgid "Choose Type of Gallery"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:76
+#: admin/flow/Photonic_Flow_Fields.php:95
+#: admin/flow/Photonic_Flow_Fields.php:151
+#: admin/flow/Photonic_Flow_Fields.php:192
+#: admin/flow/Photonic_Flow_Fields.php:225
+#: admin/flow/Photonic_Flow_Fields.php:245
+#: admin/flow/Photonic_Flow_Fields.php:291
+#: admin/flow/Photonic_Flow_Fields.php:404
+#: admin/flow/Photonic_Flow_Fields.php:426
+#: admin/flow/Photonic_Flow_Fields.php:459
+#: admin/flow/Photonic_Flow_Fields.php:495
+#: admin/flow/Photonic_Flow_Fields.php:560
+#: admin/flow/Photonic_Flow_Fields.php:665
+#: admin/flow/Photonic_Flow_Fields.php:767
+#: admin/flow/Photonic_Flow_Fields.php:801
+#: admin/flow/Photonic_Flow_Fields.php:835
+msgid "What do you want to show?"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:80
+msgid "Gallery attached to the current post"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:81
+msgid "Photos from Media Library"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:99
+#: admin/flow/Photonic_Flow_Fields.php:295
+msgid "A Single Photo"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:100
+#: admin/flow/Photonic_Flow_Fields.php:229
+#: admin/flow/Photonic_Flow_Fields.php:250
+#: admin/flow/Photonic_Flow_Fields.php:296
+msgid "Multiple Photos"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:101
+msgid "Photos from an Album / Photoset"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:102
+msgid "Photos from a Gallery"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:103
+#: admin/flow/Photonic_Flow_Fields.php:158
+#: admin/flow/Photonic_Flow_Fields.php:197
+#: admin/flow/Photonic_Flow_Fields.php:231
+msgid "Multiple Albums"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:104
+#: admin/flow/Photonic_Flow_Fields.php:253
+msgid "Multiple Galleries"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:105
+msgid "Albums from a single collection"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:106
+msgid "Multiple collections"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:111
+#: admin/flow/Photonic_Flow_Fields.php:165
+#: admin/flow/Photonic_Flow_Fields.php:202
+#: admin/flow/Photonic_Flow_Fields.php:262
+msgid "For whom?"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:114
+msgid "Current user (Defined under <em>Photonic &rarr; Settings &rarr; Flickr &rarr; Flickr Settings &rarr; Default user</em>)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:115
+#: admin/flow/Photonic_Flow_Fields.php:169
+#: admin/flow/Photonic_Flow_Fields.php:206
+#: admin/flow/Photonic_Flow_Fields.php:266
+msgid "Another user"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:116 photonic-form.php:1358
+msgid "Group"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:117
+#: admin/flow/Photonic_Flow_Fields.php:267
+msgid "All users"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:126
+#: admin/flow/Photonic_Flow_Fields.php:174
+#: admin/flow/Photonic_Flow_Fields.php:211
+#: admin/flow/Photonic_Flow_Fields.php:277
+msgid "User name, e.g. %s"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:133
+msgid "Group name, e.g. %s"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:155
+#: admin/flow/Photonic_Flow_Fields.php:196
+#: admin/flow/Photonic_Flow_Fields.php:230
+msgid "Photos from an Album"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:156
+msgid "Photos from a Folder"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:157
+msgid "Photos from a User"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:159
+msgid "Albums in a Folder"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:160
+#: admin/flow/Photonic_Flow_Fields.php:694
+msgid "User Tree"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:168
+msgid "Current user (Defined under <em>Photonic &rarr; Settings &rarr; SmugMug &rarr; SmugMug Settings &rarr; Default user</em>)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:205
+msgid "Current user (Defined under <em>Photonic &rarr; Settings &rarr; Picasa &rarr; Picasa Settings &rarr; Default user</em>)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:249 photonic-form.php:163
+#: photonic-form.php:1585
 msgid "Single Photo"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Sizes defined by your theme. Applies to slideshows only. Avoid loading large sizes to reduce page loads."
+#: admin/flow/Photonic_Flow_Fields.php:251
+msgid "Photos from a Gallery or Collection"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Sizes defined by your theme. Image picked here will be resized to the dimensions above."
+#: admin/flow/Photonic_Flow_Fields.php:254
+msgid "Multiple Collections"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Slide X"
+#: admin/flow/Photonic_Flow_Fields.php:255
+msgid "Multiple Galleries and Collections"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Slide Y"
+#: admin/flow/Photonic_Flow_Fields.php:256
+msgid "Single Group"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Slides image size"
+#: admin/flow/Photonic_Flow_Fields.php:257 photonic-form.php:1357
+msgid "Group Hierarchy"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Slideshow Effects"
+#: admin/flow/Photonic_Flow_Fields.php:265
+msgid "Current user (Defined under <em>Photonic &rarr; Settings &rarr; Zenfolio &rarr; Zenfolio Photo Settings &rarr; Default user</em>)"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Slideshow Height"
+#: admin/flow/Photonic_Flow_Fields.php:306
+#: admin/flow/Photonic_Flow_Fields.php:478
+#: admin/flow/Photonic_Flow_Fields.php:514
+#: admin/flow/Photonic_Flow_Fields.php:590
+#: admin/flow/Photonic_Flow_Fields.php:706
+#: admin/flow/Photonic_Flow_Fields.php:888
+msgid "Build your gallery"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "SmugMug"
+#: admin/flow/Photonic_Flow_Fields.php:308
+#: admin/flow/Photonic_Flow_Fields.php:708
+#: admin/flow/Photonic_Flow_Fields.php:890
+msgid "Pick a photo"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Sort by"
+#: admin/flow/Photonic_Flow_Fields.php:309
+#: admin/flow/Photonic_Flow_Fields.php:709
+#: admin/flow/Photonic_Flow_Fields.php:891
+msgid "From the list below pick the single photo you wish to display."
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Specified user's favourite photos"
+#: admin/flow/Photonic_Flow_Fields.php:319
+#: admin/flow/Photonic_Flow_Fields.php:516
+#: admin/flow/Photonic_Flow_Fields.php:901
+msgid "All your photos"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Specified user's photos"
+#: admin/flow/Photonic_Flow_Fields.php:320
+msgid "You can show all your photos, or apply tags to show some of them."
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Sport"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Still Life"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Street"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Tag mode"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
+#: admin/flow/Photonic_Flow_Fields.php:323 photonic-form.php:230
+#: photonic-form.php:1194
 msgid "Tags"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Taken at"
+#: admin/flow/Photonic_Flow_Fields.php:325 photonic-form.php:232
+msgid "Comma-separated list of tags"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Thumbnail height"
+#: admin/flow/Photonic_Flow_Fields.php:329 photonic-form.php:237
+msgid "Tag mode"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Thumbnail size"
+#: admin/flow/Photonic_Flow_Fields.php:332 photonic-form.php:240
+msgid "Any tag"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Thumbnail width"
+#: admin/flow/Photonic_Flow_Fields.php:333 photonic-form.php:241
+msgid "All tags"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Thumbnails above slideshow"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Thumbnails below slideshow"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Time between slides in ms"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Time for each transition in ms"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Times viewed"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Travel"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Tree"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Turn Down"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Turn Left"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Turn Right"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Turn Up"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Uncover"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Underwater"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Upcoming photos"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "User ID"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "User Name"
-msgstr ""
-
-#. Text in function
-#: photonic/extensions/Photonic_Flickr_Processor.php:1
-msgid "User id is required for displaying a single gallery"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic.php:1
-msgid "View in Flickr"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "WP Galleries"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Will show a single gallery if \"Display\" is set to \"Galleries\""
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Will show a single photo if \"Display\" is set to \"Single Photo\""
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Will show a single photoset if \"Display\" is set to \"Photosets\""
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Will show contents of a single collection if \"Display\" is set to \"Collections\""
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Wipe"
-msgstr ""
-
-#. Text in function
-#: photonic/photonic-form.php:55
+#: admin/flow/Photonic_Flow_Fields.php:338
+#: admin/flow/Photonic_Flow_Fields.php:723
+#: admin/flow/Photonic_Flow_Fields.php:779
+#: admin/flow/Photonic_Flow_Fields.php:813
+#: admin/flow/Photonic_Flow_Fields.php:847 photonic-form.php:247
 msgid "With text"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "You have to define your Consumer API Key under Settings &rarr; Photonic &rarr; 500px &rarr; 500px Settings"
+#: admin/flow/Photonic_Flow_Fields.php:343
+#: admin/flow/Photonic_Flow_Fields.php:368 photonic-form.php:303
+msgid "Privacy filter"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "You have to define your Flickr API Key under Settings &rarr; Photonic &rarr; Flickr &rarr; Flickr Settings"
+#: admin/flow/Photonic_Flow_Fields.php:346
+#: admin/flow/Photonic_Flow_Fields.php:371 photonic-form.php:306
+msgid "None"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "You have to define your SmugMug API Key under Settings &rarr; Photonic &rarr; SmugMug &rarr; SmugMug Settings"
+#: admin/flow/Photonic_Flow_Fields.php:347
+#: admin/flow/Photonic_Flow_Fields.php:372 photonic-form.php:307
+msgid "Public photos"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic-form.php:55
-msgid "Zoom"
+#: admin/flow/Photonic_Flow_Fields.php:348
+#: admin/flow/Photonic_Flow_Fields.php:373 photonic-form.php:308
+msgid "Private photos visible to friends"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic.php:1
-msgid "{#} photos"
+#: admin/flow/Photonic_Flow_Fields.php:349
+#: admin/flow/Photonic_Flow_Fields.php:374 photonic-form.php:309
+msgid "Private photos visible to family"
 msgstr ""
 
-#. Text in function
-#: photonic/photonic.php:1
-msgid "{#} sets"
+#: admin/flow/Photonic_Flow_Fields.php:350
+#: admin/flow/Photonic_Flow_Fields.php:375 photonic-form.php:310
+msgid "Private photos visible to friends & family"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:351
+#: admin/flow/Photonic_Flow_Fields.php:376 photonic-form.php:311
+msgid "Completely private photos"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:353
+#: admin/flow/Photonic_Flow_Fields.php:378
+msgid "Applicable only if Flickr private photos are turned on (%1$s) and Back-end authentication is off (%2$s)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:364
+#: admin/flow/Photonic_Flow_Fields.php:480
+#: admin/flow/Photonic_Flow_Fields.php:545
+#: admin/flow/Photonic_Flow_Fields.php:592
+msgid "Pick your album"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:365
+#: admin/flow/Photonic_Flow_Fields.php:481
+#: admin/flow/Photonic_Flow_Fields.php:546
+#: admin/flow/Photonic_Flow_Fields.php:593
+msgid "From the list below pick the album whose photos you wish to display. Photos from that album will show up as thumbnails."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:389
+#: admin/flow/Photonic_Flow_Fields.php:741
+msgid "Pick your gallery"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:390
+#: admin/flow/Photonic_Flow_Fields.php:742
+msgid "From the list below pick the gallery whose photos you wish to display. Photos from that gallery will show up as thumbnails."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:400
+msgid "Pick your albums / photosets"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:401
+msgid "From the list below pick the albums / photosets you wish to display. Each album will show up as a single thumbnail."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:407
+#: admin/flow/Photonic_Flow_Fields.php:498
+#: admin/flow/Photonic_Flow_Fields.php:563
+#: admin/flow/Photonic_Flow_Fields.php:668
+msgid "Automatic all (will automatically add new albums)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:408
+msgid "Selected albums / photosets"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:409
+msgid "All except selected albums / photosets"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:411
+#: admin/flow/Photonic_Flow_Fields.php:434
+#: admin/flow/Photonic_Flow_Fields.php:467
+#: admin/flow/Photonic_Flow_Fields.php:502
+#: admin/flow/Photonic_Flow_Fields.php:567
+#: admin/flow/Photonic_Flow_Fields.php:672
+#: admin/flow/Photonic_Flow_Fields.php:775
+#: admin/flow/Photonic_Flow_Fields.php:808
+#: admin/flow/Photonic_Flow_Fields.php:842
+msgid "If you pick \"Automatic all\" your selections below will be ignored."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:422
+#: admin/flow/Photonic_Flow_Fields.php:763
+msgid "Pick your galleries"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:423
+msgid "From the list below pick the galleries you wish to display. Each album will show up as a single thumbnail."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:429
+#: admin/flow/Photonic_Flow_Fields.php:770
+msgid "Automatic all (will automatically add new galleries)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:430
+#: admin/flow/Photonic_Flow_Fields.php:771
+msgid "Selected galleries"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:431
+#: admin/flow/Photonic_Flow_Fields.php:772
+msgid "All except selected galleries"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:444
+#: admin/flow/Photonic_Flow_Fields.php:752
+msgid "Pick your collection"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:445
+msgid "From the list below pick the collection you wish to display. The albums within the collections will show up as single thumbnails."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:455
+#: admin/flow/Photonic_Flow_Fields.php:797
+msgid "Pick your collections"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:456
+msgid "From the list below pick the collections you wish to display. The albums within the collections will show up as single thumbnails."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:462
+#: admin/flow/Photonic_Flow_Fields.php:804
+msgid "Automatic all (will automatically add new collections)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:463
+#: admin/flow/Photonic_Flow_Fields.php:805
+msgid "Selected collections"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:464
+#: admin/flow/Photonic_Flow_Fields.php:806
+msgid "All except selected collections"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:491
+#: admin/flow/Photonic_Flow_Fields.php:556
+#: admin/flow/Photonic_Flow_Fields.php:661
+msgid "Pick your albums"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:492
+#: admin/flow/Photonic_Flow_Fields.php:557
+#: admin/flow/Photonic_Flow_Fields.php:662
+msgid "From the list below pick the albums you wish to display. Each album will show up as a single thumbnail."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:499
+#: admin/flow/Photonic_Flow_Fields.php:564
+#: admin/flow/Photonic_Flow_Fields.php:669
+msgid "Selected albums"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:500
+#: admin/flow/Photonic_Flow_Fields.php:565
+#: admin/flow/Photonic_Flow_Fields.php:670
+msgid "All except selected albums"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:517
+msgid "You can show all your photos, or apply filters to show some of them."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:520 photonic-form.php:661
+msgid "Date Filters"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:526
+msgid "Date Range Filters"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:532 photonic-form.php:668
+msgid "Content Filters"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:534
+msgid "Comma-separated. Pick from: %1$s. See <a href=\"%2$s\" target=\"_blank\">here</a> for documentation."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:571
+msgid "What type of album?"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:575
+msgid "Show both shared and not shared albums"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:576 photonic-form.php:634
+msgid "Only show shared albums"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:577 photonic-form.php:635
+msgid "Only show albums not shared"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:596
+#: admin/flow/Photonic_Flow_Fields.php:619
+#: admin/flow/Photonic_Flow_Fields.php:642
+msgid "Only show photos with this text"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:599
+#: admin/flow/Photonic_Flow_Fields.php:605
+#: admin/flow/Photonic_Flow_Fields.php:622
+#: admin/flow/Photonic_Flow_Fields.php:628
+#: admin/flow/Photonic_Flow_Fields.php:645
+#: admin/flow/Photonic_Flow_Fields.php:651
+msgid "Comma-separated list of values"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:602
+#: admin/flow/Photonic_Flow_Fields.php:625
+#: admin/flow/Photonic_Flow_Fields.php:648
+msgid "Only show photos with these keywords"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:615
+#: admin/flow/Photonic_Flow_Fields.php:683
+msgid "Pick your folder"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:616
+msgid "From the list below pick the folder whose photos you wish to display. Photos from that folder will show up as thumbnails."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:638
+msgid "Photos for a User"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:639
+msgid "The following lists the top-level folders and albums for the selected user. All photos from these folders will show up as thumbnails."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:684
+msgid "From the list below pick the folder you wish to display. The albums within the folder will show up as single thumbnails."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:695
+msgid "The following user tree will be displayed on your site. Only top level folders and albums are shown here. The albums within the folders will show up as single thumbnails and can be clicked to show the images within."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:719
+msgid "Photos from all users"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:720
+msgid "You can show photos from all users, and apply text or category filters to show some of them."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:728
+#: admin/flow/Photonic_Flow_Fields.php:784
+#: admin/flow/Photonic_Flow_Fields.php:818
+#: admin/flow/Photonic_Flow_Fields.php:852
+msgid "Category"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:753
+msgid "From the list below pick the collection whose photos you wish to display. Photos from that collection will show up as thumbnails."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:764
+msgid "From the list below pick the galleries you wish to display. Each album will show up as a single thumbnail. Note that text and category filters are not applied here but will be applied on the front-end."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:798
+msgid "From the list below pick the collections you wish to display. Each collection will show up as a single thumbnail. Note that text and category filters are not applied here but will be applied on the front-end."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:831
+msgid "Pick your galleries and collections"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:832
+msgid "From the list below pick the galleries and collections you wish to display. Each gallery and collection will show up as a single thumbnail. Note that text and category filters are not applied here but will be applied on the front-end."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:838
+msgid "Automatic all (will automatically add new galleries and collections)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:839
+msgid "Selected galleries and collections"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:840
+msgid "All except selected galleries and collections"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:865
+msgid "Pick your group"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:866
+msgid "From the list below pick the group you wish to display. The galleries / collections within the group will show up as single thumbnails."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:876
+msgid "Your group hierarchy"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:877
+msgid "The following group hierarchy will be displayed on your site. Only top level groups and galleries / collections are shown here. The galleries / collections within the groups will show up as single thumbnails and can be clicked to show the images within."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:902
+msgid "Though Photonic has the capability to handle tags, Instagram has not granted it permission to display photos by tag. You can only show all your photos without filtering. In the following only the latest 20 photos are displayed. You can change this in subsequent screens."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:925
+#: admin/flow/Photonic_Flow_Fields.php:1498 photonic-form.php:42
+#: photonic-form.php:1208 photonic-form.php:1503 photonic-form.php:1672
+msgid "Number of photos to show"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:927
+msgid "Numeric values only. Shows all photos by default."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:930
+#: admin/flow/Photonic_Flow_Fields.php:1012
+#: admin/flow/Photonic_Flow_Fields.php:1070
+#: admin/flow/Photonic_Flow_Fields.php:1087
+#: admin/flow/Photonic_Flow_Fields.php:1177
+#: admin/flow/Photonic_Flow_Fields.php:1261
+#: admin/flow/Photonic_Flow_Fields.php:1284 photonic-form.php:351
+#: photonic-form.php:556 photonic-form.php:739 photonic-form.php:937
+#: photonic-form.php:1285 photonic-form.php:1483
+msgid "Main image size"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:939 photonic-form.php:253
+#: photonic-form.php:1179
+msgid "Sort by"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:943 photonic-form.php:256
+msgid "Date posted, descending"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:944 photonic-form.php:257
+msgid "Date posted, ascending"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:945 photonic-form.php:258
+msgid "Date taken, ascending"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:946 photonic-form.php:259
+msgid "Date taken, descending"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:947 photonic-form.php:260
+msgid "Interestingness, descending"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:948 photonic-form.php:261
+msgid "Interestingness, ascending"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:949 photonic-form.php:262
+msgid "Relevance"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:953
+#: admin/flow/Photonic_Flow_Fields.php:1029
+#: admin/flow/Photonic_Flow_Fields.php:1079
+#: admin/flow/Photonic_Flow_Fields.php:1096
+#: admin/flow/Photonic_Flow_Fields.php:1194
+#: admin/flow/Photonic_Flow_Fields.php:1277 photonic-form.php:216
+#: photonic-form.php:482 photonic-form.php:675 photonic-form.php:868
+#: photonic-form.php:1430 photonic-form.php:1658
+msgid "Media to Show"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:957
+#: admin/flow/Photonic_Flow_Fields.php:964
+#: admin/flow/Photonic_Flow_Fields.php:1016
+#: admin/flow/Photonic_Flow_Fields.php:1023
+#: admin/flow/Photonic_Flow_Fields.php:1033
+#: admin/flow/Photonic_Flow_Fields.php:1040
+#: admin/flow/Photonic_Flow_Fields.php:1083
+#: admin/flow/Photonic_Flow_Fields.php:1100
+#: admin/flow/Photonic_Flow_Fields.php:1107
+#: admin/flow/Photonic_Flow_Fields.php:1181
+#: admin/flow/Photonic_Flow_Fields.php:1188
+#: admin/flow/Photonic_Flow_Fields.php:1198
+#: admin/flow/Photonic_Flow_Fields.php:1205
+#: admin/flow/Photonic_Flow_Fields.php:1265
+#: admin/flow/Photonic_Flow_Fields.php:1272
+#: admin/flow/Photonic_Flow_Fields.php:1281
+#: admin/flow/Photonic_Flow_Fields.php:1288
+#: admin/flow/Photonic_Flow_Fields.php:1295
+#: admin/flow/Photonic_Flow_Fields.php:1386
+#: admin/flow/Photonic_Flow_Fields.php:1421
+#: admin/flow/Photonic_Flow_Fields.php:1430
+#: admin/flow/Photonic_Flow_Fields.php:1450
+#: admin/flow/Photonic_Flow_Fields.php:1474
+#: admin/flow/Photonic_Flow_Fields.php:1483
+msgid "Default settings can be configured under: %s"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:960
+#: admin/flow/Photonic_Flow_Fields.php:1036
+#: admin/flow/Photonic_Flow_Fields.php:1103
+#: admin/flow/Photonic_Flow_Fields.php:1201
+msgid "Photo titles and captions"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:967
+#: admin/flow/Photonic_Flow_Fields.php:996
+#: admin/flow/Photonic_Flow_Fields.php:1136
+msgid "Show Header"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:970
+#: admin/flow/Photonic_Flow_Fields.php:999
+#: admin/flow/Photonic_Flow_Fields.php:1139
+#: admin/flow/Photonic_Flow_Fields.php:1161
+#: admin/flow/Photonic_Flow_Fields.php:1252
+#: admin/flow/Photonic_Flow_Fields.php:1589
+#: admin/flow/Photonic_Flow_Fields.php:1597
+#: admin/flow/Photonic_Flow_Fields.php:1609
+#: admin/flow/Photonic_Flow_Fields.php:1619
+#: admin/flow/Photonic_Flow_Fields.php:1628
+#: admin/flow/Photonic_Flow_Fields.php:1634
+#: admin/flow/Photonic_Flow_Fields.php:1647
+#: admin/flow/Photonic_Flow_Fields.php:1659
+#: admin/flow/Photonic_Flow_Fields.php:1789
+#: admin/flow/Photonic_Flow_Fields.php:1797
+#: admin/flow/Photonic_Flow_Fields.php:1806
+#: admin/flow/Photonic_Flow_Fields.php:1814
+#: admin/flow/Photonic_Flow_Fields.php:1823
+#: admin/flow/Photonic_Flow_Fields.php:1829
+#: admin/flow/Photonic_Flow_Fields.php:1882 photonic.php:1523 photonic.php:1561
+msgid "Default from settings"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:971
+#: admin/flow/Photonic_Flow_Fields.php:1000
+#: admin/flow/Photonic_Flow_Fields.php:1140
+#: admin/flow/Photonic_Flow_Fields.php:1253
+msgid "No header"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:972
+#: admin/flow/Photonic_Flow_Fields.php:1001
+#: admin/flow/Photonic_Flow_Fields.php:1141
+#: admin/flow/Photonic_Flow_Fields.php:1254
+msgid "Title only"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:973
+#: admin/flow/Photonic_Flow_Fields.php:1002
+#: admin/flow/Photonic_Flow_Fields.php:1142
+msgid "Thumbnail only"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:974
+#: admin/flow/Photonic_Flow_Fields.php:1003
+#: admin/flow/Photonic_Flow_Fields.php:1143
+#: admin/flow/Photonic_Flow_Fields.php:1255
+msgid "Counts only"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:975
+#: admin/flow/Photonic_Flow_Fields.php:1004
+#: admin/flow/Photonic_Flow_Fields.php:1144
+#: admin/flow/Photonic_Flow_Fields.php:1256
+msgid "Title and counts"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:976
+#: admin/flow/Photonic_Flow_Fields.php:1005
+#: admin/flow/Photonic_Flow_Fields.php:1145
+msgid "Thumbnail and counts"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:977
+#: admin/flow/Photonic_Flow_Fields.php:1006
+#: admin/flow/Photonic_Flow_Fields.php:1146
+msgid "Thumbnail and title"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:978
+#: admin/flow/Photonic_Flow_Fields.php:1007
+#: admin/flow/Photonic_Flow_Fields.php:1147
+msgid "Thumbnail, title and counts"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:986 photonic-form.php:367
+msgid "Expand Collections"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:990 photonic-form.php:371
+msgid "Lazy loading"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:991 photonic-form.php:372
+msgid "Expanded upfront"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:993
+msgid "The Collections API is slow, so, if you are displaying collections, pick <a href=\"https://aquoid.com/plugins/photonic/flickr/flickr-collections/\" target=\"_blank\">lazy loading</a> if your collections have many albums / photosets."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1019
+#: admin/flow/Photonic_Flow_Fields.php:1184
+#: admin/flow/Photonic_Flow_Fields.php:1268
+#: admin/flow/Photonic_Flow_Fields.php:1291
+msgid "Main video size"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1045 photonic-form.php:448
+#: photonic-form.php:629
+msgid "Displayed Access Levels"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1048 photonic-form.php:451
+msgid "Show all public, protected and private albums"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1049 photonic-form.php:452
+msgid "Show public albums only"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1050 photonic-form.php:453
+msgid "Show protected albums only"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1051 photonic-form.php:454
+msgid "Show public and protected albums"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1052 photonic-form.php:455
+msgid "Show protected and private albums"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1053 photonic-form.php:456
+msgid "Show public and private albums"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1056
+msgid "You can show public, private (Picasa only) or protected (Google Photos only) albums. You can use the <code>album</code> or <code>filter</code> attributes to filter the content further. See <a href=\"https://aquoid.com/plugins/photonic/picasa/picasa-albums/\" target=\"_blank\">here</a> for more details."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1059 photonic-form.php:490
+msgid "Protection for Private Albums"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1062 photonic-form.php:493
+msgid "None - visitors see albums without providing the authkey"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1063 photonic-form.php:494
+msgid "Authkey - visitors are prompted for the authkey"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1066
+msgid "Will prompt your users for an <code>authkey</code> before they see the photos in your old Picasa private album. Not applicable to new Google Photos albums. See <a href=\"https://aquoid.com/plugins/photonic/picasa/picasa-albums/\" target=\"_blank\">here</a> for more details."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1090 photonic-form.php:742
+msgid "Numeric values between 1 and 16383, both inclusive."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1110
+#: admin/flow/Photonic_Flow_Fields.php:1218
+msgid "Password for password-protected album"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1113
+#: admin/flow/Photonic_Flow_Fields.php:1221
+msgid "You are trying to display photos from a password-protected album. The password is mandatory for such an album."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1117
+msgid "Sort photos by"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1121
+msgid "Date Taken"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1122
+msgid "Date Uploaded"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1123 photonic-form.php:1415
+msgid "Popular"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1127
+msgid "Sort order"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1131
+msgid "Ascending"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1132
+msgid "Descending"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1153
+#: admin/flow/Photonic_Flow_Fields.php:1171
+msgid "Site Password for password-protected sites"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1155
+#: admin/flow/Photonic_Flow_Fields.php:1173
+msgid "If you SmugMug site is password-protected you will need to provide the password to be able to show your photos."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1158 photonic-form.php:883
+msgid "Album sort order"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1162 photonic-form.php:888
+msgid "Last Updated (Descending)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1163 photonic-form.php:889
+msgid "Last Updated (Ascending)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1164 photonic-form.php:890
+msgid "Date Added (Descending)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1165 photonic-form.php:891
+msgid "Date Added (Ascending)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1208
+#: admin/flow/Photonic_Flow_Fields.php:1227 photonic-form.php:1386
+msgid "Search results sort order"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1212
+#: admin/flow/Photonic_Flow_Fields.php:1231
+#: admin/flow/Photonic_Flow_Manager.php:34 photonic-form.php:1390
+msgid "Date"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1213
+#: admin/flow/Photonic_Flow_Fields.php:1232 photonic-form.php:1391
+msgid "Popularity"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1214
+#: admin/flow/Photonic_Flow_Fields.php:1233 photonic-form.php:1392
+msgid "Rank (for searching by text only)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1239 photonic-form.php:1447
+msgid "Group / Hierarchy structure"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1243 photonic-form.php:1451
+msgid "All photosets shown in single level"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1244 photonic-form.php:1452
+msgid "Photosets shown nested within groups"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1246
+msgid "See examples <a href=\"https://aquoid.com/plugins/photonic/zenfolio/group-hierarchy/\" target=\"_blank\">here</a>."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1249
+msgid "Show Group Header"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1300
+msgid "Slideshow display style"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1303
+msgid "Thumbnail strip or buttons below slideshow"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1304 photonic.php:1548
+msgid "Thumbnail strip above slideshow"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1305
+msgid "Thumbnail strip to the right of slideshow"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1306
+msgid "No thumbnails or buttons for the slideshow"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1311
+msgid "Thumbnails or buttons for the strip?"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1314
+msgid "Thumbnails"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1315
+msgid "Buttons"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1317
+msgid "If you choose \"Buttons\" those are only shown below the slideshow."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1321 photonic-form.php:116
+#: photonic-form.php:392 photonic-form.php:577 photonic-form.php:768
+#: photonic-form.php:1001 photonic-form.php:1318 photonic-form.php:1544
+#: photonic-form.php:1698
+msgid "Slideshow Controls"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1324 photonic-form.php:119
+#: photonic-form.php:396 photonic-form.php:581 photonic-form.php:772
+#: photonic-form.php:1005 photonic-form.php:1322 photonic-form.php:1548
+#: photonic-form.php:1702 photonic.php:1383
+msgid "Hide"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1325
+#: extensions/Photonic_Processor.php:312 photonic-form.php:120
+#: photonic-form.php:397 photonic-form.php:582 photonic-form.php:773
+#: photonic-form.php:1006 photonic-form.php:1323 photonic-form.php:1549
+#: photonic-form.php:1703 photonic.php:1382
+msgid "Show"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1327 photonic-form.php:122
+#: photonic-form.php:399 photonic-form.php:584 photonic-form.php:775
+#: photonic-form.php:1008 photonic-form.php:1325 photonic-form.php:1551
+#: photonic-form.php:1705
+msgid "Shows Previous and Next buttons on the slideshow."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1330 photonic-form.php:104
+#: photonic-form.php:379 photonic-form.php:564 photonic-form.php:755
+#: photonic-form.php:988 photonic-form.php:1305 photonic-form.php:1531
+#: photonic-form.php:1685
+msgid "Slideshow Effects"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1333 photonic-form.php:107
+#: photonic-form.php:383 photonic-form.php:568 photonic-form.php:759
+#: photonic-form.php:992 photonic-form.php:1309 photonic-form.php:1535
+#: photonic-form.php:1689
+msgid "Fade"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1334 photonic-form.php:108
+#: photonic-form.php:384 photonic-form.php:569 photonic-form.php:760
+#: photonic-form.php:993 photonic-form.php:1310 photonic-form.php:1536
+#: photonic-form.php:1690
+msgid "Slide"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1336
+msgid "Determines if a photo in a slideshow should fade in or slide in."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1339 photonic-form.php:127
+#: photonic-form.php:404 photonic-form.php:589 photonic-form.php:780
+#: photonic-form.php:1013 photonic-form.php:1330 photonic-form.php:1556
+#: photonic-form.php:1710
+msgid "Time between slides in ms"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1342
+msgid "Please enter numbers only"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1345 photonic-form.php:135
+#: photonic-form.php:412 photonic-form.php:597 photonic-form.php:788
+#: photonic-form.php:1021 photonic-form.php:1338 photonic-form.php:1564
+#: photonic-form.php:1718
+msgid "Time for each transition in ms"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1348
+msgid "How fast do you want the fade or slide effect to happen?"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1351
+msgid "Pause upon hover?"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1354
+#: admin/flow/Photonic_Flow_Fields.php:1528
+msgid "No"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1355
+#: admin/flow/Photonic_Flow_Fields.php:1529
+msgid "Yes"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1357
+msgid "Should the slideshow pause when you hover over it?"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1360
+msgid "Number of columns in slideshow"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1375
+msgid "Pick > 1 for a carousel"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1382
+#: admin/flow/Photonic_Flow_Fields.php:1391
+#: admin/flow/Photonic_Flow_Fields.php:1399
+#: admin/flow/Photonic_Flow_Fields.php:1417
+#: admin/flow/Photonic_Flow_Fields.php:1426
+#: admin/flow/Photonic_Flow_Fields.php:1435 photonic-form.php:87
+#: photonic-form.php:336 photonic-form.php:548 photonic-form.php:719
+#: photonic-form.php:924 photonic-form.php:1269 photonic-form.php:1468
+#: photonic-form.php:1636
+msgid "Thumbnail size"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1401
+msgid "Numeric values between 1 and 256, both inclusive."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1405 photonic-form.php:727
+msgid "Crop Thumbnail"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1408 photonic-form.php:730
+msgid "Crop the thumbnail"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1409 photonic-form.php:731
+msgid "Do not crop the thumbnail"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1412 photonic-form.php:734
+msgid "Cropping the thumbnail presents you with a square thumbnail."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1446
+#: admin/flow/Photonic_Flow_Fields.php:1455
+#: admin/flow/Photonic_Flow_Fields.php:1463
+#: admin/flow/Photonic_Flow_Fields.php:1470
+#: admin/flow/Photonic_Flow_Fields.php:1479
+#: admin/flow/Photonic_Flow_Fields.php:1488
+msgid "Tile size"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1465 photonic-form.php:750
+msgid "Numeric values between 1 and 16383, both inclusive. Leave blank to use the \"Main image size\"."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1500
+#: admin/flow/Photonic_Flow_Fields.php:1512
+#: admin/flow/Photonic_Flow_Fields.php:1537
+msgid "Numeric values only. Leave blank for default."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1503
+#: admin/flow/Photonic_Flow_Fields.php:1515 photonic-form.php:48
+#: photonic-form.php:282 photonic-form.php:509 photonic-form.php:689
+#: photonic-form.php:967 photonic-form.php:1216 photonic-form.php:1510
+#: photonic-form.php:1678
+msgid "\"More\" button text"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1505 photonic-form.php:50
+#: photonic-form.php:1218 photonic-form.php:1512 photonic-form.php:1680
+msgid "Will show a \"More\" button with the specified text if the number of photos is higher than the above entry. Leave blank to show no button"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1510
+msgid "Number of albums to show"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1517
+msgid "Will show a \"More\" button with the specified text if the number of albums is higher than the above entry. Leave blank to show no button"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1524
+msgid "Show an overlaid popup panel"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1532
+msgid "Setting this to \"No\" would directly start up a lightbox with photos. Setting this to \"Yes\" would show an overlaid panel that has the photos. See %1$sdocumentation%2$s."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1535 photonic-form.php:289
+#: photonic-form.php:516 photonic-form.php:696 photonic-form.php:974
+#: photonic-form.php:1223 photonic-form.php:1517
+msgid "Number of photos to show in overlaid popup"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1541 photonic-form.php:296
+#: photonic-form.php:523 photonic-form.php:703 photonic-form.php:981
+#: photonic-form.php:1230 photonic-form.php:1524
+msgid "\"More\" button text in overlaid popup"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1543
+msgid "Will show a \"More\" button with the specified text if the number of photos in the overlaid popup is higher than the above entry. Leave blank to show no button"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1590 photonic-form.php:340
+msgid "Small square, 75x75px"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1591 photonic-form.php:341
+msgid "Large square, 150x150px"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1592 photonic-form.php:342
+msgid "Thumbnail, 100px on longest side"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1593 photonic-form.php:343
+msgid "Small, 240px on longest side"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1594
+#: admin/flow/Photonic_Flow_Fields.php:1599 photonic-form.php:344
+msgid "Small, 320px on longest side"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1598
+#: admin/flow/Photonic_Flow_Fields.php:1635
+#: admin/flow/Photonic_Flow_Fields.php:1689
+#: admin/flow/Photonic_Flow_Fields.php:1744
+#: admin/flow/Photonic_Flow_Fields.php:1798
+msgid "Same as Main image size"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1600
+#: admin/flow/Photonic_Flow_Fields.php:1610 photonic-form.php:355
+msgid "Medium, 500px on the longest side"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1601
+#: admin/flow/Photonic_Flow_Fields.php:1611 photonic-form.php:356
+msgid "Medium, 640px on longest side"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1602
+#: admin/flow/Photonic_Flow_Fields.php:1612 photonic-form.php:357
+msgid "Medium, 800px on longest side"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1603
+#: admin/flow/Photonic_Flow_Fields.php:1613 photonic-form.php:358
+msgid "Large, 1024px on longest side"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1604
+#: admin/flow/Photonic_Flow_Fields.php:1614 photonic-form.php:359
+msgid "Large, 1600px on longest side"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1605
+#: admin/flow/Photonic_Flow_Fields.php:1615 photonic-form.php:360
+msgid "Large, 2048px on longest side"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1606
+#: admin/flow/Photonic_Flow_Fields.php:1616 photonic-form.php:361
+msgid "Original"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1620
+msgid "Site MP4"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1621
+msgid "Mobile MP4"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1622
+msgid "HD MP4"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1623
+msgid "Video Original"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1629 photonic-form.php:928
+msgid "Tiny"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1630 photonic-form.php:929
+msgid "Thumb"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1631 photonic-form.php:930
+msgid "Small"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1636
+#: admin/flow/Photonic_Flow_Fields.php:1648 photonic-form.php:941
+msgid "4K (not always available)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1637
+#: admin/flow/Photonic_Flow_Fields.php:1649 photonic-form.php:942
+msgid "5K (not always available)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1638
+#: admin/flow/Photonic_Flow_Fields.php:1650 photonic-form.php:943
+msgid "Medium"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1639
+#: admin/flow/Photonic_Flow_Fields.php:1651 photonic-form.php:944
+msgid "Original (not always available)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1640
+#: admin/flow/Photonic_Flow_Fields.php:1652 photonic-form.php:945
+msgid "Large"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1641
+#: admin/flow/Photonic_Flow_Fields.php:1653
+#: admin/flow/Photonic_Flow_Fields.php:1666 photonic-form.php:946
+msgid "Largest available"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1642
+#: admin/flow/Photonic_Flow_Fields.php:1654 photonic-form.php:947
+msgid "XLarge (not always available)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1643
+#: admin/flow/Photonic_Flow_Fields.php:1655 photonic-form.php:948
+msgid "X2Large (not always available)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1644
+#: admin/flow/Photonic_Flow_Fields.php:1656 photonic-form.php:949
+msgid "X3Large (not always available)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1660
+msgid "110px along longest side"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1661
+msgid "200px along longest side"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1662
+msgid "320px along longest side"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1663
+msgid "640px along longest side"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1664
+msgid "1280px along longest side"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1665
+msgid "1920px along longest side"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1672
+msgid "32 - cropped"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1674
+msgid "48 - cropped"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1676
+msgid "64 - cropped"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1678
+msgid "72 - cropped"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1680
+msgid "104 - cropped"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1682
+msgid "144 - cropped"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1684
+msgid "150 - cropped"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1686
+msgid "160 - cropped"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1790 photonic-form.php:1472
+msgid "Square thumbnail, 60 &times; 60px, cropped square"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1791 photonic-form.php:1473
+msgid "Small thumbnail, upto 80 &times; 80px"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1792 photonic-form.php:1474
+msgid "Medium thumbnail, upto 120 &times; 120px"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1793 photonic-form.php:1475
+msgid "Large thumbnail, upto 120 &times; 120px"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1794
+#: admin/flow/Photonic_Flow_Fields.php:1799
+#: admin/flow/Photonic_Flow_Fields.php:1807 photonic-form.php:1476
+#: photonic-form.php:1487
+msgid "Small image, upto 400 &times; 400px"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1800
+#: admin/flow/Photonic_Flow_Fields.php:1808 photonic-form.php:1488
+msgid "Medium image, upto 580 &times; 450px"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1801
+#: admin/flow/Photonic_Flow_Fields.php:1809 photonic-form.php:1489
+msgid "Large image, upto 800 &times; 630px"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1802
+#: admin/flow/Photonic_Flow_Fields.php:1810 photonic-form.php:1490
+msgid "X-Large image, upto 1100 &times; 850px"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1803
+#: admin/flow/Photonic_Flow_Fields.php:1811 photonic-form.php:1491
+msgid "XX-Large image, upto 1550 &times; 960px"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1815
+msgid "360p resolution (MP4)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1816
+msgid "480p resolution (MP4)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1817
+msgid "720p resolution (MP4)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1818
+msgid "1080p resolution (MP4)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1824
+msgid "Low Resolution - 306x306px, or 320x320px"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1825
+msgid "Standard Resolution - 612x612px or 640x640px"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1826
+msgid "Largest available resolution (640x640px for old images, upto 1080x1080px for new images)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1830
+msgid "Low Resolution"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1831
+msgid "Standard Resolution"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1832
+msgid "Low Bandwidth"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1883
+msgid "Normal title display using the HTML \"title\" attribute"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1884
+msgid "Below the thumbnail"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1885
+msgid "Using the JQuery Tooltip plugin"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1886
+msgid "Slide up from bottom upon hover"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1887
+msgid "Cover the lower portion always"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1888
+msgid "No title"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1892
+msgid "How do you want the title?"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:25 photonic.php:1674
+msgid "Please fill the mandatory fields. Mandatory fields are marked with a red \"*\"."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:26
+msgid "No response from server."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:27
+msgid "Unknown error. Please post a <a href=\"https://wordpress.org/support/plugin/photonic/\">support request</a>."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:28
+msgid "Not found."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:29
+msgid "No data was returned for the user you provided. Please verify that the user has the content you are looking for."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:30
+msgid "Incorrect value passed for \"%1$s\": %2$s"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:31
+msgid "Please set up your %1$s and secret under <em>Photonic &rarr; Settings &rarr; %2$s &rarr; %2$s Settings</em>"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:32
+msgid "Please set up your %s Authentication from <em>Photonic &rarr; Authentication</em>"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:34
+msgid "Year"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:34
+msgid "Month"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:35
+msgid "Year (0 - 9999)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:35
+msgid "Month (0 - 12)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:35
+msgid "Date (0 - 31)"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:169
+msgid "Invalid screen value: %s"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:172
+msgid "Invalid photo provider: %s"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:246
+msgid "While the \"For whom?\" setting may not be required for the shortcode to function in the front-end, it is required to edit this shortcode in this editor. Please specify a value."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:250
+msgid "Invalid display type: %s"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:258
+#: admin/flow/Photonic_Flow_Manager.php:473
+msgid "Incompatible selections:"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:268
+msgid "Default user not defined under <em>Photonic &rarr; Settings &rarr; Flickr &rarr; Flickr Settings &rarr; Default User</em>. <br/>Select \"Another user\" and put in your user id."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:353
+msgid "Default user not defined under <em>Photonic &rarr; Settings &rarr; SmugMug &rarr; SmugMug Settings &rarr; Default User</em>. <br/>Select \"Another user\" and put in your user id."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:415
+msgid "Default user not defined under <em>Photonic &rarr; Settings &rarr; Picasa &rarr; Picasa Settings &rarr; Default User</em>. <br/>Select \"Another user\" and put in your user id."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:486
+msgid "Default user not defined under <em>Photonic &rarr; Settings &rarr; Zenfolio &rarr; Zenfolio Photo Settings &rarr; Default User</em>. <br/>Select \"Another user\" and put in your user id."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:540
+#: admin/flow/Photonic_Flow_Manager.php:544
+msgid "Please select what you want to show."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:566
+msgid "Invalid layout: %s"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:666
+msgid "Required"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:811
+msgid "Mark:"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:812
+msgid "<a href=\"#\" class=\"%s\" data-photonic-mark-for=\"%s\">All</a>"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:813
+msgid "<a href=\"#\" class=\"%s\" data-photonic-mark-for=\"%s\">None</a>"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:897
+msgid "Pick Your Layout"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:898
+msgid "You can configure the default settings from <strong>Photonic &rarr; Settings &rarr; Generic Options &rarr; Generic Settings &rarr; Layouts</strong>."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:929
+msgid "Configure Your Layout"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:1193
+msgid "Your shortcode"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:1202
+msgid "The above shortcode was generated based on your selections. You can either copy the above and paste it manually into your post, or click on the buttons below to insert it into or update your post"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:1205
+msgid "Your Gallery"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:1206
+msgid "Based on your selections a gallery with the following attributes will be generated. Please click on the buttons below to insert it into or update your post:"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:1625
+#: admin/flow/Photonic_Flow_Manager.php:1858
+#: admin/flow/Photonic_Flow_Manager.php:1974
+#: admin/flow/Photonic_Flow_Manager.php:2001
+msgid "%s media item"
+msgid_plural "%s media items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/flow/Photonic_Flow_Manager.php:1714 photonic-options-manager.php:1869
+msgid "Load More"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:1727
+msgid "No data returned. Error code %s"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:1732
+msgid "No data returned. Empty response, or empty error code."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Manager.php:1767
+#: admin/flow/Photonic_Flow_Manager.php:1782
+#: extensions/Photonic_Processor.php:330
+msgid "%s photo"
+msgid_plural "%s photos"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/flow/Photonic_Flow_Manager.php:1768
+#: admin/flow/Photonic_Flow_Manager.php:1783
+#: extensions/Photonic_Processor.php:333
+msgid "%s video"
+msgid_plural "%s videos"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/flow/Photonic_Flow_Manager.php:1813
+msgid "%s album"
+msgid_plural "%s albums"
+msgstr[0] ""
+msgstr[1] ""
+
+#: extensions/Photonic_500px_Processor.php:73
+msgid "500px Consumer Key not defined. See <a href=\"%s\">here</a> for documentation."
+msgstr ""
+
+#: extensions/Photonic_500px_Processor.php:84
+msgid "User is invalid."
+msgstr ""
+
+#: extensions/Photonic_500px_Processor.php:142
+msgid "A user-specific feature (<code>%s</code>) has been requested, but the <code>username</code> or <code>user_id</code> is missing."
+msgstr ""
+
+#: extensions/Photonic_500px_Processor.php:218
+msgid "Sorry, you need to be authorized to see this."
+msgstr ""
+
+#: extensions/Photonic_500px_Processor.php:240
+msgid "No collections found!"
+msgstr ""
+
+#: extensions/Photonic_500px_Processor.php:371
+msgid "%1$s photos"
+msgstr ""
+
+#: extensions/Photonic_500px_Processor.php:374
+msgid "%1$s friends"
+msgstr ""
+
+#: extensions/Photonic_500px_Processor.php:377
+msgid "%1$s followers"
+msgstr ""
+
+#: extensions/Photonic_500px_Processor.php:476
+msgid "No users found!"
+msgstr ""
+
+#: extensions/Photonic_500px_Processor.php:505
+msgid "No galleries found!"
+msgstr ""
+
+#: extensions/Photonic_Flickr_Processor.php:100
+msgid "Flickr API Key not defined. See <a href='%s'>here</a> for documentation."
+msgstr ""
+
+#: extensions/Photonic_Flickr_Processor.php:172
+msgid "User id or default user is required for displaying a single gallery"
+msgstr ""
+
+#: extensions/Photonic_Google_Photos_Processor.php:30
+msgid "Dates must be entered in the format Y/M/D where Y is from 0 to 9999, M is from 0 to 12 and D is from 0 to 31. You entered %s."
+msgstr ""
+
+#: extensions/Photonic_Google_Photos_Processor.php:67
+msgid "Google Photos Client ID not defined. See <a href='%s'>here</a> for documentation."
+msgstr ""
+
+#: extensions/Photonic_Google_Photos_Processor.php:71
+msgid "Google Photos Client Secret not defined. See <a href='%s'>here</a> for documentation."
+msgstr ""
+
+#: extensions/Photonic_Google_Photos_Processor.php:75
+msgid "Google Photos Refresh Token not defined. Please authenticate from <em>Photonic &rarr; Authentication</em> See <a href='%s'>here</a> for documentation."
+msgstr ""
+
+#: extensions/Photonic_Google_Photos_Processor.php:80
+msgid "The <code>view</code> parameter is mandatory for the shortcode."
+msgstr ""
+
+#: extensions/Photonic_Google_Photos_Processor.php:438
+#: extensions/Photonic_Google_Photos_Processor.php:445
+#: extensions/Photonic_Picasa_Processor.php:334
+msgid "Failed to get data. Error:"
+msgstr ""
+
+#: extensions/Photonic_Instagram_Processor.php:55
+#: extensions/Photonic_Instagram_Processor.php:147
+msgid "Instagram Access Token not valid. Please reauthenticate."
+msgstr ""
+
+#: extensions/Photonic_Instagram_Processor.php:102
+msgid "The <code>view</code> parameter has to be defined."
+msgstr ""
+
+#: extensions/Photonic_Instagram_Processor.php:105
+msgid "Malformed shortcode. Either <code>media_id</code> or <code>user_id</code> or <code>tag_name</code> or <code>location_id</code> or <code>lat+lng</code> have to be defined. If you have specified one of them, the <code>view</code> parameter is inconsistent."
+msgstr ""
+
+#: extensions/Photonic_Instagram_Processor.php:164
+msgid "More"
+msgstr ""
+
+#: extensions/Photonic_Instagram_Processor.php:185
+msgid "No data returned. Unknown error"
+msgstr ""
+
+#: extensions/Photonic_Instagram_Processor.php:198
+#: extensions/Photonic_Instagram_Processor.php:209
+#: extensions/Photonic_Zenfolio_Processor.php:578
+#: extensions/Photonic_Zenfolio_Processor.php:582
+msgid "Unknown error"
+msgstr ""
+
+#: extensions/Photonic_Picasa_Processor.php:113
+msgid "Please provide a <code>user_id</code>. See <a href=\"%s\">here</a> and <a href=\"%s\">here</a> for documentation."
+msgstr ""
+
+#: extensions/Photonic_Picasa_Processor.php:121
+msgid "The <code>kind=\"album\"</code> parameter returns all albums for a user, and the <code>%s</code> parameter returns photos for a specific album. Please correct the shortcode by either setting <code>kind=\"photo\"</code>, or removing <code>%s</code>. See <a href=\"%s\">here</a> and <a href=\"%s\">here</a> for documentation."
+msgstr ""
+
+#: extensions/Photonic_Picasa_Processor.php:340
+msgid "Data returned by Google:"
+msgstr ""
+
+#: extensions/Photonic_Processor.php:54 layouts/Layout_Default.php:455
+#: photonic.php:1380
+msgid "This album is password-protected. Please provide a valid password."
+msgstr ""
+
+#: extensions/Photonic_Processor.php:211
+msgid "The authentication server is down. Please try after some time."
+msgstr ""
+
+#: extensions/Photonic_Processor.php:324
+msgid "%s group"
+msgid_plural "%s groups"
+msgstr[0] ""
+msgstr[1] ""
+
+#: extensions/Photonic_Processor.php:327
+msgid "%s set"
+msgid_plural "%s sets"
+msgstr[0] ""
+msgstr[1] ""
+
+#: extensions/Photonic_Processor.php:502
+msgid "<strong>%s Message:</strong>"
+msgid_plural "<strong>%s Messages:</strong>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: extensions/Photonic_Processor.php:635
+msgid "There was an error connecting to %s. Please try again later."
+msgstr ""
+
+#: extensions/Photonic_SmugMug_Processor.php:49
+msgid "SmugMug API Key not defined. See <a href=\"%s\">here</a> for documentation."
+msgstr ""
+
+#: extensions/Photonic_SmugMug_Processor.php:87
+msgid "The <code>nick_name</code> attributes is required for the <code>tree</code> and <code>albums</code> views."
+msgstr ""
+
+#: extensions/Photonic_Zenfolio_Processor.php:132
+#: extensions/Photonic_Zenfolio_Processor.php:241
+msgid "Invalid <code>kind</code> parameter. See <a href=\"%s\">here</a> for documentation."
+msgstr ""
+
+#: extensions/Photonic_Zenfolio_Processor.php:137
+msgid "The <code>kind</code> parameter is required if <code>object_id</code> is not specified. See <a href=\"%s\">here</a> for documentation."
+msgstr ""
+
+#: extensions/Photonic_Zenfolio_Processor.php:191
+#: extensions/Photonic_Zenfolio_Processor.php:215
+#: extensions/Photonic_Zenfolio_Processor.php:251
+msgid "Invalid <code>photoset_type</code> parameter. Permissible values are <code>Gallery</code> or <code>Collection</code>. See <a href=\"%s\">here</a> for documentation."
+msgstr ""
+
+#: extensions/Photonic_Zenfolio_Processor.php:260
+msgid "The <code>login_name</code> parameter is required if <code>filter</code> is specified. See <a href=\"%s\">here</a> for documentation."
+msgstr ""
+
+#: extensions/Photonic_Zenfolio_Processor.php:264
+msgid "The <code>kind</code> parameter is required if <code>object_id</code> or <code>login_name</code> is not specified. See <a href=\"%s\">here</a> for documentation."
+msgstr ""
+
+#: extensions/Photonic_Zenfolio_Processor.php:268
+msgid "The <code>photoset_type</code> parameter is required if <code>object_id</code> or <code>login_name</code> is not specified. See <a href=\"%s\">here</a> for documentation."
+msgstr ""
+
+#: extensions/Photonic_Zenfolio_Processor.php:283
+msgid "The <code>login_name</code> parameter is required. See <a href=\"%s\">here</a> for documentation."
+msgstr ""
+
+#: extensions/Photonic_Zenfolio_Processor.php:292
+msgid "The <code>object_id</code> parameter is required. See <a href=\"%s\">here</a> for documentation."
+msgstr ""
+
+#: extensions/Photonic_Zenfolio_Processor.php:575
+msgid "Zenfolio returned an error:"
+msgstr ""
+
+#: extensions/Photonic_Zenfolio_Processor.php:597
+#: extensions/Photonic_Zenfolio_Processor.php:766
+msgid "Response is not an array"
+msgstr ""
+
+#: extensions/Photonic_Zenfolio_Processor.php:864
+msgid "No galleries, collections or groups defined for this user"
+msgstr ""
+
+#: extensions/Photonic_Zenfolio_Processor.php:1105
+msgid "Authentication failed."
+msgstr ""
+
+#: extensions/Photonic_Zenfolio_Processor.php:1114
+msgid "Failed to get challenge."
+msgstr ""
+
+#: extensions/Photonic_Zenfolio_Processor.php:1119
+msgid "Default user not defined. Please define one under <em>Photonic &rarr; Settings &rarr; Zenfolio &rarr; Zenfolio Photo Settings &rarr; Default User</em>"
+msgstr ""
+
+#: layouts/Layout_Default.php:233
+msgid "Buy"
+msgstr ""
+
+#: layouts/Layout_Default.php:262 layouts/Layout_Default.php:277
+#: layouts/Layout_Default.php:650 layouts/Layout_Default.php:653
+msgid "Your browser does not support HTML5 videos."
+msgstr ""
+
+#: layouts/Layout_Default.php:441
+msgid "%s photos"
+msgstr ""
+
+#: layouts/Layout_Default.php:451
+msgid "Protected Content"
+msgstr ""
+
+#: layouts/Layout_Default.php:452
+msgid "Access"
+msgstr ""
+
+#: layouts/Layout_Default.php:457
+msgid "This album is protected. Please provide a valid authorization key."
+msgstr ""
+
+#: layouts/Layout_Default.php:460
+msgid "This album is protected. Please provide the short-link for it."
+msgstr ""
+
+#: photonic-form.php:16
+msgid "WP Galleries"
+msgstr ""
+
+#: photonic-form.php:20 photonic-form.php:177
+msgid "Gallery ID"
+msgstr ""
+
+#: photonic-form.php:27
+msgid "Image IDs"
+msgstr ""
+
+#: photonic-form.php:29
+msgid "Comma-separated. You can specify this if there is no Gallery ID specified."
+msgstr ""
+
+#: photonic-form.php:34
+msgid "Display Style"
+msgstr ""
+
+#: photonic-form.php:37 photonic-form.php:321 photonic-form.php:533
+#: photonic-form.php:713 photonic-form.php:909 photonic-form.php:1254
+#: photonic-form.php:1441 photonic-form.php:1630
+msgid "The first four options trigger a slideshow, the rest trigger a lightbox."
+msgstr ""
+
+#: photonic-form.php:55 photonic-form.php:327 photonic-form.php:539
+#: photonic-form.php:915 photonic-form.php:1260 photonic-form.php:1459
+msgid "Photo title / caption"
+msgstr ""
+
+#: photonic-form.php:59 photonic-form.php:331 photonic-form.php:543
+#: photonic-form.php:919 photonic-form.php:1264 photonic-form.php:1463
+msgid "This will be used as the title for your photos."
+msgstr ""
+
+#: photonic-form.php:64 photonic-form.php:224 photonic-form.php:955
+#: photonic-form.php:1299 photonic-form.php:1497 photonic-form.php:1666
+msgid "Number of columns"
+msgstr ""
+
+#: photonic-form.php:71
+msgid "Thumbnail width"
+msgstr ""
+
+#: photonic-form.php:74 photonic-form.php:82
+msgid "In pixels"
+msgstr ""
+
+#: photonic-form.php:79
+msgid "Thumbnail height"
+msgstr ""
+
+#: photonic-form.php:90
+msgid "Sizes defined by your theme. Image picked here will be resized to the dimensions above."
+msgstr ""
+
+#: photonic-form.php:95
+msgid "Slides image size"
+msgstr ""
+
+#: photonic-form.php:98
+msgid "Sizes defined by your theme. Shown in a slideshow or lightbox. Avoid loading large sizes to reduce page loads."
+msgstr ""
+
+#: photonic-form.php:111 photonic-form.php:130 photonic-form.php:138
+#: photonic-form.php:387 photonic-form.php:407 photonic-form.php:415
+#: photonic-form.php:572 photonic-form.php:592 photonic-form.php:600
+#: photonic-form.php:763 photonic-form.php:783 photonic-form.php:791
+#: photonic-form.php:996 photonic-form.php:1016 photonic-form.php:1024
+#: photonic-form.php:1313 photonic-form.php:1333 photonic-form.php:1341
+#: photonic-form.php:1539 photonic-form.php:1559 photonic-form.php:1567
+#: photonic-form.php:1693 photonic-form.php:1713 photonic-form.php:1721
+msgid "Applies to slideshows only"
+msgstr ""
+
+#: photonic-form.php:143
+msgid "Flickr"
+msgstr ""
+
+#: photonic-form.php:144
+msgid "You have to define your Flickr API Key under Photonic &rarr; Settings &rarr; Flickr &rarr; Flickr Settings.<br/> Documentation: <a href=\"https://aquoid.com/plugins/photonic/flickr/\" target=\"_blank\">Overall</a> | <a href=\"https://aquoid.com/plugins/photonic/flickr/flickr-photos/\" target=\"_blank\">Photos</a> | <a href=\"https://aquoid.com/plugins/photonic/flickr/flickr-photo/\" target=\"_blank\">Single Photos</a> | <a href=\"https://aquoid.com/plugins/photonic/flickr/flickr-photosets/\" target=\"_blank\">Albums (Photosets)</a> | <a href=\"https://aquoid.com/plugins/photonic/flickr/flickr-galleries/\" target=\"_blank\">Galleries</a> | <a href=\"https://aquoid.com/plugins/photonic/flickr/flickr-collections/\" target=\"_blank\">Collections</a> | <a href=\"https://aquoid.com/plugins/photonic/flickr/flickr-authentication/\" target=\"_blank\">Authentication</a>"
+msgstr ""
+
+#: photonic-form.php:148 photonic-form.php:425 photonic-form.php:1089
+msgid "User ID"
+msgstr ""
+
+#: photonic-form.php:151
+msgid "Find your user ID from Photonic &rarr; Helpers."
+msgstr ""
+
+#: photonic-form.php:156 photonic-form.php:432 photonic-form.php:611
+#: photonic-form.php:802 photonic-form.php:1034 photonic-form.php:1352
+#: photonic-form.php:1578
+msgid "Display"
+msgstr ""
+
+#: photonic-form.php:159 photonic-form.php:436 photonic-form.php:615
+#: photonic-form.php:1037 photonic-form.php:1355
+msgid "Photos"
+msgstr ""
+
+#: photonic-form.php:160 photonic-form.php:1356
+msgid "Photosets"
+msgstr ""
+
+#: photonic-form.php:161
+msgid "Galleries"
+msgstr ""
+
+#: photonic-form.php:162 photonic-form.php:1038
+msgid "Collections"
+msgstr ""
+
+#: photonic-form.php:170
+msgid "Album ID (Photoset ID)"
+msgstr ""
+
+#: photonic-form.php:172
+msgid "Will show a single photoset if \"Display\" is set to \"Photosets\""
+msgstr ""
+
+#: photonic-form.php:179
+msgid "Will show a single gallery if \"Display\" is set to \"Galleries\""
+msgstr ""
+
+#: photonic-form.php:184
+msgid "Collection ID"
+msgstr ""
+
+#: photonic-form.php:186
+msgid "Will show contents of a single collection if \"Display\" is set to \"Collections\""
+msgstr ""
+
+#: photonic-form.php:191
+msgid "Photo ID"
+msgstr ""
+
+#: photonic-form.php:193
+msgid "Will show a single photo if \"Display\" is set to \"Single Photo\""
+msgstr ""
+
+#: photonic-form.php:198 photonic-form.php:464 photonic-form.php:836
+#: photonic-form.php:1052
+msgid "Filter"
+msgstr ""
+
+#: photonic-form.php:200
+msgid "If \"Display\" is \"Photosets\" or \"Galleries\" or \"Collections\" and you provide a comma-separated list of values here, these entities will be included / excluded based on the next option. Useful if you want to display a single thumbnail for a single photoset / gallery, ignored if Photoset, Gallery or Collection ID is provided"
+msgstr ""
+
+#: photonic-form.php:205 photonic-form.php:471 photonic-form.php:843
+#: photonic-form.php:1059
+msgid "Filter Type"
+msgstr ""
+
+#: photonic-form.php:209 photonic-form.php:475 photonic-form.php:654
+#: photonic-form.php:847 photonic-form.php:1063
+msgid "Include above list in results"
+msgstr ""
+
+#: photonic-form.php:210 photonic-form.php:476 photonic-form.php:655
+#: photonic-form.php:848 photonic-form.php:1064
+msgid "Exclude above list from results"
+msgstr ""
+
+#: photonic-form.php:268
+msgid "Group ID"
+msgstr ""
+
+#: photonic-form.php:274
+msgid "Number of photos / albums / galleries to show"
+msgstr ""
+
+#: photonic-form.php:276
+msgid "Will show at the most 100 by default, 500 is the maximum"
+msgstr ""
+
+#: photonic-form.php:284
+msgid "Will show a \"More\" button with the specified text if the number of photos / albums / galleries is higher than the above entry. Leave blank to show no button"
+msgstr ""
+
+#: photonic-form.php:291 photonic-form.php:518 photonic-form.php:698
+#: photonic-form.php:976 photonic-form.php:1225 photonic-form.php:1519
+msgid "Applicable for pagination if <strong>Photonic &rarr; Settings &rarr; Generic Options &rarr; Overlaid Popup Panel &rarr; Enable Interim Popup for Album Thumbnails</strong> is selected. Leave blank to show maximum allowed photos."
+msgstr ""
+
+#: photonic-form.php:298 photonic-form.php:525 photonic-form.php:705
+#: photonic-form.php:983 photonic-form.php:1232 photonic-form.php:1526
+msgid "Applicable for pagination if <strong>Photonic &rarr; Settings &rarr; Generic Options &rarr; Overlaid Popup Panel &rarr; Enable Interim Popup for Album Thumbnails</strong> is selected. Will show a \"More\" button with the specified text if the number of photos is higher than the above entry. Leave blank to show no button."
+msgstr ""
+
+#: photonic-form.php:313
+msgid "Applicable only if Flickr private photos are turned on"
+msgstr ""
+
+#: photonic-form.php:318 photonic-form.php:530 photonic-form.php:710
+#: photonic-form.php:906 photonic-form.php:1251 photonic-form.php:1438
+#: photonic-form.php:1627
+msgid "Layout"
+msgstr ""
+
+#: photonic-form.php:346 photonic-form.php:932 photonic-form.php:1280
+#: photonic-form.php:1478 photonic-form.php:1639
+msgid "In pixels, only applicable to square and circular thumbnails"
+msgstr ""
+
+#: photonic-form.php:374
+msgid "The Collections API is slow, so, if you are displaying collections, pick <a href=\"https://aquoid.com/plugins/photonic/flickr/flickr-collections/\">lazy loading</a> if your collections have many albums / photosets."
+msgstr ""
+
+#: photonic-form.php:420
+msgid "Picasa"
+msgstr ""
+
+#: photonic-form.php:421
+msgid "Documentation: <a href=\"https://aquoid.com/plugins/photonic/picasa/\" target=\"_blank\">Overall</a> | <a href=\"https://aquoid.com/plugins/photonic/picasa/picasa-photos/\" target=\"_blank\">Photos</a> | <a href=\"https://aquoid.com/plugins/photonic/picasa/picasa-albums/\" target=\"_blank\">Albums</a>"
+msgstr ""
+
+#: photonic-form.php:435 photonic-form.php:614
+msgid "Albums"
+msgstr ""
+
+#: photonic-form.php:442 photonic-form.php:622 photonic-form.php:829
+msgid "Album"
+msgstr ""
+
+#: photonic-form.php:459
+msgid "If \"Display\" is \"Albums\" you can decide to show public, private (Picasa only) or protected (Google Photos only) albums. You can use the <code>album</code> or <code>filter</code> attributes to filter the content further. See <a href=\"https://aquoid.com/plugins/photonic/picasa/picasa-albums/\">here</a> for more details."
+msgstr ""
+
+#: photonic-form.php:466 photonic-form.php:645
+msgid "If \"Display\" is \"Albums\" and you provide a comma-separated list of values here, these entities will be included / excluded based on the next option. Useful if you want to display thumbnails for certain albums only, ignored if an album id is provided above"
+msgstr ""
+
+#: photonic-form.php:497
+msgid "If \"Display\" is \"Albums\" and \"Displayed Access Levels\" includes \"private\", you can opt to prompt your users for an <code>authkey</code> before they see the photos in your album. See <a href=\"https://aquoid.com/plugins/photonic/picasa/picasa-albums/\">here</a> for more details."
+msgstr ""
+
+#: photonic-form.php:502 photonic-form.php:683 photonic-form.php:961
+msgid "Number of photos / albums to show"
+msgstr ""
+
+#: photonic-form.php:511 photonic-form.php:691 photonic-form.php:969
+msgid "Will show a \"More\" button with the specified text if the number of photos / albums is higher than the above entry. Leave blank to show no button"
+msgstr ""
+
+#: photonic-form.php:551
+msgid "In pixels, only applicable to square and circular thumbnails. Permitted values: 32, 48, 64, 72, 104, 144, 150, 160. To get a cropped thumbnail, append a <code>c</code> to the size, e.g. 104c, and to get an uncropped thumbnail, append a <code>u</code> to the size, e.g. 104u."
+msgstr ""
+
+#: photonic-form.php:559
+msgid "In pixels. Permitted values: 94, 110, 128, 200, 220, 288, 320, 400, 512, 576, 640, 720, 800, 912, 1024, 1152, 1280, 1440, 1600. These are uncropped. To get a cropped thumbnail, append a <code>c</code> to the size, e.g. 1600c."
+msgstr ""
+
+#: photonic-form.php:606
+msgid "Google Photos"
+msgstr ""
+
+#: photonic-form.php:607
+msgid "Documentation: <a href=\"https://aquoid.com/plugins/photonic/google-photos/\" target=\"_blank\">Overall</a> | <a href=\"https://aquoid.com/plugins/photonic/google-photos/photos/\" target=\"_blank\">Photos</a> | <a href=\"https://aquoid.com/plugins/photonic/google-photos/albums/\" target=\"_blank\">Albums</a>"
+msgstr ""
+
+#: photonic-form.php:617
+msgid "Pick \"Albums\" if you want to display a collection of albums. Pick \"Photos\" if you want to display photos from a single album or from your photo-stream."
+msgstr ""
+
+#: photonic-form.php:624
+msgid "Applicable if \"Display\" is \"Photos\" and you want to show photos from an album. See <a href=\"https://aquoid.com/plugins/photonic/google-photos/albums/\">here</a> for more details."
+msgstr ""
+
+#: photonic-form.php:633
+msgid "Show all shared and not shared albums"
+msgstr ""
+
+#: photonic-form.php:638
+msgid "If \"Display\" is \"Albums\" you can decide to show shared or not-shared albums. See <a href=\"https://aquoid.com/plugins/photonic/google-photos/albums/\">here</a> for more details."
+msgstr ""
+
+#: photonic-form.php:643
+msgid "Album Filter"
+msgstr ""
+
+#: photonic-form.php:650
+msgid "Album Filter Type"
+msgstr ""
+
+#: photonic-form.php:663
+msgid "Applicable only if \"Display\" is \"Photos\". You can provide a comma-separated list of dates and ranges in the format <code>Y/M/D</code> or <code>Y/M/D-Y/M/D</code>. See <a href=\"https://aquoid.com/plugins/photonic/google-photos/photos/#filtering-photos\">here</a> for documentation."
+msgstr ""
+
+#: photonic-form.php:670
+msgid "Applicable only if \"Display\" is \"Photos\". You can provide a comma-separated list of categories from %s. See <a href=\"https://aquoid.com/plugins/photonic/google-photos/photos/#filtering-photos\">here</a> for documentation."
+msgstr ""
+
+#: photonic-form.php:722
+msgid "In pixels, only applicable to square and circular thumbnails. Permitted values: 32, 48, 64, 72, 104, 144, 150, 160."
+msgstr ""
+
+#: photonic-form.php:747
+msgid "Tile image size"
+msgstr ""
+
+#: photonic-form.php:797
+msgid "SmugMug"
+msgstr ""
+
+#: photonic-form.php:798
+msgid "You have to define your SmugMug API Key under Photonic &rarr; Settings &rarr; SmugMug &rarr; SmugMug Settings.<br/> Documentation: <a href=\"https://aquoid.com/plugins/photonic/smugmug/\" target=\"_blank\">Overall</a> | <a href=\"https://aquoid.com/plugins/photonic/smugmug/smugmug-photos/\" target=\"_blank\">Photos</a> | <a href=\"https://aquoid.com/plugins/photonic/smugmug/smugmug-albums/\" target=\"_blank\">Albums</a> | <a href=\"https://aquoid.com/plugins/photonic/smugmug/folders/\" target=\"_blank\">Folders</a> | <a href=\"https://aquoid.com/plugins/photonic/smugmug/smugmug-tree/\" target=\"_blank\">User Tree</a>"
+msgstr ""
+
+#: photonic-form.php:805
+msgid "Tree"
+msgstr ""
+
+#: photonic-form.php:806
+msgid "All albums"
+msgstr ""
+
+#: photonic-form.php:807
+msgid "Single Album"
+msgstr ""
+
+#: photonic-form.php:808
+msgid "Single Folder"
+msgstr ""
+
+#: photonic-form.php:815
+msgid "Nickname"
+msgstr ""
+
+#: photonic-form.php:817
+msgid "If your SmugMug URL is http://joe-sixpack.smugmug.com, this is \"joe-sixpack\". Required if the \"Display\" is \"Tree\" or \"All albums\"."
+msgstr ""
+
+#: photonic-form.php:822
+msgid "Site Password"
+msgstr ""
+
+#: photonic-form.php:824
+msgid "Required if your entire SmugMug site is password-protected. See documentation link for \"Albums\" above."
+msgstr ""
+
+#: photonic-form.php:831
+msgid "Required if you are showing \"Single Album\" above. To find this, go to <i>Photonic &rarr; Helpers &rarr; SmugMug</i> on your dashboard and find the albums for your nickname."
+msgstr ""
+
+#: photonic-form.php:838
+msgid "If \"Display\" is \"All albums\" and you provide a comma-separated list of album keys here, these entities will be included / excluded based on the next option. Useful if you want to display thumbnails for certain albums only, ignored if an album is provided above"
+msgstr ""
+
+#: photonic-form.php:854
+msgid "Photos with text"
+msgstr ""
+
+#: photonic-form.php:856
+msgid "Will show photos with the specified text. Leave blank for no filter."
+msgstr ""
+
+#: photonic-form.php:861
+msgid "Photos with keywords"
+msgstr ""
+
+#: photonic-form.php:863
+msgid "Will show photos with the specified keywords. Leave blank for no filter."
+msgstr ""
+
+#: photonic-form.php:876
+msgid "Album Password"
+msgstr ""
+
+#: photonic-form.php:878
+msgid "Required if you are showing \"Single Album\" above, and if your album is password-protected. See documentation link for \"Photos\" above."
+msgstr ""
+
+#: photonic-form.php:886
+msgid "Album Settings"
+msgstr ""
+
+#: photonic-form.php:887
+msgid "Position"
+msgstr ""
+
+#: photonic-form.php:894
+msgid "If you are displaying multiple albums the results are sorted by this parameter"
+msgstr ""
+
+#: photonic-form.php:899
+msgid "Folder"
+msgstr ""
+
+#: photonic-form.php:901
+msgid "Required if you are showing \"Single Folder\" above. To find this, go to <i>Photonic &rarr; Helpers &rarr; SmugMug</i> on your dashboard and find the folders for your nickname."
+msgstr ""
+
+#: photonic-form.php:1029
+msgid "500px"
+msgstr ""
+
+#: photonic-form.php:1030
+msgid "You have to define your Consumer API Key under Photonic &rarr; Settings &rarr; 500px &rarr; 500px Settings.<br/> Documentation: <a href=\"https://aquoid.com/plugins/photonic/500px/\" target=\"_blank\">500px</a>"
+msgstr ""
+
+#: photonic-form.php:1045 photonic-form.php:1365
+msgid "Object ID"
+msgstr ""
+
+#: photonic-form.php:1047
+msgid "Required if you are displaying a single photo"
+msgstr ""
+
+#: photonic-form.php:1054
+msgid "If \"Display\" is \"Collections\" and you provide a comma-separated list of values here, these entities will be included / excluded based on the next option. Useful if you want to display only certain collections"
+msgstr ""
+
+#: photonic-form.php:1070
+msgid "Feature"
+msgstr ""
+
+#: photonic-form.php:1073
+msgid "Popular photos"
+msgstr ""
+
+#: photonic-form.php:1074
+msgid "Upcoming photos"
+msgstr ""
+
+#: photonic-form.php:1075
+msgid "Editor's choices"
+msgstr ""
+
+#: photonic-form.php:1076 photonic-form.php:1077 photonic-form.php:1078
+#: photonic-form.php:1112 photonic-form.php:1150
+msgid "Fresh today"
+msgstr ""
+
+#: photonic-form.php:1079
+msgid "Specified user's photos"
+msgstr ""
+
+#: photonic-form.php:1080
+msgid "Photos of specified user's friends"
+msgstr ""
+
+#: photonic-form.php:1081
+msgid "Specified user's favourite photos"
+msgstr ""
+
+#: photonic-form.php:1084
+msgid "Required if you are displaying photos"
+msgstr ""
+
+#: photonic-form.php:1091 photonic-form.php:1098
+msgid "Either User ID or User Name is required if Feature is user-specific"
+msgstr ""
+
+#: photonic-form.php:1096
+msgid "User Name"
+msgstr ""
+
+#: photonic-form.php:1103
+msgid "Include category"
+msgstr ""
+
+#: photonic-form.php:1106
+msgid "All Categories"
+msgstr ""
+
+#: photonic-form.php:1107 photonic-form.php:1145
+msgid "Abstract"
+msgstr ""
+
+#: photonic-form.php:1108 photonic-form.php:1146
+msgid "Aerial"
+msgstr ""
+
+#: photonic-form.php:1109 photonic-form.php:1147
+msgid "Animals"
+msgstr ""
+
+#: photonic-form.php:1110 photonic-form.php:1148
+msgid "Black and White"
+msgstr ""
+
+#: photonic-form.php:1111 photonic-form.php:1149
+msgid "Celebrities"
+msgstr ""
+
+#: photonic-form.php:1113 photonic-form.php:1151
+msgid "Commercial"
+msgstr ""
+
+#: photonic-form.php:1114 photonic-form.php:1152
+msgid "Concert"
+msgstr ""
+
+#: photonic-form.php:1115 photonic-form.php:1153
+msgid "Family"
+msgstr ""
+
+#: photonic-form.php:1116 photonic-form.php:1154
+msgid "Fashion"
+msgstr ""
+
+#: photonic-form.php:1117 photonic-form.php:1155
+msgid "Film"
+msgstr ""
+
+#: photonic-form.php:1118 photonic-form.php:1156
+msgid "Fine Art"
+msgstr ""
+
+#: photonic-form.php:1119 photonic-form.php:1157
+msgid "Food"
+msgstr ""
+
+#: photonic-form.php:1120 photonic-form.php:1158
+msgid "Journalism"
+msgstr ""
+
+#: photonic-form.php:1121 photonic-form.php:1159
+msgid "Landscapes"
+msgstr ""
+
+#: photonic-form.php:1122 photonic-form.php:1160
+msgid "Macro"
+msgstr ""
+
+#: photonic-form.php:1123 photonic-form.php:1161
+msgid "Nature"
+msgstr ""
+
+#: photonic-form.php:1124 photonic-form.php:1162
+msgid "Night"
+msgstr ""
+
+#: photonic-form.php:1125 photonic-form.php:1163
+msgid "Nude"
+msgstr ""
+
+#: photonic-form.php:1126 photonic-form.php:1164
+msgid "People"
+msgstr ""
+
+#: photonic-form.php:1127 photonic-form.php:1165
+msgid "Performing Arts"
+msgstr ""
+
+#: photonic-form.php:1128 photonic-form.php:1166
+msgid "Sport"
+msgstr ""
+
+#: photonic-form.php:1129 photonic-form.php:1167
+msgid "Still Life"
+msgstr ""
+
+#: photonic-form.php:1130 photonic-form.php:1168
+msgid "Street"
+msgstr ""
+
+#: photonic-form.php:1131 photonic-form.php:1169
+msgid "Transportation"
+msgstr ""
+
+#: photonic-form.php:1132 photonic-form.php:1170
+msgid "Travel"
+msgstr ""
+
+#: photonic-form.php:1133 photonic-form.php:1171
+msgid "Underwater"
+msgstr ""
+
+#: photonic-form.php:1134 photonic-form.php:1172
+msgid "Urban Exploration"
+msgstr ""
+
+#: photonic-form.php:1135 photonic-form.php:1173
+msgid "Wedding"
+msgstr ""
+
+#: photonic-form.php:1141
+msgid "Exclude category"
+msgstr ""
+
+#: photonic-form.php:1144
+msgid "No Category"
+msgstr ""
+
+#: photonic-form.php:1182
+msgid "Created at"
+msgstr ""
+
+#: photonic-form.php:1183
+msgid "Rating"
+msgstr ""
+
+#: photonic-form.php:1184
+msgid "Times viewed"
+msgstr ""
+
+#: photonic-form.php:1185
+msgid "Votes count"
+msgstr ""
+
+#: photonic-form.php:1186
+msgid "Favorites count"
+msgstr ""
+
+#: photonic-form.php:1187
+msgid "Comments count"
+msgstr ""
+
+#: photonic-form.php:1188
+msgid "Taken at"
+msgstr ""
+
+#: photonic-form.php:1196
+msgid "Comma-separated list of tags (above criteria will not apply)"
+msgstr ""
+
+#: photonic-form.php:1201
+msgid "Search terms"
+msgstr ""
+
+#: photonic-form.php:1203
+msgid "Comma-separated list of search terms (above criteria will not apply)"
+msgstr ""
+
+#: photonic-form.php:1237
+msgid "From this date"
+msgstr ""
+
+#: photonic-form.php:1239
+msgid "Format: yyyy-mm-dd. Use this to filter from a certain date (this is the start date). Set \"Sort by\" to \"Created at\"!"
+msgstr ""
+
+#: photonic-form.php:1244
+msgid "To this date"
+msgstr ""
+
+#: photonic-form.php:1246
+msgid "Format: yyyy-mm-dd. Use this to filter to a certain date (this is the end date). Set \"Sort by\" to \"Created at\"!"
+msgstr ""
+
+#: photonic-form.php:1272
+msgid "75 &times; 75 px"
+msgstr ""
+
+#: photonic-form.php:1273
+msgid "140 &times; 140 px"
+msgstr ""
+
+#: photonic-form.php:1274 photonic-form.php:1288
+msgid "280 &times; 280 px"
+msgstr ""
+
+#: photonic-form.php:1275
+msgid "100 &times; 100 px"
+msgstr ""
+
+#: photonic-form.php:1276
+msgid "200 &times; 200 px"
+msgstr ""
+
+#: photonic-form.php:1277
+msgid "440 &times; 440 px"
+msgstr ""
+
+#: photonic-form.php:1278
+msgid "600 &times; 600 px"
+msgstr ""
+
+#: photonic-form.php:1289
+msgid "900px on the longest edge"
+msgstr ""
+
+#: photonic-form.php:1290
+msgid "1170px on the longest edge"
+msgstr ""
+
+#: photonic-form.php:1291
+msgid "1080px on the longest edge"
+msgstr ""
+
+#: photonic-form.php:1292
+msgid "1600px on the longest edge"
+msgstr ""
+
+#: photonic-form.php:1293
+msgid "2048px on the longest edge"
+msgstr ""
+
+#: photonic-form.php:1347
+msgid "Zenfolio"
+msgstr ""
+
+#: photonic-form.php:1348
+msgid "Documentation: <a href=\"https://aquoid.com/plugins/photonic/zenfolio/\" target=\"_blank\">Overall</a> | <a href=\"https://aquoid.com/plugins/photonic/zenfolio/photos/\" target=\"_blank\">Photos</a> | <a href=\"https://aquoid.com/plugins/photonic/zenfolio/photosets/\" target=\"_blank\">Photosets</a> | <a href=\"https://aquoid.com/plugins/photonic/zenfolio/groups/\" target=\"_blank\">Groups</a> | <a href=\"https://aquoid.com/plugins/photonic/zenfolio/group-hierarchy/\" target=\"_blank\">Group Hierarchy</a>"
+msgstr ""
+
+#: photonic-form.php:1367
+msgid "Can be set if \"Display\" is <code>Photos</code>, <code>Photosets</code> or <code>Group</code>."
+msgstr ""
+
+#: photonic-form.php:1372
+msgid "Search by text"
+msgstr ""
+
+#: photonic-form.php:1374 photonic-form.php:1381 photonic-form.php:1394
+msgid "Can be set if \"Display\" is <code>Photos</code> or <code>Photosets</code>."
+msgstr ""
+
+#: photonic-form.php:1379
+msgid "Search by category code"
+msgstr ""
+
+#: photonic-form.php:1381
+msgid "See the list of categories from <em>Photonic &rarr; Helpers</em>."
+msgstr ""
+
+#: photonic-form.php:1394
+msgid "For search results only."
+msgstr ""
+
+#: photonic-form.php:1399
+msgid "Photoset type"
+msgstr ""
+
+#: photonic-form.php:1403
+msgid "Gallery"
+msgstr ""
+
+#: photonic-form.php:1404
+msgid "Collection"
+msgstr ""
+
+#: photonic-form.php:1406
+msgid "Mandatory if Display = Photosets and no Object ID is specified."
+msgstr ""
+
+#: photonic-form.php:1411
+msgid "Display classification"
+msgstr ""
+
+#: photonic-form.php:1416
+msgid "Recent"
+msgstr ""
+
+#: photonic-form.php:1418
+msgid "Mandatory if \"Display\" is <code>Photos</code> or <code>Photosets</code>, and none of the other criteria above is specified."
+msgstr ""
+
+#: photonic-form.php:1423
+msgid "Login name"
+msgstr ""
+
+#: photonic-form.php:1425
+msgid "Mandatory if Display = Hierarchy"
+msgstr ""
+
+#: photonic-form.php:1454
+msgid "Applicable if groups or hierarchies are being displayed."
+msgstr ""
+
+#: photonic-form.php:1573
+msgid "Instagram"
+msgstr ""
+
+#: photonic-form.php:1574
+msgid "You have to define your Instagram Client ID under Photonic &rarr; Settings &rarr; Instagram &rarr; Instagram Settings.<br/> Documentation: <a href=\"https://aquoid.com/plugins/photonic/instagram/\" target=\"_blank\">Instagram</a>"
+msgstr ""
+
+#: photonic-form.php:1581
+msgid "Recent Photos"
+msgstr ""
+
+#: photonic-form.php:1582
+msgid "Search"
+msgstr ""
+
+#: photonic-form.php:1583 photonic-form.php:1599
+msgid "Tag"
+msgstr ""
+
+#: photonic-form.php:1584
+msgid "Location"
+msgstr ""
+
+#: photonic-form.php:1592
+msgid "Media ID"
+msgstr ""
+
+#: photonic-form.php:1594
+msgid "Required if \"Display\" is set to \"Single Photos\"."
+msgstr ""
+
+#: photonic-form.php:1594
+msgid "If your photo is at <code>https://instagram.com/p/ABcde5678fg/</code>, your media id is <code>ABcde5678fg</code>."
+msgstr ""
+
+#: photonic-form.php:1601
+msgid "Required if \"Display\" is set to \"Tag\""
+msgstr ""
+
+#: photonic-form.php:1606
+msgid "Latitude"
+msgstr ""
+
+#: photonic-form.php:1608 photonic-form.php:1615
+msgid "Latitude and Longitude are required if \"Display\" = \"Search\""
+msgstr ""
+
+#: photonic-form.php:1613
+msgid "Longitude"
+msgstr ""
+
+#: photonic-form.php:1620
+msgid "Location ID"
+msgstr ""
+
+#: photonic-form.php:1622
+msgid "Required if \"Display\" is set to \"Location\"."
+msgstr ""
+
+#: photonic-form.php:1644
+msgid "Min Photo ID"
+msgstr ""
+
+#: photonic-form.php:1646 photonic-form.php:1653
+msgid "Use the min and max ID to reduce your matches for \"Location\" and \"Tag\" displays"
+msgstr ""
+
+#: photonic-form.php:1651
+msgid "Max Photo ID"
+msgstr ""
+
+#: photonic-options-manager.php:274
+msgid "<p>The following instances were found on your site for Photonic with the <code>%s</code> shortcode. <strong>Please verify the instances below before replacing the shortcodes. It is strongly recommended to back up the posts listed below before the shortcode replacement.</strong></p>"
+msgstr ""
+
+#: photonic-options-manager.php:288 photonic-options-manager.php:303
+msgid "Please set up your Flickr API Key under <em>Photonic &rarr; Settings &rarr; Flickr &rarr; Flickr Settings</em>"
+msgstr ""
+
+#: photonic-options-manager.php:291
+msgid "<h4>Flickr User ID Finder</h4>"
+msgstr ""
+
+#: photonic-options-manager.php:292
+msgid "<label>Enter your Flickr photostream URL and click \"Find\""
+msgstr ""
+
+#: photonic-options-manager.php:295 photonic-options-manager.php:310
+#: photonic-options-manager.php:325 photonic-options-manager.php:491
+msgid "Find"
+msgstr ""
+
+#: photonic-options-manager.php:306
+msgid "<h4>Flickr Group ID Finder</h4>"
+msgstr ""
+
+#: photonic-options-manager.php:307
+msgid "<label>Enter your Flickr group URL and click \"Find\""
+msgstr ""
+
+#: photonic-options-manager.php:318
+msgid "Please set up your SmugMug API Key under <em>Photonic &rarr; Settings &rarr; SmugMug &rarr; SmugMug Settings</em>"
+msgstr ""
+
+#: photonic-options-manager.php:321
+msgid "<h4>SmugMug User Albums and Folders</h4>"
+msgstr ""
+
+#: photonic-options-manager.php:322
+msgid "<label>Enter your SmugMug username and click \"Find\""
+msgstr ""
+
+#: photonic-options-manager.php:361 photonic-options-manager.php:407
+#: photonic-options-manager.php:482
+msgid "Please set up your Google Client ID and Client Secret under <em>Photonic &rarr; Settings &rarr; Picasa &rarr; Picasa Settings</em>"
+msgstr ""
+
+#: photonic-options-manager.php:370 photonic-options-manager.php:416
+msgid "You have already set up your authentication. <span class=\"photonic-all-ok\">Unless you wish to regenerate the token this step is not required.</span><br/>"
+msgstr ""
+
+#: photonic-options-manager.php:375 photonic-options-manager.php:421
+msgid "You first have to authorize Photonic to connect to your Google account."
+msgstr ""
+
+#: photonic-options-manager.php:379 photonic-options-manager.php:388
+#: photonic-options-manager.php:425 photonic-options-manager.php:434
+msgid "Step 1: Authenticate"
+msgstr ""
+
+#: photonic-options-manager.php:382 photonic-options-manager.php:391
+#: photonic-options-manager.php:428 photonic-options-manager.php:437
+msgid "Next, you have to obtain the token."
+msgstr ""
+
+#: photonic-options-manager.php:384 photonic-options-manager.php:393
+#: photonic-options-manager.php:430 photonic-options-manager.php:439
+#: photonic.php:232
+msgid "Step 2: Obtain Token"
+msgstr ""
+
+#: photonic-options-manager.php:458
+msgid "Please set up the default user for Zenfolio under <em>Photonic &rarr; Settings &rarr; Zenfolio &rarr; Zenfolio Photo Settings &rarr; Default User</em>"
+msgstr ""
+
+#: photonic-options-manager.php:461
+msgid "You have already set up your authentication. <span class=\"photonic-all-ok\">Unless you wish to re-authenticate or your password has changed this step is not required.</span>"
+msgstr ""
+
+#: photonic-options-manager.php:467
+msgid "Password:"
+msgstr ""
+
+#: photonic-options-manager.php:468
+msgid "Login and Authenticate"
+msgstr ""
+
+#: photonic-options-manager.php:472
+msgid "Delete current authentication data"
+msgstr ""
+
+#: photonic-options-manager.php:479
+msgid "<h4>Picasa Album ID Finder</h4>"
+msgstr ""
+
+#: photonic-options-manager.php:485
+msgid "Please obtain your Refresh Token and save it under <em>Photonic &rarr; Settings &rarr; Picasa &rarr; Picasa Settings</em>"
+msgstr ""
+
+#: photonic-options-manager.php:488
+msgid "<label>Enter your Picasa / Google Photos user name click \"Find\""
+msgstr ""
+
+#: photonic-options-manager.php:497
+msgid "<h4>Google Photos Album ID Finder</h4>"
+msgstr ""
+
+#: photonic-options-manager.php:500
+msgid "Please set up your Google Client ID and Client Secret under <em>Photonic &rarr; Settings &rarr; Google Photos &rarr; Google Photos Settings</em>"
+msgstr ""
+
+#: photonic-options-manager.php:503
+msgid "Please obtain your Refresh Token and save it under <em>Photonic &rarr; Settings &rarr; Google Photos &rarr; Google Photos Settings</em>"
+msgstr ""
+
+#: photonic-options-manager.php:506
+msgid "Find my albums"
+msgstr ""
+
+#: photonic-options-manager.php:521 photonic-options-manager.php:524
+#: photonic-options-manager.php:2019 photonic-options-manager.php:2022
+msgid "Login and get Access Token"
+msgstr ""
+
+#: photonic-options-manager.php:526 photonic-options-manager.php:2030
+msgid "Save Token"
+msgstr ""
+
+#: photonic-options-manager.php:533
+msgid "Please set up your Instagram Access Token under <em>Photonic &rarr; Settings &rarr; Instagram &rarr; Instagram Settings</em>"
+msgstr ""
+
+#: photonic-options-manager.php:536
+msgid "<h4>Instagram ID Finder</h4>"
+msgstr ""
+
+#: photonic-options-manager.php:537
+msgid "Instagram has made it almost impossible to determine user ids using the API. <strong>That being said, if you are authenticated your user id is not required: the authenticated user is used to show photos.</strong> However, if you are feeling adventurous, you can try the following steps:<br/>"
+msgstr ""
+
+#: photonic-options-manager.php:548
+msgid "<h4>Zenfolio Categories</h4>"
+msgstr ""
+
+#: photonic-options-manager.php:549
+msgid "List"
+msgstr ""
+
+#: photonic-options-manager.php:1554
+msgid "If you have protected albums, you will have to %1sauthenticate%2s to see the protected albums."
+msgstr ""
+
+#: photonic-options-manager.php:1641 photonic-options-manager.php:1659
+msgid "You have to authenticate to see the details."
+msgstr ""
+
+#: photonic-options-manager.php:1689 photonic-options-manager.php:1697
+msgid "<span class=\"found-id-text\">No response from server!</span>"
+msgstr ""
+
+#: photonic-options-manager.php:1701
+msgid "<span class=\"found-id-text\">Cannot connect to the server. Please try later.</span>"
+msgstr ""
+
+#: photonic-options-manager.php:1713 photonic-options-manager.php:1899
+msgid "User ID:"
+msgstr ""
+
+#: photonic-options-manager.php:1718
+msgid "Group ID:"
+msgstr ""
+
+#: photonic-options-manager.php:1879
+msgid "No albums found"
+msgstr ""
+
+#: photonic-options-manager.php:1889
+msgid "<span class=\"found-id-text\">User not found</span>"
+msgstr ""
+
+#: photonic-options-manager.php:1892
+msgid "<span class=\"found-id-text\">Location not found</span>"
+msgstr ""
+
+#: photonic-options-manager.php:1903 photonic-options-manager.php:1918
+msgid "Name not available"
+msgstr ""
+
+#: photonic-options-manager.php:1904
+msgid "Location ID:"
+msgstr ""
+
+#: photonic-options-manager.php:1913
+msgid "Matching users:"
+msgstr ""
+
+#: photonic-options-manager.php:1920
+msgid "Matching locations:"
+msgstr ""
+
+#: photonic-options-manager.php:1999
+msgid "<div class=\"notice-warning notice-alt\">With effect from 15th June <a href=\"https://support.500px.com/hc/en-us/articles/360002435653-API-\">500px.com has shutdown its API</a>, so authentication is no longer possible.</div>"
+msgstr ""
+
+#: photonic-options-manager.php:2002
+msgid "Please set up your %1$s API key under <em>Photonic &rarr; Settings &rarr; %1$s &rarr; %1$s Settings</em>."
+msgstr ""
+
+#: photonic-options-manager.php:2005
+msgid "You have already set up your authentication. <span class=\"photonic-all-ok\">Unless you wish to regenerate your token this step is not required.</span>"
+msgstr ""
+
+#: photonic.php:179
+msgid "Original width"
+msgstr ""
+
+#: photonic.php:179
+msgid "Original height"
+msgstr ""
+
+#: photonic.php:204
+msgid "Settings"
+msgstr ""
+
+#: photonic.php:207
+msgid "Prepare for Gutenberg"
+msgstr ""
+
+#: photonic.php:1248
+msgid "Authentication successful! All your galleries will be displayed with Authentication in place."
+msgstr ""
+
+#: photonic.php:1381
+msgid "Incorrect password."
+msgstr ""
+
+#: photonic.php:1524
+msgid "No title / caption / description"
+msgstr ""
+
+#: photonic.php:1525
+msgid "Always use the photo title, even if blank"
+msgstr ""
+
+#: photonic.php:1526
+msgid "Always use the photo description / caption, even if blank"
+msgstr ""
+
+#: photonic.php:1527
+msgid "Use the photo description / caption. If blank use the title"
+msgstr ""
+
+#: photonic.php:1528
+msgid "Use the photo title. If blank use the description / caption"
+msgstr ""
+
+#: photonic.php:1547
+msgid "Thumbnail strip below slideshow"
+msgstr ""
+
+#: photonic.php:1549
+msgid "Thumbnail strip to the right of the slideshow"
+msgstr ""
+
+#: photonic.php:1550
+msgid "Slideshow without thumbnails"
+msgstr ""
+
+#: photonic.php:1551
+msgid "Square thumbnail grid, lightbox"
+msgstr ""
+
+#: photonic.php:1552
+msgid "Circular thumbnail grid, lightbox"
+msgstr ""
+
+#: photonic.php:1553
+msgid "Random justified gallery, lightbox"
+msgstr ""
+
+#: photonic.php:1554
+msgid "Masonry layout, lightbox"
+msgstr ""
+
+#: photonic.php:1555
+msgid "Mosaic layout, lightbox"
+msgstr ""
+
+#: photonic.php:1562
+msgid "Photos only"
+msgstr ""
+
+#: photonic.php:1563
+msgid "Videos only"
+msgstr ""
+
+#: photonic.php:1564
+msgid "Both photos and videos"
+msgstr ""
+
+#: photonic.php:1655 photonic.php:1661
+msgid "Add / Edit Photonic Gallery"
+msgstr ""
+
+#: photonic.php:1672
+msgid "Insert Gallery"
+msgstr ""
+
+#: photonic.php:1673
+msgid "Update Gallery"
+msgstr ""
+
+#: photonic.php:1675
+msgid "Select from WordPress Media Library"
+msgstr ""
+
+#: photonic.php:1676
+msgid "Select"
+msgstr ""
+
+#: photonic.php:1677
+msgid "The text selected in the editor is not a Photonic shortcode. Creating a new shortcode."
+msgstr ""
+
+#: photonic.php:1810
+msgid "It looks like you are using the Gutenberg editor. Please ensure that you have followed the instructions under <em><a href=\"%s\">Photonic &rarr; Prepare for Gutenberg</a></em>."
+msgstr ""
+#. Plugin Name of the plugin/theme
+msgid "Photonic Gallery & Lightbox for Flickr, SmugMug, Google Photos, Picasa, Zenfolio and Instagram"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://aquoid.com/plugins/photonic/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Extends the native gallery to support Flickr, Picasa, SmugMug, Zenfolio and Instagram. JS libraries like Swipebox, Fancybox, Colorbox, PrettyPhoto, Image Lightbox, Featherlight, Lightcase and Lightgallery are supported. Photos are displayed in grids of square or circular thumbnails, or slideshows, or justified or masonry or random mosaic layouts. The plugin also extends all layout options to a regular WP gallery."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Sayontan Sinha"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://mynethome.net/"
 msgstr ""

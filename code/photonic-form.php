@@ -1,58 +1,16 @@
 <?php
 /**
- * Creates a form in the "Add Media" screen under the new "Photonic" tab. This form lets you insert the gallery shortcode with
- * the right arguments for native WP galleries, Flickr, Picasa, SmugMug and 500px.
+ * Contains all fields required on the add / edit forms for the gallery.
  *
  * @package Photonic
  * @subpackage UI
  */
 
-$selected_tab = isset($_GET['photonic-tab']) ? esc_attr($_GET['photonic-tab']) : 'default';
-if (!in_array($selected_tab, array('default', 'flickr', 'picasa', 'smugmug', '500px'))) {
-	$selected_tab = 'default';
-}
+global $photonic_wp_title_caption, $photonic_picasa_use_desc, $photonic_smug_title_caption, $photonic_flickr_title_caption, $photonic_zenfolio_title_caption, $photonic_500px_title_caption,
+	   $photonic_flickr_thumb_size, $photonic_flickr_main_size, $photonic_smug_thumb_size, $photonic_smug_main_size, $photonic_zenfolio_thumb_size, $photonic_zenfolio_main_size, $photonic_thumbnail_style,
+	   $photonic_flickr_media, $photonic_picasa_media, $photonic_google_media, $photonic_smug_media, $photonic_zenfolio_media, $photonic_instagram_media;
+$layout = isset($photonic_thumbnail_style) ? $photonic_thumbnail_style : 'square';
 
-if (isset($_POST['photonic-submit'])) {
-	$shortcode =  stripslashes($_POST['photonic-shortcode']);
-	return media_send_to_editor($shortcode);
-}
-else if (isset($_POST['photonic-cancel'])) {
-	return media_send_to_editor('');
-}
-?>
-<script type="text/javascript">
-	$j = jQuery.noConflict();
-
-	function photonicAdminHtmlEncode(value){
-		return $j('<div/>').text(value).html();
-	}
-
-	$j(document).ready(function() {
-		$j('#photonic-shortcode-form input[type="text"], #photonic-shortcode-form select').change(function(event) {
-			var comboValues = $j('#photonic-shortcode-form').serializeArray();
-			var newValues = new Array();
-			var len = comboValues.length;
-			for (var i=0; i<len; i++) {
-				var individual = comboValues[i];
-				if (individual['name'].trim() != 'photonic-shortcode' && individual['name'].trim() != 'photonic-submit' &&
-						individual['name'].trim() != 'photonic-cancel' && individual['value'].trim() != '') {
-					newValues.push(individual['name'] + "='" + photonicAdminHtmlEncode(decodeURIComponent(individual['value'].trim())) + "'");
-				}
-			}
-
-			var shortcode = "[gallery type='<?php echo $selected_tab; ?>' ";
-			len = newValues.length;
-			for (var i=0; i<len; i++) {
-				shortcode += newValues[i] + ' ';
-			}
-			shortcode += ']';
-			$j('#photonic-preview').text(shortcode);
-			$j('#photonic-shortcode').val(shortcode);
-		});
-		$j('#photonic-shortcode-form select').change();
-	});
-</script>
-<?php
 $fields = array(
 	'default' => array(
 		'name' => __('WP Galleries', 'photonic'),
@@ -65,57 +23,40 @@ $fields = array(
 			),
 
 			array(
+				'id' => 'ids',
+				'name' => __('Image IDs', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Comma-separated. You can specify this if there is no Gallery ID specified.', 'photonic'),
+			),
+
+			array(
 				'id' => 'style',
 				'name' => __('Display Style', 'photonic'),
 				'type' => 'select',
-				'options' => array(
-					'strip-below' => __('Thumbnails below slideshow', 'photonic'),
-					'strip-above' => __('Thumbnails above slideshow', 'photonic'),
-					'no-strip' => __('No thumbnails - only slideshow', 'photonic'),
-					'launch' => __('Only thumbnails - click for slideshow', 'photonic')
-				),
+				'options' => Photonic::layout_options(true),
+				'hint' => __('The first four options trigger a slideshow, the rest trigger a lightbox.', 'photonic'),
 			),
 
 			array(
-				'id' => 'fx',
-				'name' => __('Slideshow Effects', 'photonic'),
-				'type' => 'select',
-				'options' => array(
-					'fade' => __('Fade', 'photonic'),
-					'scrollUp' => __('Scroll Up', 'photonic'),
-					'scrollDown' => __('Scroll Down', 'photonic'),
-					'scrollLeft' => __('Scroll Left', 'photonic'),
-					'scrollRight' => __('Scroll Right', 'photonic'),
-					'scrollHorz' => __('Scroll Horizontal', 'photonic'),
-					'scrollVert' => __('Scroll Vertical', 'photonic'),
-					'slideX' => __('Slide X', 'photonic'),
-					'slideY' => __('Slide Y', 'photonic'),
-					'turnUp' => __('Turn Up', 'photonic'),
-					'turnDown' => __('Turn Down', 'photonic'),
-					'turnLeft' => __('Turn Left', 'photonic'),
-					'turnRight' => __('Turn Right', 'photonic'),
-					'zoom' => __('Zoom', 'photonic'),
-					'fadeZoom' => __('Fade Zoom', 'photonic'),
-					'blindX' => __('Blind X', 'photonic'),
-					'blindY' => __('Blind Y', 'photonic'),
-					'blindZ' => __('Blind Z', 'photonic'),
-					'growX' => __('Grow X', 'photonic'),
-					'growY' => __('Grow Y', 'photonic'),
-					'curtainX' => __('Curtain-X', 'photonic'),
-					'curtainY' => __('Curtain-Y', 'photonic'),
-					'cover' => __('Cover', 'photonic'),
-					'uncover' => __('Uncover', 'photonic'),
-					'wipe' => __('Wipe', 'photonic'),
-				),
-			),
-
-			array(
-				'id' => 'slideshow_height',
-				'name' => __('Slideshow Height', 'photonic'),
+				'id' => 'count',
+				'name' => __('Number of photos to show', 'photonic'),
 				'type' => 'text',
-				'std' => 500,
-				'hint' => __('In pixels. This is applicable only if you are displaying the slideshow directly on the page.', 'photonic'),
-				'req' => true,
+			),
+
+			array(
+				'id' => 'more',
+				'name' => __('"More" button text', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Will show a "More" button with the specified text if the number of photos is higher than the above entry. Leave blank to show no button', 'photonic'),
+			),
+
+			array(
+				'id' => 'caption',
+				'name' => __('Photo title / caption', 'photonic'),
+				'type' => 'select',
+				'options' => Photonic::title_caption_options(),
+				'std' => $photonic_wp_title_caption,
+				'hint' => __('This will be used as the title for your photos.', 'photonic'),
 			),
 
 			array(
@@ -142,10 +83,10 @@ $fields = array(
 			),
 
 			array(
-				'id' => 'thumbnail_size',
+				'id' => 'thumb_size',
 				'name' => __('Thumbnail size', 'photonic'),
 				'type' => 'raw',
-				'std' => Photonic::get_image_sizes_selection('thumbnail_size', false),
+				'std' => Photonic::get_image_sizes_selection('thumb_size', false),
 				'hint' => __('Sizes defined by your theme. Image picked here will be resized to the dimensions above.', 'photonic')
 			),
 
@@ -154,7 +95,31 @@ $fields = array(
 				'name' => __('Slides image size', 'photonic'),
 				'type' => 'raw',
 				'std' => Photonic::get_image_sizes_selection('slide_size', true),
-				'hint' => __('Sizes defined by your theme. Applies to slideshows only. Avoid loading large sizes to reduce page loads.', 'photonic')
+				'hint' => __('Sizes defined by your theme. Shown in a slideshow or lightbox. Avoid loading large sizes to reduce page loads.', 'photonic'),
+				'alt_id' => 'main_size',
+			),
+
+			array(
+				'id' => 'fx',
+				'name' => __('Slideshow Effects', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'fade' => __('Fade', 'photonic'),
+					'slide' => __('Slide', 'photonic'),
+				),
+				'std' => 'slide',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
+
+			array(
+				'id' => 'controls',
+				'name' => __('Slideshow Controls', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'hide' => __('Hide', 'photonic'),
+					'show' => __('Show', 'photonic'),
+				),
+				'hint' => __('Shows Previous and Next buttons on the slideshow.', 'photonic'),
 			),
 
 			array(
@@ -176,13 +141,14 @@ $fields = array(
 	),
 	'flickr' => array(
 		'name' => __('Flickr', 'photonic'),
-		'prelude' => __('You have to define your Flickr API Key under Settings &rarr; Photonic &rarr; Flickr &rarr; Flickr Settings', 'photonic'),
+		'prelude' => __('You have to define your Flickr API Key under Photonic &rarr; Settings &rarr; Flickr &rarr; Flickr Settings.<br/> Documentation: <a href="https://aquoid.com/plugins/photonic/flickr/" target="_blank">Overall</a> | <a href="https://aquoid.com/plugins/photonic/flickr/flickr-photos/" target="_blank">Photos</a> | <a href="https://aquoid.com/plugins/photonic/flickr/flickr-photo/" target="_blank">Single Photos</a> | <a href="https://aquoid.com/plugins/photonic/flickr/flickr-photosets/" target="_blank">Albums (Photosets)</a> | <a href="https://aquoid.com/plugins/photonic/flickr/flickr-galleries/" target="_blank">Galleries</a> | <a href="https://aquoid.com/plugins/photonic/flickr/flickr-collections/" target="_blank">Collections</a> | <a href="https://aquoid.com/plugins/photonic/flickr/flickr-authentication/" target="_blank">Authentication</a>', 'photonic'),
 		'fields' => array(
 			array(
 				'id' => 'user_id',
-				'name' => "<a href='http://idgettr.com/' target='_blank'>".__('User ID', 'photonic')."</a>",
+				'name' => __('User ID', 'photonic'),
 				'type' => 'text',
 				'req' => true,
+				'hint' => __('Find your user ID from Photonic &rarr; Helpers.', 'photonic')
 			),
 
 			array(
@@ -201,30 +167,56 @@ $fields = array(
 
 			array(
 				'id' => 'photoset_id',
-				'name' => __('Photoset ID', 'photonic')."</a>",
+				'name' => __('Album ID (Photoset ID)', 'photonic'),
 				'type' => 'text',
 				'hint' => __('Will show a single photoset if "Display" is set to "Photosets"', 'photonic')
 			),
 
 			array(
 				'id' => 'gallery_id',
-				'name' => __('Gallery ID', 'photonic')."</a>",
+				'name' => __('Gallery ID', 'photonic'),
 				'type' => 'text',
 				'hint' => __('Will show a single gallery if "Display" is set to "Galleries"', 'photonic')
 			),
 
 			array(
 				'id' => 'collection_id',
-				'name' => __('Collection ID', 'photonic')."</a>",
+				'name' => __('Collection ID', 'photonic'),
 				'type' => 'text',
 				'hint' => __('Will show contents of a single collection if "Display" is set to "Collections"', 'photonic')
 			),
 
 			array(
 				'id' => 'photo_id',
-				'name' => __('Photo ID', 'photonic')."</a>",
+				'name' => __('Photo ID', 'photonic'),
 				'type' => 'text',
 				'hint' => __('Will show a single photo if "Display" is set to "Single Photo"', 'photonic')
+			),
+
+			array(
+				'id' => 'filter',
+				'name' => __('Filter', 'photonic'),
+				'type' => 'text',
+				'hint' => __('If "Display" is "Photosets" or "Galleries" or "Collections" and you provide a comma-separated list of values here, these entities will be included / excluded based on the next option. Useful if you want to display a single thumbnail for a single photoset / gallery, ignored if Photoset, Gallery or Collection ID is provided', 'photonic')
+			),
+
+			array(
+				'id' => 'filter_type',
+				'name' => __('Filter Type', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'include' => __('Include above list in results', 'photonic'),
+					'exclude' => __('Exclude above list from results', 'photonic'),
+				),
+			),
+
+			array(
+				'id' => 'media',
+				'name' => __('Media to Show', 'photonic'),
+				'type' => 'select',
+				'options' => Photonic::media_options(),
+				'std' => $photonic_flickr_media,
 			),
 
 			array(
@@ -273,14 +265,37 @@ $fields = array(
 
 			array(
 				'id' => 'group_id',
-				'name' => __('Group ID', 'photonic')."</a>",
+				'name' => __('Group ID', 'photonic'),
 				'type' => 'text',
 			),
 
 			array(
 				'id' => 'per_page',
-				'name' => __('Number of photos to show', 'photonic')."</a>",
+				'name' => __('Number of photos / albums / galleries to show', 'photonic'),
 				'type' => 'text',
+				'hint' => __('Will show at the most 100 by default, 500 is the maximum', 'photonic'),
+				'alt_id' => 'count',
+			),
+
+			array(
+				'id' => 'more',
+				'name' => __('"More" button text', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Will show a "More" button with the specified text if the number of photos / albums / galleries is higher than the above entry. Leave blank to show no button', 'photonic'),
+			),
+
+			array(
+				'id' => 'photo_count',
+				'name' => __('Number of photos to show in overlaid popup', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Applicable for pagination if <strong>Photonic &rarr; Settings &rarr; Generic Options &rarr; Overlaid Popup Panel &rarr; Enable Interim Popup for Album Thumbnails</strong> is selected. Leave blank to show maximum allowed photos.', 'photonic'),
+			),
+
+			array(
+				'id' => 'photo_more',
+				'name' => __('"More" button text in overlaid popup', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Applicable for pagination if <strong>Photonic &rarr; Settings &rarr; Generic Options &rarr; Overlaid Popup Panel &rarr; Enable Interim Popup for Album Thumbnails</strong> is selected. Will show a "More" button with the specified text if the number of photos is higher than the above entry. Leave blank to show no button.', 'photonic'),
 			),
 
 			array(
@@ -298,10 +313,112 @@ $fields = array(
 				'hint' => __('Applicable only if Flickr private photos are turned on', 'photonic'),
 			),
 
+			array(
+				'id' => 'layout',
+				'name' => __('Layout', 'photonic'),
+				'type' => 'select',
+				'options' => Photonic::layout_options(),
+				'hint' => __('The first four options trigger a slideshow, the rest trigger a lightbox.', 'photonic'),
+				'std' => $layout,
+			),
+
+			array(
+				'id' => 'caption',
+				'name' => __('Photo title / caption', 'photonic'),
+				'type' => 'select',
+				'options' => Photonic::title_caption_options(),
+				'std' => $photonic_flickr_title_caption,
+				'hint' => __('This will be used as the title for your photos.', 'photonic'),
+			),
+
+			array(
+				'id' => 'thumb_size',
+				'name' => __('Thumbnail size', 'photonic'),
+				'type' => 'select',
+				'std' => $photonic_flickr_thumb_size,
+				"options" => array(
+					's' => __('Small square, 75x75px', 'photonic'),
+					'q' => __('Large square, 150x150px', 'photonic'),
+					't' => __('Thumbnail, 100px on longest side', 'photonic'),
+					'm' => __('Small, 240px on longest side', 'photonic'),
+					'n' => __('Small, 320px on longest side', 'photonic'),
+				),
+				'hint' => __('In pixels, only applicable to square and circular thumbnails', 'photonic')
+			),
+
+			array(
+				'id' => 'main_size',
+				'name' => __('Main image size', 'photonic'),
+				'type' => 'select',
+				'std' => $photonic_flickr_main_size,
+				'options' => array(
+					'none' => __('Medium, 500px on the longest side', 'photonic'),
+					'z' => __('Medium, 640px on longest side', 'photonic'),
+					'c' => __('Medium, 800px on longest side', 'photonic'),
+					'b' => __('Large, 1024px on longest side', 'photonic'),
+					'h' => __('Large, 1600px on longest side', 'photonic'),
+					'k' => __('Large, 2048px on longest side', 'photonic'),
+					'o' => __('Original', 'photonic'),
+				),
+			),
+
+			array(
+				'id' => 'collections_display',
+				'name' => __('Expand Collections', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'lazy' => __('Lazy loading', 'photonic'),
+					'expanded' => __('Expanded upfront', 'photonic'),
+				),
+				'hint' => __('The Collections API is slow, so, if you are displaying collections, pick <a href="https://aquoid.com/plugins/photonic/flickr/flickr-collections/">lazy loading</a> if your collections have many albums / photosets.', 'photonic'),
+			),
+
+			array(
+				'id' => 'fx',
+				'name' => __('Slideshow Effects', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'fade' => __('Fade', 'photonic'),
+					'slide' => __('Slide', 'photonic'),
+				),
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
+
+			array(
+				'id' => 'controls',
+				'name' => __('Slideshow Controls', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'hide' => __('Hide', 'photonic'),
+					'show' => __('Show', 'photonic'),
+				),
+				'hint' => __('Shows Previous and Next buttons on the slideshow.', 'photonic'),
+			),
+
+			array(
+				'id' => 'timeout',
+				'name' => __('Time between slides in ms', 'photonic'),
+				'type' => 'text',
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
+
+			array(
+				'id' => 'speed',
+				'name' => __('Time for each transition in ms', 'photonic'),
+				'type' => 'text',
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
 		),
 	),
 	'picasa' => array(
 		'name' => __('Picasa', 'photonic'),
+		'prelude' => __('Documentation: <a href="https://aquoid.com/plugins/photonic/picasa/" target="_blank">Overall</a> | <a href="https://aquoid.com/plugins/photonic/picasa/picasa-photos/" target="_blank">Photos</a> | <a href="https://aquoid.com/plugins/photonic/picasa/picasa-albums/" target="_blank">Albums</a>', 'photonic'),
 		'fields' => array(
 			array(
 				'id' => 'user_id',
@@ -322,29 +439,363 @@ $fields = array(
 
 			array(
 				'id' => 'album',
-				'name' => __('Album', 'photonic')."</a>",
+				'name' => __('Album', 'photonic'),
 				'type' => 'text',
+			),
+
+			array(
+				'id' => 'access',
+				'name' => __('Displayed Access Levels', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'public,protected,private' => __('Show all public, protected and private albums', 'photonic'),
+					'public' => __('Show public albums only', 'photonic'),
+					'protected' => __('Show protected albums only', 'photonic'),
+					'public,protected' => __('Show public and protected albums', 'photonic'),
+					'protected,private' => __('Show protected and private albums', 'photonic'),
+					'public,private' => __('Show public and private albums', 'photonic'),
+				),
+				'std' => 'public',
+				'hint' => __('If "Display" is "Albums" you can decide to show public, private (Picasa only) or protected (Google Photos only) albums. You can use the <code>album</code> or <code>filter</code> attributes to filter the content further. See <a href="https://aquoid.com/plugins/photonic/picasa/picasa-albums/">here</a> for more details.', 'photonic')
+			),
+
+			array(
+				'id' => 'filter',
+				'name' => __('Filter', 'photonic'),
+				'type' => 'text',
+				'hint' => __('If "Display" is "Albums" and you provide a comma-separated list of values here, these entities will be included / excluded based on the next option. Useful if you want to display thumbnails for certain albums only, ignored if an album id is provided above', 'photonic')
+			),
+
+			array(
+				'id' => 'filter_type',
+				'name' => __('Filter Type', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'include' => __('Include above list in results', 'photonic'),
+					'exclude' => __('Exclude above list from results', 'photonic'),
+				),
+			),
+
+			array(
+				'id' => 'media',
+				'name' => __('Media to Show', 'photonic'),
+				'type' => 'select',
+				'options' => Photonic::media_options(),
+				'std' => $photonic_picasa_media,
+			),
+
+			array(
+				'id' => 'protection',
+				'name' => __('Protection for Private Albums', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'none' => __('None - visitors see albums without providing the authkey', 'photonic'),
+					'authkey' => __('Authkey - visitors are prompted for the authkey', 'photonic'),
+				),
+				'std' => 'none',
+				'hint' => __('If "Display" is "Albums" and "Displayed Access Levels" includes "private", you can opt to prompt your users for an <code>authkey</code> before they see the photos in your album. See <a href="https://aquoid.com/plugins/photonic/picasa/picasa-albums/">here</a> for more details.', 'photonic')
 			),
 
 			array(
 				'id' => 'max_results',
-				'name' => __('Number of photos to show', 'photonic')."</a>",
+				'name' => __('Number of photos / albums to show', 'photonic'),
+				'type' => 'text',
+				'alt_id' => 'count',
+			),
+
+			array(
+				'id' => 'more',
+				'name' => __('"More" button text', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Will show a "More" button with the specified text if the number of photos / albums is higher than the above entry. Leave blank to show no button', 'photonic'),
+			),
+
+			array(
+				'id' => 'photo_count',
+				'name' => __('Number of photos to show in overlaid popup', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Applicable for pagination if <strong>Photonic &rarr; Settings &rarr; Generic Options &rarr; Overlaid Popup Panel &rarr; Enable Interim Popup for Album Thumbnails</strong> is selected. Leave blank to show maximum allowed photos.', 'photonic'),
+			),
+
+			array(
+				'id' => 'photo_more',
+				'name' => __('"More" button text in overlaid popup', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Applicable for pagination if <strong>Photonic &rarr; Settings &rarr; Generic Options &rarr; Overlaid Popup Panel &rarr; Enable Interim Popup for Album Thumbnails</strong> is selected. Will show a "More" button with the specified text if the number of photos is higher than the above entry. Leave blank to show no button.', 'photonic'),
+			),
+
+			array(
+				'id' => 'layout',
+				'name' => __('Layout', 'photonic'),
+				'type' => 'select',
+				'options' => Photonic::layout_options(),
+				'hint' => __('The first four options trigger a slideshow, the rest trigger a lightbox.', 'photonic'),
+				'std' => $layout,
+			),
+
+			array(
+				'id' => 'caption',
+				'name' => __('Photo title / caption', 'photonic'),
+				'type' => 'select',
+				'options' => Photonic::title_caption_options(),
+				'std' => $photonic_picasa_use_desc,
+				'hint' => __('This will be used as the title for your photos.', 'photonic'),
+			),
+
+			array(
+				'id' => 'thumb_size',
+				'name' => __('Thumbnail size', 'photonic'),
+				'type' => 'text',
+				'std' => 72,
+				'hint' => __('In pixels, only applicable to square and circular thumbnails. Permitted values: 32, 48, 64, 72, 104, 144, 150, 160. To get a cropped thumbnail, append a <code>c</code> to the size, e.g. 104c, and to get an uncropped thumbnail, append a <code>u</code> to the size, e.g. 104u.', 'photonic')
+			),
+
+			array(
+				'id' => 'main_size',
+				'name' => __('Main image size', 'photonic'),
+				'type' => 'text',
+				'std' => 1600,
+				'hint' => __('In pixels. Permitted values: 94, 110, 128, 200, 220, 288, 320, 400, 512, 576, 640, 720, 800, 912, 1024, 1152, 1280, 1440, 1600. These are uncropped. To get a cropped thumbnail, append a <code>c</code> to the size, e.g. 1600c.', 'photonic')
+			),
+
+			array(
+				'id' => 'fx',
+				'name' => __('Slideshow Effects', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'fade' => __('Fade', 'photonic'),
+					'slide' => __('Slide', 'photonic'),
+				),
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
+
+			array(
+				'id' => 'controls',
+				'name' => __('Slideshow Controls', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'hide' => __('Hide', 'photonic'),
+					'show' => __('Show', 'photonic'),
+				),
+				'hint' => __('Shows Previous and Next buttons on the slideshow.', 'photonic'),
+			),
+
+			array(
+				'id' => 'timeout',
+				'name' => __('Time between slides in ms', 'photonic'),
+				'type' => 'text',
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
+
+			array(
+				'id' => 'speed',
+				'name' => __('Time for each transition in ms', 'photonic'),
+				'type' => 'text',
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
+		),
+	),
+
+	'google' => array(
+		'name' => __('Google Photos', 'photonic'),
+		'prelude' => __('Documentation: <a href="https://aquoid.com/plugins/photonic/google-photos/" target="_blank">Overall</a> | <a href="https://aquoid.com/plugins/photonic/google-photos/photos/" target="_blank">Photos</a> | <a href="https://aquoid.com/plugins/photonic/google-photos/albums/" target="_blank">Albums</a>', 'photonic'),
+		'fields' => array(
+			array(
+				'id' => 'view',
+				'name' => __('Display', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'albums' => __('Albums', 'photonic'),
+					'photos' => __('Photos', 'photonic'),
+				),
+				'hint' => __('Pick "Albums" if you want to display a collection of albums. Pick "Photos" if you want to display photos from a single album or from your photo-stream.', 'photonic')
+			),
+
+			array(
+				'id' => 'album_id',
+				'name' => __('Album', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Applicable if "Display" is "Photos" and you want to show photos from an album. See <a href="https://aquoid.com/plugins/photonic/google-photos/albums/">here</a> for more details.', 'photonic')
+			),
+
+			array(
+				'id' => 'access',
+				'name' => __('Displayed Access Levels', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'all' => __('Show all shared and not shared albums', 'photonic'),
+					'shared' => __('Only show shared albums', 'photonic'),
+					'not-shared' => __('Only show albums not shared', 'photonic'),
+				),
+				'std' => '',
+				'hint' => __('If "Display" is "Albums" you can decide to show shared or not-shared albums. See <a href="https://aquoid.com/plugins/photonic/google-photos/albums/">here</a> for more details.', 'photonic')
+			),
+
+			array(
+				'id' => 'filter',
+				'name' => __('Album Filter', 'photonic'),
+				'type' => 'text',
+				'hint' => __('If "Display" is "Albums" and you provide a comma-separated list of values here, these entities will be included / excluded based on the next option. Useful if you want to display thumbnails for certain albums only, ignored if an album id is provided above', 'photonic')
+			),
+
+			array(
+				'id' => 'filter_type',
+				'name' => __('Album Filter Type', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'include' => __('Include above list in results', 'photonic'),
+					'exclude' => __('Exclude above list from results', 'photonic'),
+				),
+			),
+
+			array(
+				'id' => 'date_filters',
+				'name' => __('Date Filters', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Applicable only if "Display" is "Photos". You can provide a comma-separated list of dates and ranges in the format <code>Y/M/D</code> or <code>Y/M/D-Y/M/D</code>. See <a href="https://aquoid.com/plugins/photonic/google-photos/photos/#filtering-photos">here</a> for documentation.', 'photonic')
+			),
+
+			array(
+				'id' => 'content_filters',
+				'name' => __('Content Filters', 'photonic'),
+				'type' => 'text',
+				'hint' => sprintf(__('Applicable only if "Display" is "Photos". You can provide a comma-separated list of categories from %s. See <a href="https://aquoid.com/plugins/photonic/google-photos/photos/#filtering-photos">here</a> for documentation.', 'photonic'), 'NONE, LANDSCAPES, RECEIPTS, CITYSCAPES, LANDMARKS, SELFIES, PEOPLE, PETS, WEDDINGS, BIRTHDAYS, DOCUMENTS, TRAVEL, ANIMALS, FOOD, SPORT, NIGHT, PERFORMANCES, WHITEBOARDS, SCREENSHOTS, UTILITY')
+			),
+
+			array(
+				'id' => 'media',
+				'name' => __('Media to Show', 'photonic'),
+				'type' => 'select',
+				'options' => Photonic::media_options(),
+				'std' => $photonic_google_media,
+			),
+
+			array(
+				'id' => 'count',
+				'name' => __('Number of photos / albums to show', 'photonic'),
 				'type' => 'text',
 			),
 
 			array(
-				'id' => 'thumbsize',
-				'name' => __('Thumbnail size', 'photonic'),
+				'id' => 'more',
+				'name' => __('"More" button text', 'photonic'),
 				'type' => 'text',
-				'std' => 75,
-				'hint' => __('In pixels', 'photonic')
+				'hint' => __('Will show a "More" button with the specified text if the number of photos / albums is higher than the above entry. Leave blank to show no button', 'photonic'),
 			),
 
+			array(
+				'id' => 'photo_count',
+				'name' => __('Number of photos to show in overlaid popup', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Applicable for pagination if <strong>Photonic &rarr; Settings &rarr; Generic Options &rarr; Overlaid Popup Panel &rarr; Enable Interim Popup for Album Thumbnails</strong> is selected. Leave blank to show maximum allowed photos.', 'photonic'),
+			),
+
+			array(
+				'id' => 'photo_more',
+				'name' => __('"More" button text in overlaid popup', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Applicable for pagination if <strong>Photonic &rarr; Settings &rarr; Generic Options &rarr; Overlaid Popup Panel &rarr; Enable Interim Popup for Album Thumbnails</strong> is selected. Will show a "More" button with the specified text if the number of photos is higher than the above entry. Leave blank to show no button.', 'photonic'),
+			),
+
+			array(
+				'id' => 'layout',
+				'name' => __('Layout', 'photonic'),
+				'type' => 'select',
+				'options' => Photonic::layout_options(),
+				'hint' => __('The first four options trigger a slideshow, the rest trigger a lightbox.', 'photonic'),
+				'std' => $layout,
+			),
+
+			array(
+				'id' => 'thumb_size',
+				'name' => __('Thumbnail size', 'photonic'),
+				'type' => 'text',
+				'std' => 150,
+				'hint' => __('In pixels, only applicable to square and circular thumbnails. Permitted values: 32, 48, 64, 72, 104, 144, 150, 160.', 'photonic')
+			),
+
+			array(
+				'id' => 'crop_thumb',
+				'name' => __('Crop Thumbnail', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'crop' => __('Crop the thumbnail', 'photonic'),
+					'no-crop' => __('Do not crop the thumbnail', 'photonic'),
+				),
+				'std' => 'crop',
+				'hint' => __('Cropping the thumbnail presents you with a square thumbnail.', 'photonic')
+			),
+
+			array(
+				'id' => 'main_size',
+				'name' => __('Main image size', 'photonic'),
+				'type' => 'text',
+				'std' => 1600,
+				'hint' => __('Numeric values between 1 and 16383, both inclusive.', 'photonic')
+			),
+
+			array(
+				'id' => 'tile_size',
+				'name' => __('Tile image size', 'photonic'),
+				'type' => 'text',
+				'std' => 1600,
+				'hint' => __('Numeric values between 1 and 16383, both inclusive. Leave blank to use the "Main image size".', 'photonic')
+			),
+
+			array(
+				'id' => 'fx',
+				'name' => __('Slideshow Effects', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'fade' => __('Fade', 'photonic'),
+					'slide' => __('Slide', 'photonic'),
+				),
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
+
+			array(
+				'id' => 'controls',
+				'name' => __('Slideshow Controls', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'hide' => __('Hide', 'photonic'),
+					'show' => __('Show', 'photonic'),
+				),
+				'hint' => __('Shows Previous and Next buttons on the slideshow.', 'photonic'),
+			),
+
+			array(
+				'id' => 'timeout',
+				'name' => __('Time between slides in ms', 'photonic'),
+				'type' => 'text',
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
+
+			array(
+				'id' => 'speed',
+				'name' => __('Time for each transition in ms', 'photonic'),
+				'type' => 'text',
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
 		),
 	),
+
 	'smugmug' => array(
 		'name' => __('SmugMug', 'photonic'),
-		'prelude' => __('You have to define your SmugMug API Key under Settings &rarr; Photonic &rarr; SmugMug &rarr; SmugMug Settings', 'photonic'),
+		'prelude' => __('You have to define your SmugMug API Key under Photonic &rarr; Settings &rarr; SmugMug &rarr; SmugMug Settings.<br/> Documentation: <a href="https://aquoid.com/plugins/photonic/smugmug/" target="_blank">Overall</a> | <a href="https://aquoid.com/plugins/photonic/smugmug/smugmug-photos/" target="_blank">Photos</a> | <a href="https://aquoid.com/plugins/photonic/smugmug/smugmug-albums/" target="_blank">Albums</a> | <a href="https://aquoid.com/plugins/photonic/smugmug/folders/" target="_blank">Folders</a> | <a href="https://aquoid.com/plugins/photonic/smugmug/smugmug-tree/" target="_blank">User Tree</a>', 'photonic'),
 		'fields' => array(
 			array(
 				'id' => 'view',
@@ -354,6 +805,7 @@ $fields = array(
 					'tree' => __('Tree', 'photonic'),
 					'albums' => __('All albums', 'photonic'),
 					'album' => __('Single Album', 'photonic'),
+					'folder' => __('Single Folder', 'photonic'),
 				),
 				'req' => true,
 			),
@@ -366,10 +818,136 @@ $fields = array(
 			),
 
 			array(
-				'id' => 'album',
-				'name' => __('Album', 'photonic')."</a>",
+				'id' => 'site_password',
+				'name' => __('Site Password', 'photonic'),
 				'type' => 'text',
-				'hint' => __('Required if you are showing "Single Album" above. If your gallery URL is http://nick-name.smugmug.com/gallery/<b>abcdefgh_123456</b>, this is <b>abcdefgh_123456</b>', 'photonic')
+				'hint' => __('Required if your entire SmugMug site is password-protected. See documentation link for "Albums" above.', 'photonic')
+			),
+
+			array(
+				'id' => 'album',
+				'name' => __('Album', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Required if you are showing "Single Album" above. To find this, go to <i>Photonic &rarr; Helpers &rarr; SmugMug</i> on your dashboard and find the albums for your nickname.', 'photonic')
+			),
+
+			array(
+				'id' => 'filter',
+				'name' => __('Filter', 'photonic'),
+				'type' => 'text',
+				'hint' => __('If "Display" is "All albums" and you provide a comma-separated list of album keys here, these entities will be included / excluded based on the next option. Useful if you want to display thumbnails for certain albums only, ignored if an album is provided above', 'photonic')
+			),
+
+			array(
+				'id' => 'filter_type',
+				'name' => __('Filter Type', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'include' => __('Include above list in results', 'photonic'),
+					'exclude' => __('Exclude above list from results', 'photonic'),
+				),
+			),
+
+			array(
+				'id' => 'text',
+				'name' => __('Photos with text', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Will show photos with the specified text. Leave blank for no filter.', 'photonic')
+			),
+
+			array(
+				'id' => 'keywords',
+				'name' => __('Photos with keywords', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Will show photos with the specified keywords. Leave blank for no filter.', 'photonic')
+			),
+
+			array(
+				'id' => 'media',
+				'name' => __('Media to Show', 'photonic'),
+				'type' => 'select',
+				'options' => Photonic::media_options(),
+				'std' => $photonic_smug_media,
+			),
+
+			array(
+				'id' => 'password',
+				'name' => __('Album Password', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Required if you are showing "Single Album" above, and if your album is password-protected. See documentation link for "Photos" above.', 'photonic')
+			),
+
+			array(
+				'id' => 'album_sort_order',
+				'name' => __('Album sort order', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'Album Settings' => __('Album Settings', 'photonic'),
+					'Position' => __('Position', 'photonic'),
+					'Last Updated (Descending)' => __('Last Updated (Descending)', 'photonic'),
+					'Last Updated (Ascending)' => __('Last Updated (Ascending)', 'photonic'),
+					'Date Added (Descending)' => __('Date Added (Descending)', 'photonic'),
+					'Date Added (Ascending)' => __('Date Added (Ascending)', 'photonic'),
+				),
+				'std' => 'Album Settings',
+				'hint' => __('If you are displaying multiple albums the results are sorted by this parameter', 'photonic'),
+			),
+
+			array(
+				'id' => 'folder',
+				'name' => __('Folder', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Required if you are showing "Single Folder" above. To find this, go to <i>Photonic &rarr; Helpers &rarr; SmugMug</i> on your dashboard and find the folders for your nickname.', 'photonic')
+			),
+
+			array(
+				'id' => 'layout',
+				'name' => __('Layout', 'photonic'),
+				'type' => 'select',
+				'options' => Photonic::layout_options(),
+				'hint' => __('The first four options trigger a slideshow, the rest trigger a lightbox.', 'photonic'),
+				'std' => $layout,
+			),
+
+			array(
+				'id' => 'caption',
+				'name' => __('Photo title / caption', 'photonic'),
+				'type' => 'select',
+				'options' => Photonic::title_caption_options(),
+				'std' => $photonic_smug_title_caption,
+				'hint' => __('This will be used as the title for your photos.', 'photonic'),
+			),
+
+			array(
+				'id' => 'thumb_size',
+				'name' => __('Thumbnail size', 'photonic'),
+				'type' => 'select',
+				'std' => $photonic_smug_thumb_size,
+				"options" => array(
+					'Tiny' => __('Tiny', 'photonic'),
+					'Thumb' => __('Thumb', 'photonic'),
+					'Small' => __('Small', 'photonic'),
+				),
+				'hint' => __('In pixels, only applicable to square and circular thumbnails', 'photonic')
+			),
+
+			array(
+				'id' => 'main_size',
+				'name' => __('Main image size', 'photonic'),
+				'type' => 'select',
+				'std' => $photonic_smug_main_size,
+				'options' => array(
+					'4K' => __('4K (not always available)', 'photonic'),
+					'5K' => __('5K (not always available)', 'photonic'),
+					'Medium' => __('Medium', 'photonic'),
+					'Original' => __('Original (not always available)', 'photonic'),
+					'Large' => __('Large', 'photonic'),
+					'Largest' => __('Largest available', 'photonic'),
+					'XLarge' => __('XLarge (not always available)', 'photonic'),
+					'X2Large' => __('X2Large (not always available)', 'photonic'),
+					'X3Large' => __('X3Large (not always available)', 'photonic'),
+				),
 			),
 
 			array(
@@ -377,12 +955,116 @@ $fields = array(
 				'name' => __('Number of columns', 'photonic'),
 				'type' => 'text',
 			),
+
+			array(
+				'id' => 'count',
+				'name' => __('Number of photos / albums to show', 'photonic'),
+				'type' => 'text',
+			),
+
+			array(
+				'id' => 'more',
+				'name' => __('"More" button text', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Will show a "More" button with the specified text if the number of photos / albums is higher than the above entry. Leave blank to show no button', 'photonic'),
+			),
+
+			array(
+				'id' => 'photo_count',
+				'name' => __('Number of photos to show in overlaid popup', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Applicable for pagination if <strong>Photonic &rarr; Settings &rarr; Generic Options &rarr; Overlaid Popup Panel &rarr; Enable Interim Popup for Album Thumbnails</strong> is selected. Leave blank to show maximum allowed photos.', 'photonic'),
+			),
+
+			array(
+				'id' => 'photo_more',
+				'name' => __('"More" button text in overlaid popup', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Applicable for pagination if <strong>Photonic &rarr; Settings &rarr; Generic Options &rarr; Overlaid Popup Panel &rarr; Enable Interim Popup for Album Thumbnails</strong> is selected. Will show a "More" button with the specified text if the number of photos is higher than the above entry. Leave blank to show no button.', 'photonic'),
+			),
+
+			array(
+				'id' => 'fx',
+				'name' => __('Slideshow Effects', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'fade' => __('Fade', 'photonic'),
+					'slide' => __('Slide', 'photonic'),
+				),
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
+
+			array(
+				'id' => 'controls',
+				'name' => __('Slideshow Controls', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'hide' => __('Hide', 'photonic'),
+					'show' => __('Show', 'photonic'),
+				),
+				'hint' => __('Shows Previous and Next buttons on the slideshow.', 'photonic'),
+			),
+
+			array(
+				'id' => 'timeout',
+				'name' => __('Time between slides in ms', 'photonic'),
+				'type' => 'text',
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
+
+			array(
+				'id' => 'speed',
+				'name' => __('Time for each transition in ms', 'photonic'),
+				'type' => 'text',
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
 		),
 	),
 	'500px' => array(
 		'name' => __('500px', 'photonic'),
-		'prelude' => __('You have to define your Consumer API Key under Settings &rarr; Photonic &rarr; 500px &rarr; 500px Settings', 'photonic'),
+		'prelude' => __('You have to define your Consumer API Key under Photonic &rarr; Settings &rarr; 500px &rarr; 500px Settings.<br/> Documentation: <a href="https://aquoid.com/plugins/photonic/500px/" target="_blank">500px</a>', 'photonic'),
 		'fields' => array(
+			array(
+				'id' => 'view',
+				'name' => __('Display', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'photos' => __('Photos', 'photonic'),
+					'collections' => __('Collections', 'photonic'),
+				),
+				'req' => true,
+			),
+
+			array(
+				'id' => 'view_id',
+				'name' => __('Object ID', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Required if you are displaying a single photo', 'photonic')
+			),
+
+			array(
+				'id' => 'filter',
+				'name' => __('Filter', 'photonic'),
+				'type' => 'text',
+				'hint' => __('If "Display" is "Collections" and you provide a comma-separated list of values here, these entities will be included / excluded based on the next option. Useful if you want to display only certain collections', 'photonic')
+			),
+
+			array(
+				'id' => 'filter_type',
+				'name' => __('Filter Type', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'include' => __('Include above list in results', 'photonic'),
+					'exclude' => __('Exclude above list from results', 'photonic'),
+				),
+			),
+
 			array(
 				'id' => 'feature',
 				'name' => __('Feature', 'photonic'),
@@ -399,6 +1081,7 @@ $fields = array(
 					'user_favorites' => __("Specified user's favourite photos", 'photonic'),
 				),
 				'req' => true,
+				'hint' => __('Required if you are displaying photos', 'photonic')
 			),
 
 			array(
@@ -417,11 +1100,12 @@ $fields = array(
 
 			array(
 				'id' => 'only',
-				'name' => __('Category', 'photonic'),
+				'name' => __('Include category', 'photonic'),
 				'type' => 'select',
 				'options' => array(
 					'' => __('All Categories', 'photonic'),
 					'Abstract' => __('Abstract', 'photonic'),
+					'Aerial' => __('Aerial', 'photonic'),
 					'Animals' => __('Animals', 'photonic'),
 					'Black and White' => __("Black and White", 'photonic'),
 					'Celebrities' => __('Celebrities', 'photonic'),
@@ -437,14 +1121,56 @@ $fields = array(
 					'Landscapes' => __("Landscapes", 'photonic'),
 					'Macro' => __("Macro", 'photonic'),
 					'Nature' => __("Nature", 'photonic'),
+					'Night' => __("Night", 'photonic'),
 					'Nude' => __("Nude", 'photonic'),
 					'People' => __("People", 'photonic'),
 					'Performing Arts' => __("Performing Arts", 'photonic'),
 					'Sport' => __("Sport", 'photonic'),
 					'Still Life' => __("Still Life", 'photonic'),
 					'Street' => __("Street", 'photonic'),
+					'Transportation' => __("Transportation", 'photonic'),
 					'Travel' => __("Travel", 'photonic'),
 					'Underwater' => __("Underwater", 'photonic'),
+					'Urban Exploration' => __("Urban Exploration", 'photonic'),
+					'Wedding' => __("Wedding", 'photonic'),
+				),
+			),
+
+			array(
+				'id' => 'exclude',
+				'name' => __('Exclude category', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => __('No Category', 'photonic'),
+					'Abstract' => __('Abstract', 'photonic'),
+					'Aerial' => __('Aerial', 'photonic'),
+					'Animals' => __('Animals', 'photonic'),
+					'Black and White' => __("Black and White", 'photonic'),
+					'Celebrities' => __('Celebrities', 'photonic'),
+					'City and Architecture' => __('Fresh today', 'photonic'),
+					'Commercial' => __('Commercial', 'photonic'),
+					'Concert' => __("Concert", 'photonic'),
+					'Family' => __("Family", 'photonic'),
+					'Fashion' => __("Fashion", 'photonic'),
+					'Film' => __("Film", 'photonic'),
+					'Fine Art' => __("Fine Art", 'photonic'),
+					'Food' => __("Food", 'photonic'),
+					'Journalism' => __("Journalism", 'photonic'),
+					'Landscapes' => __("Landscapes", 'photonic'),
+					'Macro' => __("Macro", 'photonic'),
+					'Nature' => __("Nature", 'photonic'),
+					'Night' => __("Night", 'photonic'),
+					'Nude' => __("Nude", 'photonic'),
+					'People' => __("People", 'photonic'),
+					'Performing Arts' => __("Performing Arts", 'photonic'),
+					'Sport' => __("Sport", 'photonic'),
+					'Still Life' => __("Still Life", 'photonic'),
+					'Street' => __("Street", 'photonic'),
+					'Transportation' => __("Transportation", 'photonic'),
+					'Travel' => __("Travel", 'photonic'),
+					'Underwater' => __("Underwater", 'photonic'),
+					'Urban Exploration' => __("Urban Exploration", 'photonic'),
+					'Wedding' => __("Wedding", 'photonic'),
 				),
 			),
 
@@ -456,15 +1182,86 @@ $fields = array(
 					'created_at' => __('Created at', 'photonic'),
 					'rating' => __('Rating', 'photonic'),
 					'times_viewed' => __('Times viewed', 'photonic'),
+					'votes_count' => __('Votes count', 'photonic'),
+					'favorites_count' => __('Favorites count', 'photonic'),
+					'comments_count' => __('Comments count', 'photonic'),
 					'taken_at' => __('Taken at', 'photonic'),
 				),
 			),
 
 			array(
+				'id' => 'tag',
+				'name' => __('Tags', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Comma-separated list of tags (above criteria will not apply)', 'photonic')
+			),
+
+			array(
+				'id' => 'term',
+				'name' => __('Search terms', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Comma-separated list of search terms (above criteria will not apply)', 'photonic')
+			),
+
+			array(
 				'id' => 'rpp',
-				'name' => __('Number of photos to show', 'photonic')."</a>",
+				'name' => __('Number of photos to show', 'photonic'),
 				'type' => 'text',
 				'std' => 20,
+				'alt_id' => 'count',
+			),
+
+			array(
+				'id' => 'more',
+				'name' => __('"More" button text', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Will show a "More" button with the specified text if the number of photos is higher than the above entry. Leave blank to show no button', 'photonic'),
+			),
+
+			array(
+				'id' => 'photo_count',
+				'name' => __('Number of photos to show in overlaid popup', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Applicable for pagination if <strong>Photonic &rarr; Settings &rarr; Generic Options &rarr; Overlaid Popup Panel &rarr; Enable Interim Popup for Album Thumbnails</strong> is selected. Leave blank to show maximum allowed photos.', 'photonic'),
+			),
+
+			array(
+				'id' => 'photo_more',
+				'name' => __('"More" button text in overlaid popup', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Applicable for pagination if <strong>Photonic &rarr; Settings &rarr; Generic Options &rarr; Overlaid Popup Panel &rarr; Enable Interim Popup for Album Thumbnails</strong> is selected. Will show a "More" button with the specified text if the number of photos is higher than the above entry. Leave blank to show no button.', 'photonic'),
+			),
+
+			array(
+				'id' => 'date_from',
+				'name' => __('From this date', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Format: yyyy-mm-dd. Use this to filter from a certain date (this is the start date). Set "Sort by" to "Created at"!', 'photonic'),
+			),
+
+			array(
+				'id' => 'date_to',
+				'name' => __('To this date', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Format: yyyy-mm-dd. Use this to filter to a certain date (this is the end date). Set "Sort by" to "Created at"!', 'photonic'),
+			),
+
+			array(
+				'id' => 'layout',
+				'name' => __('Layout', 'photonic'),
+				'type' => 'select',
+				'options' => Photonic::layout_options(),
+				'hint' => __('The first four options trigger a slideshow, the rest trigger a lightbox.', 'photonic'),
+				'std' => $layout,
+			),
+
+			array(
+				'id' => 'caption',
+				'name' => __('Photo title / caption', 'photonic'),
+				'type' => 'select',
+				'options' => Photonic::title_caption_options(),
+				'std' => $photonic_500px_title_caption,
+				'hint' => __('This will be used as the title for your photos.', 'photonic'),
 			),
 
 			array(
@@ -475,7 +1272,12 @@ $fields = array(
 					'1' => __('75 &times; 75 px', 'photonic'),
 					'2' => __('140 &times; 140 px', 'photonic'),
 					'3' => __('280 &times; 280 px', 'photonic'),
+					'100' => __('100 &times; 100 px', 'photonic'),
+					'200' => __('200 &times; 200 px', 'photonic'),
+					'440' => __('440 &times; 440 px', 'photonic'),
+					'600' => __('600 &times; 600 px', 'photonic'),
 				),
+				'hint' => __('In pixels, only applicable to square and circular thumbnails', 'photonic')
 			),
 
 			array(
@@ -484,7 +1286,11 @@ $fields = array(
 				'type' => 'select',
 				'options' => array(
 					'3' => __('280 &times; 280 px', 'photonic'),
-					'4' => __('Full size', 'photonic'),
+					'4' => __('900px on the longest edge', 'photonic'),
+					'5' => __('1170px on the longest edge', 'photonic'),
+					'1080' => __('1080px on the longest edge', 'photonic'),
+					'1600' => __('1600px on the longest edge', 'photonic'),
+					'2048' => __('2048px on the longest edge', 'photonic'),
 				),
 			),
 
@@ -494,69 +1300,427 @@ $fields = array(
 				'type' => 'text',
 			),
 
+			array(
+				'id' => 'fx',
+				'name' => __('Slideshow Effects', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'fade' => __('Fade', 'photonic'),
+					'slide' => __('Slide', 'photonic'),
+				),
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
+
+			array(
+				'id' => 'controls',
+				'name' => __('Slideshow Controls', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'hide' => __('Hide', 'photonic'),
+					'show' => __('Show', 'photonic'),
+				),
+				'hint' => __('Shows Previous and Next buttons on the slideshow.', 'photonic'),
+			),
+
+			array(
+				'id' => 'timeout',
+				'name' => __('Time between slides in ms', 'photonic'),
+				'type' => 'text',
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
+
+			array(
+				'id' => 'speed',
+				'name' => __('Time for each transition in ms', 'photonic'),
+				'type' => 'text',
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
+		),
+	),
+
+	'zenfolio' => array(
+		'name' => __('Zenfolio', 'photonic'),
+		'prelude' => __('Documentation: <a href="https://aquoid.com/plugins/photonic/zenfolio/" target="_blank">Overall</a> | <a href="https://aquoid.com/plugins/photonic/zenfolio/photos/" target="_blank">Photos</a> | <a href="https://aquoid.com/plugins/photonic/zenfolio/photosets/" target="_blank">Photosets</a> | <a href="https://aquoid.com/plugins/photonic/zenfolio/groups/" target="_blank">Groups</a> | <a href="https://aquoid.com/plugins/photonic/zenfolio/group-hierarchy/" target="_blank">Group Hierarchy</a>', 'photonic'),
+		'fields' => array(
+			array(
+				'id' => 'view',
+				'name' => __('Display', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'photos' => __('Photos', 'photonic'),
+					'photosets' => __('Photosets', 'photonic'),
+					'hierarchy' => __('Group Hierarchy', 'photonic'),
+					'group' => __('Group', 'photonic'),
+				),
+				'req' => true,
+			),
+
+			array(
+				'id' => 'object_id',
+				'name' => __('Object ID', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Can be set if "Display" is <code>Photos</code>, <code>Photosets</code> or <code>Group</code>.', 'photonic'),
+			),
+
+			array(
+				'id' => 'text',
+				'name' => __('Search by text', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Can be set if "Display" is <code>Photos</code> or <code>Photosets</code>.', 'photonic'),
+			),
+
+			array(
+				'id' => 'category_code',
+				'name' => __('Search by category code', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Can be set if "Display" is <code>Photos</code> or <code>Photosets</code>.', 'photonic').'<br/>'.__('See the list of categories from <em>Photonic &rarr; Helpers</em>.', 'photonic'),
+			),
+
+			array(
+				'id' => 'sort_order',
+				'name' => __('Search results sort order', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'Date' => __('Date', 'photonic'),
+					'Popularity' => __('Popularity', 'photonic'),
+					'Rank' => __('Rank (for searching by text only)', 'photonic'),
+				),
+				'hint' => __('Can be set if "Display" is <code>Photos</code> or <code>Photosets</code>.', 'photonic').'<br/>'.__('For search results only.', 'photonic'),
+			),
+
+			array(
+				'id' => 'photoset_type',
+				'name' => __('Photoset type', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'Gallery' => __('Gallery', 'photonic'),
+					'Collection' => __('Collection', 'photonic'),
+				),
+				'hint' => __('Mandatory if Display = Photosets and no Object ID is specified.', 'photonic'),
+			),
+
+			array(
+				'id' => 'kind',
+				'name' => __('Display classification', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'popular' => __('Popular', 'photonic'),
+					'recent' => __('Recent', 'photonic'),
+				),
+				'hint' => __('Mandatory if "Display" is <code>Photos</code> or <code>Photosets</code>, and none of the other criteria above is specified.', 'photonic'),
+			),
+
+			array(
+				'id' => 'login_name',
+				'name' => __('Login name', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Mandatory if Display = Hierarchy', 'photonic'),
+			),
+
+			array(
+				'id' => 'media',
+				'name' => __('Media to Show', 'photonic'),
+				'type' => 'select',
+				'options' => Photonic::media_options(),
+				'std' => $photonic_zenfolio_media,
+			),
+
+			array(
+				'id' => 'layout',
+				'name' => __('Layout', 'photonic'),
+				'type' => 'select',
+				'options' => Photonic::layout_options(),
+				'hint' => __('The first four options trigger a slideshow, the rest trigger a lightbox.', 'photonic'),
+				'std' => $layout,
+			),
+
+			array(
+				'id' => 'structure',
+				'name' => __('Group / Hierarchy structure', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'flat' => __('All photosets shown in single level', 'photonic'),
+					'nested' => __('Photosets shown nested within groups', 'photonic'),
+				),
+				'hint' => __('Applicable if groups or hierarchies are being displayed.', 'photonic'),
+			),
+
+			array(
+				'id' => 'caption',
+				'name' => __('Photo title / caption', 'photonic'),
+				'type' => 'select',
+				'options' => Photonic::title_caption_options(),
+				'std' => $photonic_zenfolio_title_caption,
+				'hint' => __('This will be used as the title for your photos.', 'photonic'),
+			),
+
+			array(
+				'id' => 'thumb_size',
+				'name' => __('Thumbnail size', 'photonic'),
+				'type' => 'select',
+				'std' => $photonic_zenfolio_thumb_size,
+				"options" => array(
+					"1" => __("Square thumbnail, 60 &times; 60px, cropped square", 'photonic'),
+					"0" => __("Small thumbnail, upto 80 &times; 80px", 'photonic'),
+					"10" => __("Medium thumbnail, upto 120 &times; 120px", 'photonic'),
+					"11" => __("Large thumbnail, upto 120 &times; 120px", 'photonic'),
+					"2" => __("Small image, upto 400 &times; 400px", 'photonic'),
+				),
+				'hint' => __('In pixels, only applicable to square and circular thumbnails', 'photonic')
+			),
+
+			array(
+				'id' => 'main_size',
+				'name' => __('Main image size', 'photonic'),
+				'type' => 'select',
+				'std' => $photonic_zenfolio_main_size,
+				'options' => array(
+					'2' => __('Small image, upto 400 &times; 400px', 'photonic'),
+					'3' => __('Medium image, upto 580 &times; 450px', 'photonic'),
+					'4' => __('Large image, upto 800 &times; 630px', 'photonic'),
+					'5' => __('X-Large image, upto 1100 &times; 850px', 'photonic'),
+					'6' => __('XX-Large image, upto 1550 &times; 960px', 'photonic'),
+				),
+			),
+
+			array(
+				'id' => 'columns',
+				'name' => __('Number of columns', 'photonic'),
+				'type' => 'text',
+			),
+
+			array(
+				'id' => 'limit',
+				'name' => __('Number of photos to show', 'photonic'),
+				'type' => 'text',
+				'alt_id' => 'count',
+			),
+
+			array(
+				'id' => 'more',
+				'name' => __('"More" button text', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Will show a "More" button with the specified text if the number of photos is higher than the above entry. Leave blank to show no button', 'photonic'),
+			),
+
+			array(
+				'id' => 'photo_count',
+				'name' => __('Number of photos to show in overlaid popup', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Applicable for pagination if <strong>Photonic &rarr; Settings &rarr; Generic Options &rarr; Overlaid Popup Panel &rarr; Enable Interim Popup for Album Thumbnails</strong> is selected. Leave blank to show maximum allowed photos.', 'photonic'),
+			),
+
+			array(
+				'id' => 'photo_more',
+				'name' => __('"More" button text in overlaid popup', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Applicable for pagination if <strong>Photonic &rarr; Settings &rarr; Generic Options &rarr; Overlaid Popup Panel &rarr; Enable Interim Popup for Album Thumbnails</strong> is selected. Will show a "More" button with the specified text if the number of photos is higher than the above entry. Leave blank to show no button.', 'photonic'),
+			),
+
+			array(
+				'id' => 'fx',
+				'name' => __('Slideshow Effects', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'fade' => __('Fade', 'photonic'),
+					'slide' => __('Slide', 'photonic'),
+				),
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
+
+			array(
+				'id' => 'controls',
+				'name' => __('Slideshow Controls', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'hide' => __('Hide', 'photonic'),
+					'show' => __('Show', 'photonic'),
+				),
+				'hint' => __('Shows Previous and Next buttons on the slideshow.', 'photonic'),
+			),
+
+			array(
+				'id' => 'timeout',
+				'name' => __('Time between slides in ms', 'photonic'),
+				'type' => 'text',
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
+
+			array(
+				'id' => 'speed',
+				'name' => __('Time for each transition in ms', 'photonic'),
+				'type' => 'text',
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
+		),
+	),
+
+	'instagram' => array(
+		'name' => __('Instagram', 'photonic'),
+		'prelude' => __('You have to define your Instagram Client ID under Photonic &rarr; Settings &rarr; Instagram &rarr; Instagram Settings.<br/> Documentation: <a href="https://aquoid.com/plugins/photonic/instagram/" target="_blank">Instagram</a>', 'photonic'),
+		'fields' => array(
+			array(
+				'id' => 'view',
+				'name' => __('Display', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'recent' => __('Recent Photos', 'photonic'),
+					'search' => __('Search', 'photonic'),
+					'tag' => __('Tag', 'photonic'),
+					'location' => __('Location', 'photonic'),
+					'photo' => __('Single Photo', 'photonic'),
+				),
+				'req' => true,
+			),
+
+			array(
+				'id' => 'media_id',
+				'name' => __('Media ID', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Required if "Display" is set to "Single Photos".', 'photonic').'<br/>'.__('If your photo is at <code>https://instagram.com/p/ABcde5678fg/</code>, your media id is <code>ABcde5678fg</code>.', 'photonic')
+			),
+
+			array(
+				'id' => 'tag_name',
+				'name' => __('Tag', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Required if "Display" is set to "Tag"', 'photonic')
+			),
+
+			array(
+				'id' => 'lat',
+				'name' => __('Latitude', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Latitude and Longitude are required if "Display" = "Search"', 'photonic')
+			),
+
+			array(
+				'id' => 'lng',
+				'name' => __('Longitude', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Latitude and Longitude are required if "Display" = "Search"', 'photonic')
+			),
+
+			array(
+				'id' => 'location_id',
+				'name' => __('Location ID', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Required if "Display" is set to "Location".', 'photonic')
+			),
+
+			array(
+				'id' => 'layout',
+				'name' => __('Layout', 'photonic'),
+				'type' => 'select',
+				'options' => Photonic::layout_options(),
+				'hint' => __('The first four options trigger a slideshow, the rest trigger a lightbox.', 'photonic'),
+				'std' => $layout,
+			),
+
+			array(
+				'id' => 'thumb_size',
+				'name' => __('Thumbnail size', 'photonic'),
+				'type' => 'text',
+				'std' => 150,
+				'hint' => __('In pixels, only applicable to square and circular thumbnails', 'photonic')
+			),
+
+			array(
+				'id' => 'min_id',
+				'name' => __('Min Photo ID', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Use the min and max ID to reduce your matches for "Location" and "Tag" displays', 'photonic')
+			),
+
+			array(
+				'id' => 'max_id',
+				'name' => __('Max Photo ID', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Use the min and max ID to reduce your matches for "Location" and "Tag" displays', 'photonic')
+			),
+
+			array(
+				'id' => 'media',
+				'name' => __('Media to Show', 'photonic'),
+				'type' => 'select',
+				'options' => Photonic::media_options(),
+				'std' => $photonic_instagram_media,
+			),
+
+			array(
+				'id' => 'columns',
+				'name' => __('Number of columns', 'photonic'),
+				'type' => 'text',
+			),
+
+			array(
+				'id' => 'count',
+				'name' => __('Number of photos to show', 'photonic'),
+				'type' => 'text',
+			),
+
+			array(
+				'id' => 'more',
+				'name' => __('"More" button text', 'photonic'),
+				'type' => 'text',
+				'hint' => __('Will show a "More" button with the specified text if the number of photos is higher than the above entry. Leave blank to show no button', 'photonic'),
+			),
+
+			array(
+				'id' => 'fx',
+				'name' => __('Slideshow Effects', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'fade' => __('Fade', 'photonic'),
+					'slide' => __('Slide', 'photonic'),
+				),
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
+
+			array(
+				'id' => 'controls',
+				'name' => __('Slideshow Controls', 'photonic'),
+				'type' => 'select',
+				'options' => array(
+					'' => '',
+					'hide' => __('Hide', 'photonic'),
+					'show' => __('Show', 'photonic'),
+				),
+				'hint' => __('Shows Previous and Next buttons on the slideshow.', 'photonic'),
+			),
+
+			array(
+				'id' => 'timeout',
+				'name' => __('Time between slides in ms', 'photonic'),
+				'type' => 'text',
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
+
+			array(
+				'id' => 'speed',
+				'name' => __('Time for each transition in ms', 'photonic'),
+				'type' => 'text',
+				'std' => '',
+				'hint' => __('Applies to slideshows only', 'photonic')
+			),
 		),
 	),
 );
 
-$tab_list = '';
-$tab_fields = '';
-$field_list = array();
-$prelude = '';
-foreach ($fields as $tab => $field_group) {
-	$tab_list .= "<li><a href='".esc_url(add_query_arg(array('photonic-tab' => $tab)))."' class='".($tab == $selected_tab ? 'current' : '')."'>".esc_attr($field_group['name'])."</a> | </li>";
-	if ($tab == $selected_tab) {
-		$field_list = $field_group['fields'];
-		$prelude = isset($field_group['prelude']) ? $field_group['prelude'] : '';
-	}
-}
-
-echo "<form id='photonic-shortcode-form' method='post' action=''>";
-echo "<ul class='subsubsub'>";
-if (strlen($tab_list) > 8) {
-	$tab_list = substr($tab_list, 0, -8);
-}
-echo $tab_list;
-echo "</ul>";
-
-if (!empty($prelude)) {
-	echo "<p class='prelude'>"; print_r($prelude); echo "</p>";
-}
-
-echo "<table class='photonic-form'>";
-echo "<tr>";"</tr>";
-foreach ($field_list as $field) {
-	echo "<tr>";
-	echo "<th scope='row'>{$field['name']} ".(isset($field['req']) && $field['req'] ? '(*)' : '')." </th>";
-	switch ($field['type']) {
-		case 'text':
-			echo "<td><input type='text' name='{$field['id']}' value='".(isset($field['std']) ? $field['std'] : '')."'/></td>";
-			continue;
-		case 'select':
-			echo "<td><select name='{$field['id']}'>";
-			foreach ($field['options'] as $option_name => $option_value) {
-				echo "<option value='$option_name'>$option_value</option>";
-			}
-			echo "</select></td>";
-			continue;
-		case 'raw':
-			echo "<td>".$field['std']."</td>";
-			continue;
-	}
-	echo "<td class='hint'>".(isset($field['hint']) ? $field['hint'] : '')."</td>";
-	echo "</tr>";
-}
-echo "</table>";
-
-echo "<div class='preview'>";
-echo "<script type='text/javascript'></script>";
-echo "<h4>".__('Shortcode preview', 'photonic')."</h4>";
-echo "<pre class='html' id='photonic-preview' name='photonic-preview'></pre>";
-echo "<input type='hidden' id='photonic-shortcode' name='photonic-shortcode' />";
-echo "</div>";
-
-echo "<div class='button-panel'>";
-echo get_submit_button(__('Insert into post', 'photonic'), 'primary', 'photonic-submit', false);
-echo get_submit_button(__('Cancel', 'photonic'), 'delete', 'photonic-cancel', false);
-echo "</div>";
-echo "</form>";
-?>

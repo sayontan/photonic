@@ -6,13 +6,22 @@
  * @subpackage Extensions
  */
 
-class Photonic_500px_Processor extends Photonic_Processor {
+class Photonic_500px_Processor extends Photonic_OAuth1_Processor {
 	function __construct() {
 		parent::__construct();
-		global $photonic_500px_api_key, $photonic_500px_api_secret;
-		$this->api_key = $photonic_500px_api_key;
-		$this->api_secret = $photonic_500px_api_secret;
+		global $photonic_500px_api_key, $photonic_500px_api_secret, $photonic_500px_access_token, $photonic_500px_disable_title_link, $photonic_500px_token_secret;
+		$this->api_key = trim($photonic_500px_api_key);
+		$this->api_secret = trim($photonic_500px_api_secret);
+		$this->token = trim($photonic_500px_access_token);
+		$this->token_secret = trim($photonic_500px_token_secret);
+
 		$this->provider = '500px';
+		$this->link_lightbox_title = empty($photonic_500px_disable_title_link);
+		$this->doc_links = array(
+			'general' => 'https://aquoid.com/plugins/photonic/500px/',
+		);
+
+		$this->set_oauth_done();
 	}
 
 	/**
@@ -23,170 +32,555 @@ class Photonic_500px_Processor extends Photonic_Processor {
 	 * The following short-code parameters are supported:
 	 * - feature: popular | upcoming | editors | fresh_today | fresh_yesterday | fresh_week | user | user_friends | user_favorites
 	 * - user_id, username: Any one of them is required if feature = user | user_friends | user_favorites
-	 * - only: 	Abstract | Animals | Black and White | Celebrities | City and Architecture | Commercial | Concert | Family | Fashion | Street | Travel |
-	 * 			Film | Fine Art | Food | Journalism | Landscapes | Macro | Nature | Nude | People | Performing Arts | Sport | Still Life | Underwater
+	 * - only: 	Abstract | Animals | Black and White | Celebrities | City and Architecture | Commercial | Concert | Family | Fashion | Film |
+	 * 			Fine Art | Food | Journalism | Landscapes | Macro | Nature | Nude | People | Performing Arts | Sport | Still Life | Street |
+	 * 			Transportation | Travel | Underwater | Urban Exploration | Wedding
 	 * - rpp: Number of photos
 	 * - thumb_size: Size of the thumbnail. Can be 1 | 2 | 3, which correspond to 75 &times; 75 px, 140 &times; 140 px and 280 &times; 280 px respectively.
 	 * - main_size: Size of the opened main photo. Can be 3 | 4, which correspond to 280 &times; 280 px and the full size respectively.
 	 * - sort: created_at | rating | times_viewed | taken_at
 	 *
 	 * @param array $attr
-	 * @return string|void
+	 * @return string
 	 */
 	function get_gallery_images($attr = array()) {
-		global $photonic_500px_api_key, $photonic_500px_position;
+		global $photonic_500px_title_caption;
+		$attr = array_merge(
+			$this->common_parameters,
+			array(
+				// Common overrides ...
+				'caption' => $photonic_500px_title_caption,
+				'thumb_size'       => '1',
+				'main_size'       => '4',
+				'tile_size'       => '4',
 
-		$attr = array_merge(array(
-			'style' => 'default',
-	//		'feature' => ''  // popular | upcoming | editors | fresh_today | fresh_yesterday | fresh_week
-			// Defaults from WP ...
-			'columns'    => 'auto',
-			'thumb_size'       => '1',
-			'main_size'       => '4',
-		), $attr);
+				// 500px-Specific ...
+				'date_to'   => strftime("%F", time() + 86400), // date format yyyy-mm-dd
+				'date_from'   => '',
+				//		'feature' => ''  // popular | upcoming | editors | fresh_today | fresh_yesterday | fresh_week
+				'view' => 'photos',
+				'count' => 100,
+				'page' => 1,
+				'username' => '',
+			), $attr);
+		$attr = array_map('trim', $attr);
+
+		$attr['rpp'] = empty($attr['rpp']) ? $attr['count'] : $attr['rpp'];
+
 		extract($attr);
 
-		if (!isset($photonic_500px_api_key) || trim($photonic_500px_api_key) == '') {
-			return __("500px Consumer Key not defined", 'photonic');
+		if (empty($this->api_key)) {
+			return $this->error(sprintf(__('500px Consumer Key not defined. See <a href="%s">here</a> for documentation.', 'photonic'), $this->doc_links['general']));
 		}
 
 		$user_feature = false;
-		$query_url = 'https://api.500px.com/v1/photos?consumer_key='.$photonic_500px_api_key;
-		if (isset($feature) && trim($feature) != '') {
-			$feature = esc_html(trim($feature));
-			$query_url .= '&feature='.$feature;
-			if (in_array(trim($feature), array('user', 'user_friends', 'user_favorites'))) {
-				$user_feature = true;
+		$user_set = !empty($attr['user_id']) || !empty($attr['username']);
+
+		$base_query = 'https://api.500px.com/v1/photos';
+		if ((isset($view) && ($view == 'collections' || $view == 'sets' || $view == 'galleries'))) {
+			if ($user_set) {
+				$user = $this->get_user_details(!empty($attr['user_id']) ? $attr['user_id'] : $attr['username']);
+				if (empty($user)) {
+					return $this->error(__("User is invalid.", 'photonic'));
+				}
+				$base_query = 'https://api.500px.com/v1/users/'.$user['id']."/galleries";
+				$attr['username'] = $user['username'];
+			}
+			else {
+				// Old format - only collection id has been passed
+				$base_query = 'https://api.500px.com/v1/collections';
+			}
+		}
+		else if ((isset($view) && $view == 'users')) {
+			$base_query = 'https://api.500px.com/v1/users';
+		}
+
+		$is_collection = isset($view) && ($view == 'collections' || $view == 'sets' || $view == 'galleries');
+		if (isset($view_id)) {
+			$base_query .= '/'.$view_id;
+			if ($is_collection && $base_query != 'https://api.500px.com/v1/collections/'.$view_id) {
+				$base_query .= '/items';
+			}
+		}
+		else if (!empty($attr['tag']) || !empty($attr['term'])) {
+			$base_query .= '/search';
+		}
+		else if ((isset($view) && $view == 'users') && (isset($id) || !empty($attr['username']) || isset($email))) {
+			$base_query .= '/show';
+		}
+
+		$dpx_params = array();
+		$dpx_params['consumer_key'] = $this->api_key;
+
+		$dpx_params['image_size'] = $attr['thumb_size'].','.$attr['main_size'];
+
+		if (!empty($attr['feature'])) {
+			$feature = esc_html($attr['feature']);
+			$dpx_params['feature'] = $feature;
+			if (in_array($feature, array('user', 'user_friends', 'user_favorites'))) {
+				$user_feature = $feature;
 			}
 		}
 
-		$user_set = false;
-		if (isset($user_id) && trim($user_id) != '') {
-			$user_id = trim($user_id);
-			$query_url .= '&user_id='.$user_id;
-			$user_set = true;
+		if (!empty($attr['user_id'])) {
+			$dpx_params['user_id'] = $attr['user_id'];
+			$dpx_params['id'] = $attr['user_id'];
 		}
-		else if (isset($username) && trim($username) != '') {
-			$username = trim($username);
-			$query_url .= '&username='.$username;
-			$user_set = true;
+		else if (!empty($attr['username'])) {
+			$dpx_params['username'] = $attr['username'];
+		}
+
+		if (isset($id) && $id != '' &&(!isset($view) || (isset($view) && $view != 'collections'))) {
+			$dpx_params['id'] = $attr['id'];
+		}
+
+		if (!empty($attr['email'])) {
+			$dpx_params['email'] = $attr['email'];
 		}
 
 		if ($user_feature && !$user_set) {
-			return __("A user-specific feature has been requested, but the username or user_id is missing", 'photonic');
+			return $this->error(sprintf(__("A user-specific feature (<code>%s</code>) has been requested, but the <code>username</code> or <code>user_id</code> is missing.", 'photonic'), $user_feature));
 		}
 
-		if (isset($only) && trim($only) != '') {
-			$only = urlencode(trim($only));
-			$query_url .= '&only='.trim($only);
+		if (!empty($attr['only'])) {
+			$dpx_params['only'] = $attr['only'];
 		}
 
-		if (isset($rpp) && trim($rpp) != '') {
-			$rpp = trim($rpp);
-			$query_url .= '&rpp='.trim($rpp);
+		if (!empty($attr['exclude'])) {
+			$dpx_params['exclude'] = $attr['exclude'];
 		}
 
-		if (isset($sort) && trim($sort) != '') {
-			$sort = trim($sort);
-			$query_url .= '&sort='.trim($sort);
+		global $photonic_archive_thumbs;
+		if (is_archive() || is_home()) {
+			if (!empty($photonic_archive_thumbs)) {
+				if (isset($rpp) && $photonic_archive_thumbs < $rpp) {
+					$this->show_more_link = true;
+					$dpx_params['rpp'] = $photonic_archive_thumbs;
+				}
+				else if (isset($rpp)) {
+					$dpx_params['rpp'] = $attr['rpp'];
+				}
+			}
+			else if (isset($rpp)) {
+				$dpx_params['rpp'] = $attr['rpp'];
+			}
+		}
+		else if (isset($rpp)) {
+			$dpx_params['rpp'] = $attr['rpp'];
+		}
+
+		if (!empty($attr['sort'])) {
+			$dpx_params['sort'] = $attr['sort'];
+		}
+
+		if (!empty($attr['tag'])) {
+			$dpx_params['tag'] = $attr['tag'];
+		}
+
+		if (!empty($attr['term'])) {
+			$dpx_params['term'] = $attr['term'];
 		}
 
 		// Allow users to define additional query parameters
-		$query_url = apply_filters('photonic_500px_query', $query_url, $attr);
+		$dpx_params = apply_filters('photonic_500px_query', $dpx_params, $attr);
 
-		global $photonic_500px_oauth_done;
-		if ($photonic_500px_oauth_done) {
-			$end_point = Photonic_Processor::get_normalized_http_url($query_url);
-			if (strstr($query_url, $end_point) > -1) {
-				$params = substr($query_url, strlen($end_point));
-				if (strlen($params) > 1) {
-					$params = substr($params, 1);
-				}
-				$params = Photonic_Processor::parse_parameters($params);
-				$signed_args = $this->sign_call($end_point, 'GET', $params);
-				$query_url = $end_point.'?'.Photonic_Processor::build_query($signed_args);
-			}
+		$ret = '';
+
+		$this->gallery_index++;
+
+		global $photonic_500px_allow_oauth, $photonic_500px_oauth_done;
+		if ($photonic_500px_allow_oauth && is_single() && !$photonic_500px_oauth_done) {
+			$post_id = get_the_ID();
+			$ret .= $this->get_login_box($post_id);
+		}
+
+		$ret .= $this->process_response($base_query, $dpx_params, $attr);
+		return $ret;
+	}
+
+	/**
+	 * Queries the server, then parses through the response.
+	 *
+	 * @param $url
+	 * @param $dpx_params
+	 * @param array $short_code
+	 * @return string
+	 */
+	function process_response($url, $dpx_params, $short_code) {
+		$params = $this->get_query_params($url, $dpx_params, $short_code['page']);
+		$response = Photonic::http($url, 'GET', $params);
+
+		$error_message = '';
+		if (is_wp_error($response)) {
+			$error_message = $this->wp_error_message($response);
+		}
+		else if ($response['response']['code'] == 401) { // Unauthorized
+			$error_message = __("Sorry, you need to be authorized to see this.", 'photonic');
+		}
+		else if ($response['response']['code'] != 200 && $response['response']['code'] != '200') { // Something went wrong
+			$error_message = "500px.com returned an error.<br/><strong>Code:</strong> ".$response['response']['code']."<br/><strong>Message:</strong> ".$response['response']['message'];
+		}
+		if (!empty($error_message)) {
+			return $this->finalize_markup($this->error($error_message), $short_code);
 		}
 
 		$ret = '';
 
-		global $photonic_500px_login_shown, $photonic_500px_allow_oauth, $photonic_500px_oauth_done;
-		if (!$photonic_500px_login_shown && $photonic_500px_allow_oauth && is_single() && !$photonic_500px_oauth_done) {
-			$post_id = get_the_ID();
-			$ret .= $this->get_login_box($post_id);
-			$photonic_500px_login_shown = true;
+		$content = $response['body'];
+		$content = json_decode($content);
+
+		if (isset($content->photos)) {
+			$ret .= $this->process_photos($content, $url, $short_code);
+		}
+		else if (isset($content->photo)) {
+			$ret .= $this->process_single_photo($content, $short_code['main_size']);
+		}
+		else if (isset($content->collections)) {
+			if (count($content->collections) == 0) {
+				$ret .= __('No collections found!', 'photonic');
+			}
+		}
+		else if (isset($content->galleries)) {
+			$ret .= $this->process_galleries($content, $short_code);
+		}
+		else if (isset($content->users)) {
+			$ret .= $this->process_users($content, $short_code);
 		}
 
-		$photonic_500px_position++;
-		$ret .= "<div class='photonic-500px-stream' id='photonic-500px-stream-$photonic_500px_position'>";
-		$ret .= $this->process_response($query_url, $thumb_size, $main_size, $columns);
-		$ret .= "</div>";
+		$ret = $this->finalize_markup($ret, $short_code);
 		return $ret;
 	}
 
-	function process_response($url, $thumb_size = '1', $main_size = '4', $columns = 'auto') {
-		global $photonic_slideshow_library, $photonic_500px_position, $photonic_500px_photos_per_row_constraint, $photonic_500px_photos_constrain_by_count, $photonic_500px_disable_title_link, $photonic_500px_photo_title_display;
-
-		$response = wp_remote_request($url, array('sslverify' => false));
-
-		if (is_wp_error($response)) {
-			return "";
+	private function get_query_params($url, $dpx_params, $page_number) {
+		global $photonic_500px_oauth_done;
+		if (empty($dpx_params['page'])) {
+			$dpx_params['page'] = $page_number;
 		}
-		else if ($response['response']['code'] != 200 && $response['response']['code'] != '200') { // Something went wrong
-			return "<!-- Currently there is an error with the server. Code: ".$response['response']['code'].", Message: ".$response['response']['message']."-->";
+
+		$params = substr($url, strlen($this->end_point()));
+		if (strlen($params) > 1) {
+			$params = substr($params, 1);
+		}
+		$params = Photonic_Processor::parse_parameters($params);
+		$params = array_merge($dpx_params, $params);
+
+		if ($photonic_500px_oauth_done || $this->oauth_done) {
+			$signed_args = $this->sign_call($this->end_point(), 'GET', $params);
+			$params = $signed_args;
+		}
+		return $params;
+	}
+
+	/**
+	 * @param $content
+	 * @param $url
+	 * @param array $short_code
+	 * @param array $dpx_params
+	 * @return string
+	 */
+	function process_photos($content, $url, $short_code, $dpx_params = array()) {
+		global $photonic_500px_photos_per_row_constraint, $photonic_500px_photos_constrain_by_count, $photonic_500px_photos_constrain_by_padding, $photonic_500px_photo_title_display;
+		$ret = '';
+		$header_meta = array();
+		if (isset($content->title)) { // A collection
+			$header_meta['title'] = $content->title;
+			if ($short_code['display'] == 'in-page' || $short_code['popup'] == 'show') {
+				$ret .= '<h3>'.$content->title.'</h3>';
+			}
+		}
+		$all_photos = $this->get_all_photos($content, $url, $short_code['date_from'], $short_code['date_to'], $short_code['rpp'], $short_code['rpp'], $short_code['page'], $dpx_params);
+		$objects = $this->build_level_1_objects($all_photos, 'photos', $short_code['thumb_size'], $short_code['main_size']);
+		$row_constraints = array('constraint-type' => $photonic_500px_photos_per_row_constraint, 'padding' => $photonic_500px_photos_constrain_by_padding, 'count' => $photonic_500px_photos_constrain_by_count);
+		$level_2_meta = array(
+			'total' => $content->total_items,
+			'start' => ($content->current_page - 1) * $short_code['rpp'] + 1,
+			'end' => $content->current_page * $short_code['rpp'] > $content->total_items ? $content->total_items : $content->current_page * $short_code['rpp'],
+			'per-page' => $short_code['rpp'],
+		);
+
+		$ret .= $this->display_level_1_gallery($objects,
+			array(
+				'title_position' => $photonic_500px_photo_title_display,
+				'row_constraints' => $row_constraints,
+				'parent' => 'gallery',
+				'level_2_meta' => $level_2_meta,
+			),
+			$short_code
+		);
+
+		if ($ret != '' && $short_code['page'] === 1) {
+			if ($this->show_more_link) {
+				$ret .= $this->more_link_button(get_permalink().'#photonic-500px-stream-'.$this->gallery_index);
+			}
+		}
+		return $ret;
+	}
+
+	function build_level_1_objects($dpx_objects, $type, $thumb_size = '1', $main_size = '4') {
+		$objects = array();
+		foreach ($dpx_objects as $dpx_object) {
+			$object = array();
+			if ($type == 'photos') {
+				$images = $dpx_object->images;
+				foreach ($images as $image) {
+					if ($image->size == $thumb_size) {
+						$object['thumbnail'] = $image->https_url;
+					}
+					else if ($image->size == $main_size) {
+						$object['main_image'] = $image->https_url;
+					}
+				}
+
+				$object['main_page'] = "https://500px.com/photo/".$dpx_object->id;
+				$object['title'] = $dpx_object->name;
+				$object['alt_title'] = $object['title'];
+				$object['description'] = $dpx_object->description;
+				$object['id'] = $dpx_object->id;
+			}
+			else {
+				if (isset($dpx_object->domain)) {
+					$url = parse_url($dpx_object->domain);
+					if (!isset($url['scheme'])) {
+						$url = 'https://'.$url['path'];
+					}
+					else {
+						$url = $url['scheme'].'://'.$url['path'];
+					}
+					$object['main_page'] = $url;
+					$object['id'] = $dpx_object->id;
+				}
+				if (isset($dpx_object->userpic_url)) {
+					$pic_url = parse_url($dpx_object->userpic_url);
+					if (!isset($pic_url['scheme'])) {
+						$pic_url = 'https://500px.com'.$pic_url['path'];
+					}
+					else {
+						$pic_url = $dpx_object->userpic_url;
+					}
+					$object['thumbnail'] = $pic_url;
+					$object['main_image'] = $pic_url;
+
+					$alt = '';
+					if (isset($dpx_object->fullname)) {
+						$alt .= $dpx_object->fullname;
+					}
+					else {
+						$alt .= $dpx_object->username;
+					}
+					if (isset($dpx_object->photos_count)) {
+						$alt .= '<br/>'.sprintf(__('%1$s photos', 'photonic'), $dpx_object->photos_count);
+					}
+					if (isset($dpx_object->friends_count)) {
+						$alt .= '<br/>'.sprintf(__('%1$s friends', 'photonic'), $dpx_object->friends_count);
+					}
+					if (isset($dpx_object->followers_count)) {
+						$alt .= '<br/>'.sprintf(__('%1$s followers', 'photonic'), $dpx_object->followers_count);
+					}
+					$object['title'] = $alt;
+					$object['alt_title'] = $alt;
+				}
+			}
+
+			$object['provider'] = $this->provider;
+			$object['gallery_index'] = $this->gallery_index;
+
+			$objects[] = $object;
+		}
+		return $objects;
+	}
+
+	/**
+	 * Gets all photos within a date range.
+	 * The date filtering capability was provided by Bart Kuipers (http://www.bartkuipers.com/).
+	 *
+	 * @param $content
+	 * @param $url
+	 * @param string $date_from_string
+	 * @param string $date_to_string
+	 * @param int $number_of_photos_to_go
+	 * @param int $number_per_page
+	 * @param int $page_number
+	 * @param $dpx_params
+	 * @return array
+	 */
+	function get_all_photos($content, $url, $date_from_string, $date_to_string, $number_of_photos_to_go, $number_per_page, $page_number, $dpx_params) {
+		$photos = $content->photos;
+		$all_photos_found = false;
+
+		$selected_photos = array();
+
+		foreach ($photos as $photo) {
+			$timestamp = strtotime($photo->created_at);
+			if ($timestamp !== false) {
+				$date_from = strtotime($date_from_string);
+				if ($date_from === false) {
+					$date_from = 1;
+				}
+				if ($timestamp < $date_from) {
+					$all_photos_found = true;
+					continue;
+				}
+
+				$date_to = strtotime($date_to_string);
+				if ($date_to === false) {
+					$date_to = gettimeofday();
+					$date_to = $date_to['sec'] + 86400; // tomorrow's date
+				}
+				if ($timestamp > $date_to) {
+					$all_photos_found = true;
+					continue;
+				}
+			}
+			if ($number_of_photos_to_go <= 0) {
+				continue;
+			}
+			$selected_photos[] = $photo;
+			$number_of_photos_to_go--;
+		}
+		if ($number_of_photos_to_go > 0 && $all_photos_found != true && count($photos) >= $number_per_page ) {
+			$new_params = $this->get_query_params($url, $dpx_params, $page_number + 1);
+			$more_photos = $this->get_all_photos($content, $url, $date_from_string, $date_to_string, $number_of_photos_to_go, $number_per_page, $page_number + 1, $new_params);
+			$selected_photos = array_merge($selected_photos, $more_photos);
+		}
+		return $selected_photos;
+	}
+
+	function process_single_photo($content, $main_size = '4') {
+		if (isset($content->photo)) {
+			$photo = $content->photo;
+			$images = $photo->images;
+			$image_url = $photo->image_url;
+			foreach ($images as $image) {
+				if ($image->size == $main_size) {
+					$image_url = $image->https_url;
+					break;
+				}
+			}
+
+			return $this->generate_single_photo_markup('500px', array(
+					'src' => $image_url,
+					'href' => '',
+					'title' => $photo->name,
+					'caption' => $photo->description,
+				)
+			);
 		}
 		else {
-			$content = $response['body'];
-			$content = json_decode($content);
-			$photos = $content->photos;
-			$ret = "<ul>";
-			if (!isset($columns)) {
-				$columns = 'auto';
-			}
-			if ($columns == 'auto') {
-				if ($photonic_500px_photos_per_row_constraint == 'padding') {
-					$pad_class = 'photonic-pad-photos';
-				}
-				else {
-					$pad_class = 'photonic-gallery-'.$photonic_500px_photos_constrain_by_count.'c';
-				}
-			}
-			else {
-				$pad_class = 'photonic-gallery-'.$columns.'c';
-			}
-
-			foreach ($photos as $photo) {
-				$image = $photo->image_url;
-				$first = substr($image, 0, strrpos($image, '/'));
-				$last = substr($image, strrpos($image, '/'));
-				$extension = substr($last, stripos($last, '.'));
-				$ret .= "<li class='photonic-500px-image $pad_class'>";
-				$a_start = $photonic_500px_disable_title_link == 'on' ? "" : "<a href=\"http://500px.com/photo/".$photo->id."\">";
-				$a_end = $photonic_500px_disable_title_link == 'on' ? "" : "</a>";
-				if ($photonic_slideshow_library == 'prettyphoto') {
-					$rel = "photonic-prettyPhoto[photonic-500px-stream-$photonic_500px_position]";
-				}
-				else {
-					$rel = "photonic-500px-stream-$photonic_500px_position";
-				}
-				$ret .= "<a href='$first/$main_size$extension' class='launch-gallery-$photonic_slideshow_library $photonic_slideshow_library' rel='$rel' title='$a_start".esc_attr($photo->name)."$a_end'>";
-				$ret .= "<img src='$first/$thumb_size$extension' alt='".esc_attr($photo->name)."' />";
-				$ret .= "</a>";
-
-				if ($photonic_500px_photo_title_display == 'below') {
-					$ret .= "<span class='photonic-photo-title'>".$photo->name."</span>";
-				}
-
-				$ret .= "</li>";
-			}
-			if ($ret != "<ul>") {
-				$ret .= "</ul>";
-			}
-			else {
-				$ret = "";
-			}
-			return $ret;
+			return '';
 		}
+	}
+
+	function process_users($content, $short_code) {
+		if (isset($content->users)) {
+			if (count($content->users) == 0) {
+				return __('No users found!', 'photonic');
+			}
+			else {
+				global $photonic_500px_photos_per_row_constraint, $photonic_500px_photos_constrain_by_padding, $photonic_500px_photos_constrain_by_count;
+				$users = $content->users;
+				$objects = $this->build_level_1_objects($users, 'users');
+				$row_constraints = array('constraint-type' => $photonic_500px_photos_per_row_constraint, 'padding' => $photonic_500px_photos_constrain_by_padding, 'count' => $photonic_500px_photos_constrain_by_count);
+				$short_code['layout'] = 'square';
+				return $this->display_level_1_gallery($objects,
+					array(
+						'title_position' => 'tooltip',
+						'row_constraints' => $row_constraints,
+						'show_lightbox' => false,
+						'type' => 'user',
+						'parent' => 'stream',
+					),
+					$short_code
+				);
+			}
+		}
+		else {
+			return '';
+		}
+	}
+
+
+	private function process_galleries($content, $short_code) {
+		if (isset($content->galleries)) {
+			if (count($content->galleries) == 0) {
+				return __('No galleries found!', 'photonic');
+			}
+			else {
+				global $photonic_500px_gallery_photos_per_row_constraint, $photonic_500px_gallery_photos_constrain_by_padding,
+					   $photonic_500px_gallery_photos_constrain_by_count, $photonic_500px_gallery_photo_title_display;
+				$galleries = $content->galleries;
+				$objects = $this->build_level_2_objects($galleries, $short_code);
+				$row_constraints = array('constraint-type' => $photonic_500px_gallery_photos_per_row_constraint, 'padding' => $photonic_500px_gallery_photos_constrain_by_padding, 'count' => $photonic_500px_gallery_photos_constrain_by_count);
+				$ret = $this->display_level_2_gallery($objects,
+					array(
+						'row_constraints' => $row_constraints,
+						'type' => 'galleries',
+						'singular_type' => 'gallery',
+						'title_position' => $photonic_500px_gallery_photo_title_display,
+						'level_1_count_display' => false,
+					),
+					$short_code
+				);
+				return $ret;
+			}
+		}
+		else {
+			return '';
+		}
+	}
+
+	private function build_level_2_objects($dpx_objects, $short_code) {
+		$objects = array();
+		$filters = array();
+		if (!empty($short_code['filter'])) {
+			$filters = explode(',', $short_code['filter']);
+		}
+
+		foreach ($dpx_objects as $dpx_object) {
+			$object = array();
+			if (!empty($filters) && ((!in_array($dpx_object->id, $filters) && !in_array($dpx_object->name, $filters) && strtolower($short_code['filter_type']) !== 'exclude') ||
+					((in_array($dpx_object->id, $filters) || in_array($dpx_object->name, $filters)) && strtolower($short_code['filter_type']) === 'exclude'))) {
+				continue;
+			}
+			$object['id_1'] = $dpx_object->id;
+//			$object['id_2'] = $dpx_object->id;
+			$object['title'] = esc_attr($dpx_object->name);
+
+			if (isset($dpx_object->thumbnail_photos)) {
+				$thumbnails = $dpx_object->thumbnail_photos;
+				if (empty($thumbnails)) {
+					continue;
+				}
+				$thumbnail = $thumbnails[0];
+				$object['thumbnail'] = $thumbnail->image_url;
+				$object['tile_image'] = $thumbnail->image_url;
+			}
+			$object['main_page'] = 'https://500px.com/'.$short_code['username'].'/galleries/';
+			$object['main_page'] .= !empty($dpx_object->custom_path) ? $dpx_object->custom_path : $dpx_object->id;
+			$object['counter'] = $dpx_object->items_count;
+			$object['classes'] = array("photonic-500px-gallery-thumb-{$dpx_object->id}");
+
+			$objects[] = $object;
+		}
+		return $objects;
+	}
+
+	private function get_user_details($user) {
+		$base_query = 'https://api.500px.com/v1/users/show?consumer_key='.$this->api_key;
+		$choices = array('username', 'id', 'email');
+
+		foreach ($choices as $choice) {
+			$response = Photonic::http($base_query.'&'.$choice.'='.$user);
+			if (is_wp_error($response)) {
+				return null;
+			}
+			if ($response['response']['code'] == 200) {
+				$body = $response['body'];
+				$body = json_decode($body);
+				$user = $body->user;
+				return array('id' => $user->id, 'username' => $user->username);
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -226,7 +620,7 @@ class Photonic_500px_Processor extends Photonic_Processor {
 	}
 
 	public function end_point() {
-		return 'https://api.500px.com/v1/photos';
+		return 'https://api.500px.com/v1/';
 	}
 
 	function parse_token($response) {
@@ -236,29 +630,28 @@ class Photonic_500px_Processor extends Photonic_Processor {
 	}
 
 	public function check_access_token_method() {
-		// TODO: Implement check_access_token_method() method.
+		// Nothing needed here
 	}
 
 	/**
 	 * Method to validate that the stored token is indeed authenticated.
 	 *
-	 * @param $request_token
+	 * @param $token
 	 * @return array|WP_Error
 	 */
-	function check_access_token($request_token) {
-		global $photonic_500px_api_key;
-		$signed_parameters = $this->sign_call('https://api.500px.com/v1/users', 'GET', array('consumer_key' => $photonic_500px_api_key));
-
-		$end_point = $this->end_point();
-		$end_point .= '?'.Photonic_Processor::build_query($signed_parameters);
-
+	function check_access_token($token) {
+		$signed_parameters = $this->sign_call('https://api.500px.com/v1/users', 'GET', array());
+		$end_point = 'https://api.500px.com/v1/users?'.Photonic_Processor::build_query($signed_parameters);
 		$response = Photonic::http($end_point, 'GET', null);
+
 		return $response;
 	}
 
 	public function is_access_token_valid($response) {
+		if (is_wp_error($response)) {
+			return false;
+		}
 		$response = $response['response'];
-
 		if ($response['code'] == 200) {
 			return true;
 		}

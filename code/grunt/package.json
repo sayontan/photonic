@@ -1,0 +1,18 @@
+{
+	"name": "photonic",
+	"version": "1.0.0",
+	"description": "The most comprehensive gallery and lightbox plugin",
+	"homepage": "https://aquoid.com/plugins/photonic",
+	"author": {
+		"name": "Sayontan Sinha",
+		"url": "https://mynethome.net"
+	},
+	"license": "GPL-3.0",
+	"dependencies": {
+		"grunt-jquery-ready": "^0.1.0"
+	},
+	"devDependencies": {
+		"grunt": "~0.4.5",
+		"grunt-contrib-concat": "^1.0.1"
+	}
+}

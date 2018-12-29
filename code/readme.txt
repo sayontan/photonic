@@ -212,6 +212,12 @@ Yes, but only for the plugin front-end and the interactive workflow. The admin p
 
 == Changelog ==
 
+= 2.15 =
+
+*	Added a filtering capability on the shortcode insertion screens
+*	Fixed a JS error that was showing up on clicking on "Add / Edit Photonic Gallery" button
+*	Added the ability to provide the thumbnail size for Instagram in the shortcode builder
+
 = 2.14 =
 
 *	Fixed "disableShrink" behaviour for Lightcase.

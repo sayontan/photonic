@@ -807,12 +807,19 @@ class Photonic_Flow_Manager {
 
 			case 'thumbnail-selector':
 				$ret = "<div class=\"photonic-flow-selector-container\" data-photonic-flow-selector-mode=\"{$field['mode']}\" data-photonic-flow-selector-for=\"{$field['for']}\">\n{{placeholder_value}}</div>\n";
-				if ($field['mode'] == 'multi') {
-					$ret = __('Mark:', 'photonic').
-						sprintf(__('<a href="#" class="%s" data-photonic-mark-for="%s">All</a>', 'photonic'), 'photonic-mark photonic-mark-all', $field['for']).'|'.
-						sprintf(__('<a href="#" class="%s" data-photonic-mark-for="%s">None</a>', 'photonic'), 'photonic-mark photonic-mark-none', $field['for']).'<br/>'.
-						$ret;
+
+				$controls = "<div class='thumb-controls'>\n";
+				if ($field['mode'] != 'none') {
+					$controls .= "<input type='text' class='search-thumbs' name='thumb-search' id='thumb-search'/>\n";
 				}
+
+				if ($field['mode'] == 'multi') {
+					$controls .= __('Mark:', 'photonic').
+						sprintf(__('<a href="#" class="%s" data-photonic-mark-for="%s">All</a>', 'photonic'), 'photonic-mark photonic-mark-all', $field['for']).'|'.
+						sprintf(__('<a href="#" class="%s" data-photonic-mark-for="%s">None</a>', 'photonic'), 'photonic-mark photonic-mark-none', $field['for']);
+				}
+				$controls .= "</div>\n";
+				$ret = $controls.$ret;
 				break;
 
 			default:
@@ -1998,7 +2005,7 @@ class Photonic_Flow_Manager {
 				$object = array();
 				$object['id'] = $album->id;
 				$object['title'] = !empty($album->title) ? esc_attr($album->title) : '';
-				$object['counters'] = array(sprintf(_n('%s media item', '%s media items', $album->totalMediaItems, 'photonic'), $album->totalMediaItems));
+				$object['counters'] = array(sprintf(_n('%s media item', '%s media items', $album->mediaItemsCount, 'photonic'), $album->mediaItemsCount));
 				$object['thumbnail'] = $album->coverPhotoBaseUrl . "=w150-h150-c";
 				$objects[] = $object;
 			}

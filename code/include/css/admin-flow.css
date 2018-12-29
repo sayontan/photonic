@@ -114,3 +114,6 @@ a.photonic-remove-date-filter span, a.photonic-remove-date-range-filter span { v
 
 .photonic-more-wrapper { display: inline-block; width: 100%; margin: 1.4em 0; }
 .photonic-flow-more, .photonic-flow-more:hover, .photonic-flow-more:active, .photonic-flow-more:focus { margin: 1.4em 0; padding: 1em 2em; background: #0085ba; border-color: #0073aa #006799 #006799; color: #fff; text-decoration: none; }
+
+.thumb-controls { text-align: right; }
+.photonic-flow-field input[type="text"].search-thumbs { display: inline; background: url(../images/Admin.svg) no-repeat right -576px; background-size: 24px; height: 24px; }

@@ -531,7 +531,7 @@ class Photonic_Flow_Fields {
 							'content_filters' => array(
 								'desc' => __('Content Filters', 'photonic'),
 								'type' => 'text',
-								'hint' => sprintf(__('Comma-separated. Pick from: %1$s. See <a href="%2$s" target="_blank">here</a> for documentation.', 'photonic'), 'NONE, LANDSCAPES, RECEIPTS, CITYSCAPES, LANDMARKS, SELFIES, PEOPLE, PETS, WEDDINGS, BIRTHDAYS, DOCUMENTS, TRAVEL, ANIMALS, FOOD, SPORT, NIGHT, PERFORMANCES, WHITEBOARDS, SCREENSHOTS, UTILITY', 'https://aquoid.com/plugins/photonic/google-photos/photos/#filtering-photos'),
+								'hint' => sprintf(__('Comma-separated. Pick from: %1$s. See <a href="%2$s" target="_blank">here</a> for documentation. Filters will be applied on the front-end, not on the display below', 'photonic'), 'NONE, LANDSCAPES, RECEIPTS, CITYSCAPES, LANDMARKS, SELFIES, PEOPLE, PETS, WEDDINGS, BIRTHDAYS, DOCUMENTS, TRAVEL, ANIMALS, FOOD, SPORT, NIGHT, PERFORMANCES, WHITEBOARDS, SCREENSHOTS, UTILITY', 'https://aquoid.com/plugins/photonic/google-photos/photos/#filtering-photos'),
 							),
 
 							'container' => array(
@@ -596,13 +596,13 @@ class Photonic_Flow_Fields {
 								'desc' => __('Only show photos with this text', 'photonic'),
 								'type' => 'text',
 								'std' => '',
-								'hint' => __('Comma-separated list of values', 'photonic'),
+								'hint' => __('Comma-separated list of values. Filters will be applied on the front-end, not on the display below', 'photonic'),
 							),
 							'keywords' => array(
 								'desc' => __('Only show photos with these keywords', 'photonic'),
 								'type' => 'text',
 								'std' => '',
-								'hint' => __('Comma-separated list of values', 'photonic'),
+								'hint' => __('Comma-separated list of values. Filters will be applied on the front-end, not on the display below', 'photonic'),
 							),
 							'container' => array(
 								'type' => 'thumbnail-selector',
@@ -619,13 +619,13 @@ class Photonic_Flow_Fields {
 								'desc' => __('Only show photos with this text', 'photonic'),
 								'type' => 'text',
 								'std' => '',
-								'hint' => __('Comma-separated list of values', 'photonic'),
+								'hint' => __('Comma-separated list of values. Filters will be applied on the front-end, not on the display below', 'photonic'),
 							),
 							'keywords' => array(
 								'desc' => __('Only show photos with these keywords', 'photonic'),
 								'type' => 'text',
 								'std' => '',
-								'hint' => __('Comma-separated list of values', 'photonic'),
+								'hint' => __('Comma-separated list of values. Filters will be applied on the front-end, not on the display below.', 'photonic'),
 							),
 							'container' => array(
 								'type' => 'thumbnail-selector',
@@ -1428,6 +1428,14 @@ class Photonic_Flow_Fields {
 							'options' => $this->allowed_image_sizes['zenfolio']['thumb_size'],
 							'std' => '',
 							'hint' => sprintf(__('Default settings can be configured under: %s', 'photonic'), '<em>Photonic &rarr; Settings &rarr; Zenfolio &rarr; Zenfolio Photo Settings &rarr; Thumbnail size</em>'),
+						),
+					),
+					'instagram' => array(
+						'thumb_size' => array(
+							'desc' => __('Thumbnail size', 'photonic'),
+							'type' => 'text',
+							'hint' => __('Numeric values only. Leave blank for default.', 'photonic'),
+							'std' => 150,
 						),
 					),
 					'wp' => array(

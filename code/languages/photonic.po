@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Photonic Gallery & Lightbox for Flickr, SmugMug, Google Photos, Picasa, Zenfolio and Instagram package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Photonic Gallery & Lightbox for Flickr, SmugMug, Google Photos, Picasa, Zenfolio and Instagram 2.13\n"
+"Project-Id-Version: Photonic Gallery & Lightbox for Flickr, SmugMug, Google Photos, Picasa, Zenfolio and Instagram 2.15\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/photonic\n"
-"POT-Creation-Date: 2018-12-11 23:33:12+00:00\n"
+"POT-Creation-Date: 2018-12-29 13:35:16+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -554,7 +554,7 @@ msgid "Content Filters"
 msgstr ""
 
 #: admin/flow/Photonic_Flow_Fields.php:534
-msgid "Comma-separated. Pick from: %1$s. See <a href=\"%2$s\" target=\"_blank\">here</a> for documentation."
+msgid "Comma-separated. Pick from: %1$s. See <a href=\"%2$s\" target=\"_blank\">here</a> for documentation. Filters will be applied on the front-end, not on the display below"
 msgstr ""
 
 #: admin/flow/Photonic_Flow_Fields.php:571
@@ -582,10 +582,7 @@ msgstr ""
 #: admin/flow/Photonic_Flow_Fields.php:599
 #: admin/flow/Photonic_Flow_Fields.php:605
 #: admin/flow/Photonic_Flow_Fields.php:622
-#: admin/flow/Photonic_Flow_Fields.php:628
-#: admin/flow/Photonic_Flow_Fields.php:645
-#: admin/flow/Photonic_Flow_Fields.php:651
-msgid "Comma-separated list of values"
+msgid "Comma-separated list of values. Filters will be applied on the front-end, not on the display below"
 msgstr ""
 
 #: admin/flow/Photonic_Flow_Fields.php:602
@@ -603,12 +600,21 @@ msgstr ""
 msgid "From the list below pick the folder whose photos you wish to display. Photos from that folder will show up as thumbnails."
 msgstr ""
 
+#: admin/flow/Photonic_Flow_Fields.php:628
+msgid "Comma-separated list of values. Filters will be applied on the front-end, not on the display below."
+msgstr ""
+
 #: admin/flow/Photonic_Flow_Fields.php:638
 msgid "Photos for a User"
 msgstr ""
 
 #: admin/flow/Photonic_Flow_Fields.php:639
 msgid "The following lists the top-level folders and albums for the selected user. All photos from these folders will show up as thumbnails."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:645
+#: admin/flow/Photonic_Flow_Fields.php:651
+msgid "Comma-separated list of values"
 msgstr ""
 
 #: admin/flow/Photonic_Flow_Fields.php:684
@@ -687,7 +693,7 @@ msgid "Though Photonic has the capability to handle tags, Instagram has not gran
 msgstr ""
 
 #: admin/flow/Photonic_Flow_Fields.php:925
-#: admin/flow/Photonic_Flow_Fields.php:1498 photonic-form.php:42
+#: admin/flow/Photonic_Flow_Fields.php:1506 photonic-form.php:42
 #: photonic-form.php:1208 photonic-form.php:1503 photonic-form.php:1672
 msgid "Number of photos to show"
 msgstr ""
@@ -773,9 +779,9 @@ msgstr ""
 #: admin/flow/Photonic_Flow_Fields.php:1386
 #: admin/flow/Photonic_Flow_Fields.php:1421
 #: admin/flow/Photonic_Flow_Fields.php:1430
-#: admin/flow/Photonic_Flow_Fields.php:1450
-#: admin/flow/Photonic_Flow_Fields.php:1474
-#: admin/flow/Photonic_Flow_Fields.php:1483
+#: admin/flow/Photonic_Flow_Fields.php:1458
+#: admin/flow/Photonic_Flow_Fields.php:1482
+#: admin/flow/Photonic_Flow_Fields.php:1491
 msgid "Default settings can be configured under: %s"
 msgstr ""
 
@@ -797,21 +803,21 @@ msgstr ""
 #: admin/flow/Photonic_Flow_Fields.php:1139
 #: admin/flow/Photonic_Flow_Fields.php:1161
 #: admin/flow/Photonic_Flow_Fields.php:1252
-#: admin/flow/Photonic_Flow_Fields.php:1589
 #: admin/flow/Photonic_Flow_Fields.php:1597
-#: admin/flow/Photonic_Flow_Fields.php:1609
-#: admin/flow/Photonic_Flow_Fields.php:1619
-#: admin/flow/Photonic_Flow_Fields.php:1628
-#: admin/flow/Photonic_Flow_Fields.php:1634
-#: admin/flow/Photonic_Flow_Fields.php:1647
-#: admin/flow/Photonic_Flow_Fields.php:1659
-#: admin/flow/Photonic_Flow_Fields.php:1789
+#: admin/flow/Photonic_Flow_Fields.php:1605
+#: admin/flow/Photonic_Flow_Fields.php:1617
+#: admin/flow/Photonic_Flow_Fields.php:1627
+#: admin/flow/Photonic_Flow_Fields.php:1636
+#: admin/flow/Photonic_Flow_Fields.php:1642
+#: admin/flow/Photonic_Flow_Fields.php:1655
+#: admin/flow/Photonic_Flow_Fields.php:1667
 #: admin/flow/Photonic_Flow_Fields.php:1797
-#: admin/flow/Photonic_Flow_Fields.php:1806
+#: admin/flow/Photonic_Flow_Fields.php:1805
 #: admin/flow/Photonic_Flow_Fields.php:1814
-#: admin/flow/Photonic_Flow_Fields.php:1823
-#: admin/flow/Photonic_Flow_Fields.php:1829
-#: admin/flow/Photonic_Flow_Fields.php:1882 photonic.php:1523 photonic.php:1561
+#: admin/flow/Photonic_Flow_Fields.php:1822
+#: admin/flow/Photonic_Flow_Fields.php:1831
+#: admin/flow/Photonic_Flow_Fields.php:1837
+#: admin/flow/Photonic_Flow_Fields.php:1890 photonic.php:1523 photonic.php:1561
 msgid "Default from settings"
 msgstr ""
 
@@ -1169,12 +1175,12 @@ msgid "Pause upon hover?"
 msgstr ""
 
 #: admin/flow/Photonic_Flow_Fields.php:1354
-#: admin/flow/Photonic_Flow_Fields.php:1528
+#: admin/flow/Photonic_Flow_Fields.php:1536
 msgid "No"
 msgstr ""
 
 #: admin/flow/Photonic_Flow_Fields.php:1355
-#: admin/flow/Photonic_Flow_Fields.php:1529
+#: admin/flow/Photonic_Flow_Fields.php:1537
 msgid "Yes"
 msgstr ""
 
@@ -1195,7 +1201,8 @@ msgstr ""
 #: admin/flow/Photonic_Flow_Fields.php:1399
 #: admin/flow/Photonic_Flow_Fields.php:1417
 #: admin/flow/Photonic_Flow_Fields.php:1426
-#: admin/flow/Photonic_Flow_Fields.php:1435 photonic-form.php:87
+#: admin/flow/Photonic_Flow_Fields.php:1435
+#: admin/flow/Photonic_Flow_Fields.php:1443 photonic-form.php:87
 #: photonic-form.php:336 photonic-form.php:548 photonic-form.php:719
 #: photonic-form.php:924 photonic-form.php:1269 photonic-form.php:1468
 #: photonic-form.php:1636
@@ -1222,372 +1229,373 @@ msgstr ""
 msgid "Cropping the thumbnail presents you with a square thumbnail."
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1446
-#: admin/flow/Photonic_Flow_Fields.php:1455
-#: admin/flow/Photonic_Flow_Fields.php:1463
-#: admin/flow/Photonic_Flow_Fields.php:1470
-#: admin/flow/Photonic_Flow_Fields.php:1479
-#: admin/flow/Photonic_Flow_Fields.php:1488
-msgid "Tile size"
-msgstr ""
-
-#: admin/flow/Photonic_Flow_Fields.php:1465 photonic-form.php:750
-msgid "Numeric values between 1 and 16383, both inclusive. Leave blank to use the \"Main image size\"."
-msgstr ""
-
-#: admin/flow/Photonic_Flow_Fields.php:1500
-#: admin/flow/Photonic_Flow_Fields.php:1512
-#: admin/flow/Photonic_Flow_Fields.php:1537
+#: admin/flow/Photonic_Flow_Fields.php:1437
+#: admin/flow/Photonic_Flow_Fields.php:1508
+#: admin/flow/Photonic_Flow_Fields.php:1520
+#: admin/flow/Photonic_Flow_Fields.php:1545
 msgid "Numeric values only. Leave blank for default."
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1503
-#: admin/flow/Photonic_Flow_Fields.php:1515 photonic-form.php:48
+#: admin/flow/Photonic_Flow_Fields.php:1454
+#: admin/flow/Photonic_Flow_Fields.php:1463
+#: admin/flow/Photonic_Flow_Fields.php:1471
+#: admin/flow/Photonic_Flow_Fields.php:1478
+#: admin/flow/Photonic_Flow_Fields.php:1487
+#: admin/flow/Photonic_Flow_Fields.php:1496
+msgid "Tile size"
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1473 photonic-form.php:750
+msgid "Numeric values between 1 and 16383, both inclusive. Leave blank to use the \"Main image size\"."
+msgstr ""
+
+#: admin/flow/Photonic_Flow_Fields.php:1511
+#: admin/flow/Photonic_Flow_Fields.php:1523 photonic-form.php:48
 #: photonic-form.php:282 photonic-form.php:509 photonic-form.php:689
 #: photonic-form.php:967 photonic-form.php:1216 photonic-form.php:1510
 #: photonic-form.php:1678
 msgid "\"More\" button text"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1505 photonic-form.php:50
+#: admin/flow/Photonic_Flow_Fields.php:1513 photonic-form.php:50
 #: photonic-form.php:1218 photonic-form.php:1512 photonic-form.php:1680
 msgid "Will show a \"More\" button with the specified text if the number of photos is higher than the above entry. Leave blank to show no button"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1510
+#: admin/flow/Photonic_Flow_Fields.php:1518
 msgid "Number of albums to show"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1517
+#: admin/flow/Photonic_Flow_Fields.php:1525
 msgid "Will show a \"More\" button with the specified text if the number of albums is higher than the above entry. Leave blank to show no button"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1524
+#: admin/flow/Photonic_Flow_Fields.php:1532
 msgid "Show an overlaid popup panel"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1532
+#: admin/flow/Photonic_Flow_Fields.php:1540
 msgid "Setting this to \"No\" would directly start up a lightbox with photos. Setting this to \"Yes\" would show an overlaid panel that has the photos. See %1$sdocumentation%2$s."
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1535 photonic-form.php:289
+#: admin/flow/Photonic_Flow_Fields.php:1543 photonic-form.php:289
 #: photonic-form.php:516 photonic-form.php:696 photonic-form.php:974
 #: photonic-form.php:1223 photonic-form.php:1517
 msgid "Number of photos to show in overlaid popup"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1541 photonic-form.php:296
+#: admin/flow/Photonic_Flow_Fields.php:1549 photonic-form.php:296
 #: photonic-form.php:523 photonic-form.php:703 photonic-form.php:981
 #: photonic-form.php:1230 photonic-form.php:1524
 msgid "\"More\" button text in overlaid popup"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1543
+#: admin/flow/Photonic_Flow_Fields.php:1551
 msgid "Will show a \"More\" button with the specified text if the number of photos in the overlaid popup is higher than the above entry. Leave blank to show no button"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1590 photonic-form.php:340
+#: admin/flow/Photonic_Flow_Fields.php:1598 photonic-form.php:340
 msgid "Small square, 75x75px"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1591 photonic-form.php:341
+#: admin/flow/Photonic_Flow_Fields.php:1599 photonic-form.php:341
 msgid "Large square, 150x150px"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1592 photonic-form.php:342
+#: admin/flow/Photonic_Flow_Fields.php:1600 photonic-form.php:342
 msgid "Thumbnail, 100px on longest side"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1593 photonic-form.php:343
+#: admin/flow/Photonic_Flow_Fields.php:1601 photonic-form.php:343
 msgid "Small, 240px on longest side"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1594
-#: admin/flow/Photonic_Flow_Fields.php:1599 photonic-form.php:344
+#: admin/flow/Photonic_Flow_Fields.php:1602
+#: admin/flow/Photonic_Flow_Fields.php:1607 photonic-form.php:344
 msgid "Small, 320px on longest side"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1598
-#: admin/flow/Photonic_Flow_Fields.php:1635
-#: admin/flow/Photonic_Flow_Fields.php:1689
-#: admin/flow/Photonic_Flow_Fields.php:1744
-#: admin/flow/Photonic_Flow_Fields.php:1798
+#: admin/flow/Photonic_Flow_Fields.php:1606
+#: admin/flow/Photonic_Flow_Fields.php:1643
+#: admin/flow/Photonic_Flow_Fields.php:1697
+#: admin/flow/Photonic_Flow_Fields.php:1752
+#: admin/flow/Photonic_Flow_Fields.php:1806
 msgid "Same as Main image size"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1600
-#: admin/flow/Photonic_Flow_Fields.php:1610 photonic-form.php:355
+#: admin/flow/Photonic_Flow_Fields.php:1608
+#: admin/flow/Photonic_Flow_Fields.php:1618 photonic-form.php:355
 msgid "Medium, 500px on the longest side"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1601
-#: admin/flow/Photonic_Flow_Fields.php:1611 photonic-form.php:356
+#: admin/flow/Photonic_Flow_Fields.php:1609
+#: admin/flow/Photonic_Flow_Fields.php:1619 photonic-form.php:356
 msgid "Medium, 640px on longest side"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1602
-#: admin/flow/Photonic_Flow_Fields.php:1612 photonic-form.php:357
+#: admin/flow/Photonic_Flow_Fields.php:1610
+#: admin/flow/Photonic_Flow_Fields.php:1620 photonic-form.php:357
 msgid "Medium, 800px on longest side"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1603
-#: admin/flow/Photonic_Flow_Fields.php:1613 photonic-form.php:358
+#: admin/flow/Photonic_Flow_Fields.php:1611
+#: admin/flow/Photonic_Flow_Fields.php:1621 photonic-form.php:358
 msgid "Large, 1024px on longest side"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1604
-#: admin/flow/Photonic_Flow_Fields.php:1614 photonic-form.php:359
+#: admin/flow/Photonic_Flow_Fields.php:1612
+#: admin/flow/Photonic_Flow_Fields.php:1622 photonic-form.php:359
 msgid "Large, 1600px on longest side"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1605
-#: admin/flow/Photonic_Flow_Fields.php:1615 photonic-form.php:360
+#: admin/flow/Photonic_Flow_Fields.php:1613
+#: admin/flow/Photonic_Flow_Fields.php:1623 photonic-form.php:360
 msgid "Large, 2048px on longest side"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1606
-#: admin/flow/Photonic_Flow_Fields.php:1616 photonic-form.php:361
+#: admin/flow/Photonic_Flow_Fields.php:1614
+#: admin/flow/Photonic_Flow_Fields.php:1624 photonic-form.php:361
 msgid "Original"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1620
+#: admin/flow/Photonic_Flow_Fields.php:1628
 msgid "Site MP4"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1621
+#: admin/flow/Photonic_Flow_Fields.php:1629
 msgid "Mobile MP4"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1622
+#: admin/flow/Photonic_Flow_Fields.php:1630
 msgid "HD MP4"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1623
+#: admin/flow/Photonic_Flow_Fields.php:1631
 msgid "Video Original"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1629 photonic-form.php:928
+#: admin/flow/Photonic_Flow_Fields.php:1637 photonic-form.php:928
 msgid "Tiny"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1630 photonic-form.php:929
+#: admin/flow/Photonic_Flow_Fields.php:1638 photonic-form.php:929
 msgid "Thumb"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1631 photonic-form.php:930
+#: admin/flow/Photonic_Flow_Fields.php:1639 photonic-form.php:930
 msgid "Small"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1636
-#: admin/flow/Photonic_Flow_Fields.php:1648 photonic-form.php:941
+#: admin/flow/Photonic_Flow_Fields.php:1644
+#: admin/flow/Photonic_Flow_Fields.php:1656 photonic-form.php:941
 msgid "4K (not always available)"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1637
-#: admin/flow/Photonic_Flow_Fields.php:1649 photonic-form.php:942
+#: admin/flow/Photonic_Flow_Fields.php:1645
+#: admin/flow/Photonic_Flow_Fields.php:1657 photonic-form.php:942
 msgid "5K (not always available)"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1638
-#: admin/flow/Photonic_Flow_Fields.php:1650 photonic-form.php:943
+#: admin/flow/Photonic_Flow_Fields.php:1646
+#: admin/flow/Photonic_Flow_Fields.php:1658 photonic-form.php:943
 msgid "Medium"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1639
-#: admin/flow/Photonic_Flow_Fields.php:1651 photonic-form.php:944
+#: admin/flow/Photonic_Flow_Fields.php:1647
+#: admin/flow/Photonic_Flow_Fields.php:1659 photonic-form.php:944
 msgid "Original (not always available)"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1640
-#: admin/flow/Photonic_Flow_Fields.php:1652 photonic-form.php:945
+#: admin/flow/Photonic_Flow_Fields.php:1648
+#: admin/flow/Photonic_Flow_Fields.php:1660 photonic-form.php:945
 msgid "Large"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1641
-#: admin/flow/Photonic_Flow_Fields.php:1653
-#: admin/flow/Photonic_Flow_Fields.php:1666 photonic-form.php:946
+#: admin/flow/Photonic_Flow_Fields.php:1649
+#: admin/flow/Photonic_Flow_Fields.php:1661
+#: admin/flow/Photonic_Flow_Fields.php:1674 photonic-form.php:946
 msgid "Largest available"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1642
-#: admin/flow/Photonic_Flow_Fields.php:1654 photonic-form.php:947
+#: admin/flow/Photonic_Flow_Fields.php:1650
+#: admin/flow/Photonic_Flow_Fields.php:1662 photonic-form.php:947
 msgid "XLarge (not always available)"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1643
-#: admin/flow/Photonic_Flow_Fields.php:1655 photonic-form.php:948
+#: admin/flow/Photonic_Flow_Fields.php:1651
+#: admin/flow/Photonic_Flow_Fields.php:1663 photonic-form.php:948
 msgid "X2Large (not always available)"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1644
-#: admin/flow/Photonic_Flow_Fields.php:1656 photonic-form.php:949
+#: admin/flow/Photonic_Flow_Fields.php:1652
+#: admin/flow/Photonic_Flow_Fields.php:1664 photonic-form.php:949
 msgid "X3Large (not always available)"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1660
+#: admin/flow/Photonic_Flow_Fields.php:1668
 msgid "110px along longest side"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1661
+#: admin/flow/Photonic_Flow_Fields.php:1669
 msgid "200px along longest side"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1662
+#: admin/flow/Photonic_Flow_Fields.php:1670
 msgid "320px along longest side"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1663
+#: admin/flow/Photonic_Flow_Fields.php:1671
 msgid "640px along longest side"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1664
+#: admin/flow/Photonic_Flow_Fields.php:1672
 msgid "1280px along longest side"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1665
+#: admin/flow/Photonic_Flow_Fields.php:1673
 msgid "1920px along longest side"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1672
+#: admin/flow/Photonic_Flow_Fields.php:1680
 msgid "32 - cropped"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1674
+#: admin/flow/Photonic_Flow_Fields.php:1682
 msgid "48 - cropped"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1676
+#: admin/flow/Photonic_Flow_Fields.php:1684
 msgid "64 - cropped"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1678
+#: admin/flow/Photonic_Flow_Fields.php:1686
 msgid "72 - cropped"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1680
+#: admin/flow/Photonic_Flow_Fields.php:1688
 msgid "104 - cropped"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1682
+#: admin/flow/Photonic_Flow_Fields.php:1690
 msgid "144 - cropped"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1684
+#: admin/flow/Photonic_Flow_Fields.php:1692
 msgid "150 - cropped"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1686
+#: admin/flow/Photonic_Flow_Fields.php:1694
 msgid "160 - cropped"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1790 photonic-form.php:1472
+#: admin/flow/Photonic_Flow_Fields.php:1798 photonic-form.php:1472
 msgid "Square thumbnail, 60 &times; 60px, cropped square"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1791 photonic-form.php:1473
+#: admin/flow/Photonic_Flow_Fields.php:1799 photonic-form.php:1473
 msgid "Small thumbnail, upto 80 &times; 80px"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1792 photonic-form.php:1474
+#: admin/flow/Photonic_Flow_Fields.php:1800 photonic-form.php:1474
 msgid "Medium thumbnail, upto 120 &times; 120px"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1793 photonic-form.php:1475
+#: admin/flow/Photonic_Flow_Fields.php:1801 photonic-form.php:1475
 msgid "Large thumbnail, upto 120 &times; 120px"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1794
-#: admin/flow/Photonic_Flow_Fields.php:1799
-#: admin/flow/Photonic_Flow_Fields.php:1807 photonic-form.php:1476
+#: admin/flow/Photonic_Flow_Fields.php:1802
+#: admin/flow/Photonic_Flow_Fields.php:1807
+#: admin/flow/Photonic_Flow_Fields.php:1815 photonic-form.php:1476
 #: photonic-form.php:1487
 msgid "Small image, upto 400 &times; 400px"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1800
-#: admin/flow/Photonic_Flow_Fields.php:1808 photonic-form.php:1488
+#: admin/flow/Photonic_Flow_Fields.php:1808
+#: admin/flow/Photonic_Flow_Fields.php:1816 photonic-form.php:1488
 msgid "Medium image, upto 580 &times; 450px"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1801
-#: admin/flow/Photonic_Flow_Fields.php:1809 photonic-form.php:1489
+#: admin/flow/Photonic_Flow_Fields.php:1809
+#: admin/flow/Photonic_Flow_Fields.php:1817 photonic-form.php:1489
 msgid "Large image, upto 800 &times; 630px"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1802
-#: admin/flow/Photonic_Flow_Fields.php:1810 photonic-form.php:1490
+#: admin/flow/Photonic_Flow_Fields.php:1810
+#: admin/flow/Photonic_Flow_Fields.php:1818 photonic-form.php:1490
 msgid "X-Large image, upto 1100 &times; 850px"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1803
-#: admin/flow/Photonic_Flow_Fields.php:1811 photonic-form.php:1491
+#: admin/flow/Photonic_Flow_Fields.php:1811
+#: admin/flow/Photonic_Flow_Fields.php:1819 photonic-form.php:1491
 msgid "XX-Large image, upto 1550 &times; 960px"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1815
+#: admin/flow/Photonic_Flow_Fields.php:1823
 msgid "360p resolution (MP4)"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1816
+#: admin/flow/Photonic_Flow_Fields.php:1824
 msgid "480p resolution (MP4)"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1817
+#: admin/flow/Photonic_Flow_Fields.php:1825
 msgid "720p resolution (MP4)"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1818
+#: admin/flow/Photonic_Flow_Fields.php:1826
 msgid "1080p resolution (MP4)"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1824
+#: admin/flow/Photonic_Flow_Fields.php:1832
 msgid "Low Resolution - 306x306px, or 320x320px"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1825
+#: admin/flow/Photonic_Flow_Fields.php:1833
 msgid "Standard Resolution - 612x612px or 640x640px"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1826
+#: admin/flow/Photonic_Flow_Fields.php:1834
 msgid "Largest available resolution (640x640px for old images, upto 1080x1080px for new images)"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1830
+#: admin/flow/Photonic_Flow_Fields.php:1838
 msgid "Low Resolution"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1831
+#: admin/flow/Photonic_Flow_Fields.php:1839
 msgid "Standard Resolution"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1832
+#: admin/flow/Photonic_Flow_Fields.php:1840
 msgid "Low Bandwidth"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1883
+#: admin/flow/Photonic_Flow_Fields.php:1891
 msgid "Normal title display using the HTML \"title\" attribute"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1884
+#: admin/flow/Photonic_Flow_Fields.php:1892
 msgid "Below the thumbnail"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1885
+#: admin/flow/Photonic_Flow_Fields.php:1893
 msgid "Using the JQuery Tooltip plugin"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1886
+#: admin/flow/Photonic_Flow_Fields.php:1894
 msgid "Slide up from bottom upon hover"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1887
+#: admin/flow/Photonic_Flow_Fields.php:1895
 msgid "Cover the lower portion always"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1888
+#: admin/flow/Photonic_Flow_Fields.php:1896
 msgid "No title"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Fields.php:1892
+#: admin/flow/Photonic_Flow_Fields.php:1900
 msgid "How do you want the title?"
 msgstr ""
 
@@ -1693,84 +1701,84 @@ msgstr ""
 msgid "Required"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Manager.php:811
+#: admin/flow/Photonic_Flow_Manager.php:817
 msgid "Mark:"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Manager.php:812
+#: admin/flow/Photonic_Flow_Manager.php:818
 msgid "<a href=\"#\" class=\"%s\" data-photonic-mark-for=\"%s\">All</a>"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Manager.php:813
+#: admin/flow/Photonic_Flow_Manager.php:819
 msgid "<a href=\"#\" class=\"%s\" data-photonic-mark-for=\"%s\">None</a>"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Manager.php:897
+#: admin/flow/Photonic_Flow_Manager.php:904
 msgid "Pick Your Layout"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Manager.php:898
+#: admin/flow/Photonic_Flow_Manager.php:905
 msgid "You can configure the default settings from <strong>Photonic &rarr; Settings &rarr; Generic Options &rarr; Generic Settings &rarr; Layouts</strong>."
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Manager.php:929
+#: admin/flow/Photonic_Flow_Manager.php:936
 msgid "Configure Your Layout"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Manager.php:1193
+#: admin/flow/Photonic_Flow_Manager.php:1200
 msgid "Your shortcode"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Manager.php:1202
+#: admin/flow/Photonic_Flow_Manager.php:1209
 msgid "The above shortcode was generated based on your selections. You can either copy the above and paste it manually into your post, or click on the buttons below to insert it into or update your post"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Manager.php:1205
+#: admin/flow/Photonic_Flow_Manager.php:1212
 msgid "Your Gallery"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Manager.php:1206
+#: admin/flow/Photonic_Flow_Manager.php:1213
 msgid "Based on your selections a gallery with the following attributes will be generated. Please click on the buttons below to insert it into or update your post:"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Manager.php:1625
-#: admin/flow/Photonic_Flow_Manager.php:1858
-#: admin/flow/Photonic_Flow_Manager.php:1974
-#: admin/flow/Photonic_Flow_Manager.php:2001
+#: admin/flow/Photonic_Flow_Manager.php:1632
+#: admin/flow/Photonic_Flow_Manager.php:1865
+#: admin/flow/Photonic_Flow_Manager.php:1981
+#: admin/flow/Photonic_Flow_Manager.php:2008
 msgid "%s media item"
 msgid_plural "%s media items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/flow/Photonic_Flow_Manager.php:1714 photonic-options-manager.php:1869
+#: admin/flow/Photonic_Flow_Manager.php:1721 photonic-options-manager.php:1869
 msgid "Load More"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Manager.php:1727
+#: admin/flow/Photonic_Flow_Manager.php:1734
 msgid "No data returned. Error code %s"
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Manager.php:1732
+#: admin/flow/Photonic_Flow_Manager.php:1739
 msgid "No data returned. Empty response, or empty error code."
 msgstr ""
 
-#: admin/flow/Photonic_Flow_Manager.php:1767
-#: admin/flow/Photonic_Flow_Manager.php:1782
+#: admin/flow/Photonic_Flow_Manager.php:1774
+#: admin/flow/Photonic_Flow_Manager.php:1789
 #: extensions/Photonic_Processor.php:330
 msgid "%s photo"
 msgid_plural "%s photos"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/flow/Photonic_Flow_Manager.php:1768
-#: admin/flow/Photonic_Flow_Manager.php:1783
+#: admin/flow/Photonic_Flow_Manager.php:1775
+#: admin/flow/Photonic_Flow_Manager.php:1790
 #: extensions/Photonic_Processor.php:333
 msgid "%s video"
 msgid_plural "%s videos"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/flow/Photonic_Flow_Manager.php:1813
+#: admin/flow/Photonic_Flow_Manager.php:1820
 msgid "%s album"
 msgid_plural "%s albums"
 msgstr[0] ""

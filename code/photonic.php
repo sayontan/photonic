@@ -3,14 +3,14 @@
  * Plugin Name: Photonic Gallery & Lightbox for Flickr, SmugMug, Google Photos, Picasa, Zenfolio and Instagram
  * Plugin URI: https://aquoid.com/plugins/photonic/
  * Description: Extends the native gallery to support Flickr, Picasa, SmugMug, Zenfolio and Instagram. JS libraries like Swipebox, Fancybox, Colorbox, PrettyPhoto, Image Lightbox, Featherlight, Lightcase and Lightgallery are supported. Photos are displayed in grids of square or circular thumbnails, or slideshows, or justified or masonry or random mosaic layouts. The plugin also extends all layout options to a regular WP gallery.
- * Version: 2.14
+ * Version: 2.15
  * Author: Sayontan Sinha
  * Author URI: https://mynethome.net/
  * License: GNU General Public License (GPL), v3 (or newer)
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain: photonic
  *
- * Copyright (c) 2011 - 2018 Sayontan Sinha. All rights reserved.
+ * Copyright (c) 2011 - 2019 Sayontan Sinha. All rights reserved.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -21,7 +21,7 @@ class Photonic {
 	function __construct() {
 		global $photonic_options, $photonic_setup_options, $photonic_is_IE;
 		if (!defined('PHOTONIC_VERSION')) {
-			define('PHOTONIC_VERSION', '2.14');
+			define('PHOTONIC_VERSION', '2.15');
 		}
 
 		if (!defined('PHOTONIC_PATH')) {

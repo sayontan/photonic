@@ -648,6 +648,9 @@ jQuery(document).ready(function($) {
 			$.post(Photonic_Flow_JS.ajaxurl, parameters, function(data){
 				$clicked.hide().remove();
 				$(data).insertAfter('.photonic-flow-selector:last');
+				var $search = $('#thumb-search');
+				$search.focus().blur();
+				$search.trigger('input');
 				$waiting.hide();
 			});
 		}
@@ -676,6 +679,42 @@ jQuery(document).ready(function($) {
 		if ($('[aria-describedby="' + tooltipId + '"]:hover').length === 0) {
 			$tooltip.attr('aria-hidden', true);
 			$tooltip.css({ display: 'none' });
+		}
+	});
+
+	$(document).on('focus', '#thumb-search', function(e) {
+		var $search = $(this);
+		var $imgs = $('.photonic-flow-selector-container img');
+		var cache = [];
+
+		$imgs.each(function() {
+			cache.push({
+				element: this,
+				text: this.alt.trim().toLowerCase()
+			})
+		});
+
+		function filter() {
+			var query = this.value.trim().toLowerCase();
+			cache.forEach(function(img) {
+				var index = 0;
+				if (query) {
+					index = img.text.indexOf(query);
+				}
+				if (index === -1) {
+					$(img.element).parents('.photonic-flow-selector').css({ display: 'none' });
+				}
+				else {
+					$(img.element).parents('.photonic-flow-selector').css({ display: 'inline-block' });
+				}
+			});
+		}
+
+		if ('oninput' in $search[0]) {
+			$search.on('input', filter);
+		}
+		else {
+			$search.on('keyup', filter);
 		}
 	});
 
